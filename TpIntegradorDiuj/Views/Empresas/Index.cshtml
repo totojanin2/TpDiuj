@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Empresas";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+              $("#fileEmpresas").change(function () {
+            var file = $(this).val();
+            var url = '@Url.Action("ObtenerEmpresas","Empresas")';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: file,
+                success: function (data) {
+                    if (data.Success) {
+                        var texto = '';
+                        $.each(data.Empresas, function (index,item){
+                            texto += '<option value="'+ item.Id +'">'+item.Nombre+'</option>'
+                        });
+                    }
+                    else {
+                        alert("hubo un error");
+                    }
+                }
+
+            });
+        });
+        });
+
+   
+</script>
+<h2>Empresas</h2>
+<div class="form-group">
+    <label>Seleccione archivo</label>
+    <input type="file" name="fileEmpresas" id="fileEmpresas" />
+</div>
+<div class="form-group">
+    @Html.DropDownList("Empresas",new List<SelectListItem>(),"Seleccione empresa",new { @class="form-control"})
+</div>
+

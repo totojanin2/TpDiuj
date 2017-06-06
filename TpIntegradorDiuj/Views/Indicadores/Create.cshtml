@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Crear Indicador";
+}
+
+<h2>Crear Indicador</h2>
+@using (Html.BeginForm("Create","Indicadores",FormMethod.Post)){ 
+    <input type="text" name="Nombre" placeholder="Nombre" />
+    <input type="text" name="Formula" placeholder="Formula" />
+    <input type="submit" value="Guardar" /> 
+}
+
