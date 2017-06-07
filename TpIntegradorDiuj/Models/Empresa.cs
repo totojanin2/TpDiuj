@@ -8,7 +8,7 @@ namespace TpIntegradorDiuj.Models
     public class Empresa
     {
         public int Id { get; set; }
-        public int Nombre { get; set; }
+        public string Nombre { get; set; }
         public virtual List<Balance> Balances { get; set; }
         public virtual List<Indicador> Indicadores { get; set; }
     }

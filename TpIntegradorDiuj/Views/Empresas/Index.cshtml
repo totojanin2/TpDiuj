@@ -3,21 +3,39 @@
     ViewBag.Title = "Empresas";
 }
 
-<script type="text/javascript">
+<script>
     $(document).ready(function () {
-              $("#fileEmpresas").change(function () {
-            var file = $(this).val();
-            var url = '@Url.Action("ObtenerEmpresas","Empresas")';
+           $("#fileEmpresas").change(function () {
+               var $file = document.getElementById('fileEmpresas'),
+                $formData = new FormData();
+
+               if ($file.files.length > 0) {
+                   for (var i = 0; i < $file.files.length; i++) {
+                       $formData.append('file-' + i, $file.files[i]);
+                   }
+               }
+            var url = '@Url.Action("ObtenerEmpresasYPeriodos", "Empresas")';
             $.ajax({
                 type: "POST",
-                url: url,
-                data: file,
+                url: url,           
+                data: $formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
                 success: function (data) {
                     if (data.Success) {
-                        var texto = '';
+                        var texto = '<option value="0" selected disabled>Seleccione empresa...</option>';
+                        var textoPeriodo = '<option value="0" selected disabled>Seleccione periodo...</option>';
+
                         $.each(data.Empresas, function (index,item){
-                            texto += '<option value="'+ item.Id +'">'+item.Nombre+'</option>'
+                            texto += '<option value="' + item.Id + '">' + item.Nombre + '</option>'
                         });
+                        $.each(data.Periodos, function (index, item) {
+                            textoPeriodo += '<option value="' + item + '">' + item + '</option>'
+                        });
+                        $("#selectEmpresas").html(texto);
+                        $("#selectPeriodo").html(textoPeriodo);
+                        alert("Empresas cargadas");
                     }
                     else {
                         alert("Hubo un error");
@@ -32,10 +50,17 @@
 </script>
 <h2>Empresas</h2>
 <div class="form-group">
-    <label>Seleccione archivo</label>
+@using (Html.BeginForm("ObtenerEmpresasYPeriodos", "Empresas", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
+{
+
     <input type="file" name="fileEmpresas" id="fileEmpresas" />
+    @*<input type="submit" value="Cargar" />*@
+ }
+
+
 </div>
 <div class="form-group">
-    @Html.DropDownList("Empresas",new List<SelectListItem>(),"Seleccione empresa",new { @class="form-control"})
+    @Html.DropDownList("Empresas",new List<SelectListItem>(),"Seleccione empresa..",new { @class="form-control",@id="selectEmpresas"})
+    @Html.DropDownList("Periodos", new List<SelectListItem>(), "Seleccione periodo..", new { @class = "form-control", @id = "selectPeriodo" })
 </div>
 

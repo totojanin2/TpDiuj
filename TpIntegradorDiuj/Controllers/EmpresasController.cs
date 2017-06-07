@@ -17,14 +17,40 @@ namespace TpIntegradorDiuj.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public JsonResult ObtenerEmpresas(HttpPostedFileBase f)
+        public List<Empresa> DeserializarArchivoEmpresas()
         {
-            // Verify that the user selected a file
-            if (f != null && f.ContentLength > 0)
-            {   JavaScriptSerializer serializer = new JavaScriptSerializer();
-                List<Empresa> empresas = serializer.Deserialize<List<Empresa>>(f.ToString());
-                return Json(new { Success=true,Empresas = empresas.ToList() });
+            var file = Request.Files[0];
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var buffer = new StreamReader(file.InputStream).ReadToEnd();
+            return serializer.Deserialize<List<Empresa>>(buffer);
+
+        }
+        [HttpPost]
+        public JsonResult ObtenerEmpresasYPeriodos()
+        {
+            if (Request.Files.Count>0)
+            {               
+                List<Empresa> empresas = this.DeserializarArchivoEmpresas();
+                List<int> periodos = new List<int>();
+                foreach (var balances in empresas.Select(x=>x.Balances))
+                {
+                    foreach (var item in balances)                    
+                        periodos.Add(item.Periodo);                   
+                }
+                periodos = periodos.Distinct().ToList();
+                return Json(new { Success = true, Empresas = empresas, Periodos = periodos });
+            }
+            return Json(new { Success = false, Mensaje = "Hubo un error" });
+        }
+        [HttpPost]
+        public JsonResult ObtenerBalancesDeEmpresaPorPeriodo(int idEmpresa,int año)
+        {
+            if (Request.Files.Count > 0)
+            {                
+                List<Empresa> empresas = this.DeserializarArchivoEmpresas();
+                var empresa = empresas.FirstOrDefault(x => x.Id == idEmpresa);
+                var balances = empresa.Balances.Where(x => x.Periodo == año);
+                return Json(new { Success = true,Balances = balances.ToList()});
             }
             return Json(new { Success = false, Mensaje = "Hubo un error" });
         }
