@@ -150,6 +150,7 @@
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
+    <Compile Include="Controllers\MetodologiasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,6 +204,7 @@
     <Content Include="Views\Empresas\Index.cshtml" />
     <Content Include="Views\Indicadores\Index.cshtml" />
     <Content Include="Views\Indicadores\Create.cshtml" />
+    <Content Include="Views\Metodologias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

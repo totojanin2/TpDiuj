@@ -11,5 +11,16 @@ namespace TpIntegradorDiuj.Models
         public virtual List<Cuenta> Cuentas { get; set; }
         public int Periodo { get; set; }
         public int Empresa_Id { get; set; }
+
+       
+        public double TotalCuentas
+        {
+            get
+            {
+                return this.Cuentas.Sum(x => x.Valor);
+            }
+        }
+
+       
     }
 }

@@ -22,7 +22,8 @@ namespace TpIntegradorDiuj.Controllers
             var file = Request.Files[0];
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             var buffer = new StreamReader(file.InputStream).ReadToEnd();
-            return serializer.Deserialize<List<Empresa>>(buffer);
+            List<Empresa> listaEmpresas =  serializer.Deserialize<List<Empresa>>(buffer);
+            return listaEmpresas;
 
         }
         [HttpPost]
@@ -43,14 +44,22 @@ namespace TpIntegradorDiuj.Controllers
             return Json(new { Success = false, Mensaje = "Hubo un error" });
         }
         [HttpPost]
-        public JsonResult ObtenerBalancesDeEmpresaPorPeriodo(int idEmpresa,int año)
+        public JsonResult ObtenerBalancesDeEmpresaPorPeriodo(int idEmpresa,int anio)
         {
             if (Request.Files.Count > 0)
             {                
                 List<Empresa> empresas = this.DeserializarArchivoEmpresas();
                 var empresa = empresas.FirstOrDefault(x => x.Id == idEmpresa);
-                var balances = empresa.Balances.Where(x => x.Periodo == año);
-                return Json(new { Success = true,Balances = balances.ToList()});
+                var balance = empresa.Balances.FirstOrDefault(x => x.Periodo == anio);
+                if (balance != null)
+                {
+                    return Json(new { Success = true, Cuentas = balance.Cuentas.ToList() });
+                }
+                else
+                {
+                   return Json(new { Success = false, Mensaje="No hay cuentas para: "+empresa.Nombre + " en el periodo "+anio });
+
+                }
             }
             return Json(new { Success = false, Mensaje = "Hubo un error" });
         }
