@@ -1,8 +1,17 @@
 ﻿
 @{
     ViewBag.Title = "Indicadores";
+    List<SelectListItem> listIndicadores = new List<SelectListItem>();
+    List<SelectListItem> _listIndicadores = ViewBag.ListIndicadores as List<SelectListItem>;
+    listIndicadores.AddRange(_listIndicadores);
 }
 
 <h2>Indicadores</h2>
-<a href="@Url.Action("Create")" >Crear Indicador</a>
+<div class="col-md-7">
+    @Html.DropDownList("Indicadores",listIndicadores,"Seleccione indicador",new { @class="form-control"})
+</div>
+<div class="col-md-5">
+    <a href="@Url.Action("Create")">Crear Indicador</a>
+</div>
+
 
