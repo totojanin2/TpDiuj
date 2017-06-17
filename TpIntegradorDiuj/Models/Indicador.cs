@@ -10,6 +10,5 @@ namespace TpIntegradorDiuj.Models
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Formula { get; set; }
-        public int Empresa_Id { get; set; }
     }
 }

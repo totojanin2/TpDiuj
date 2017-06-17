@@ -1,5 +1,7 @@
 ﻿
-
+using Antlr4.Runtime;
+using Antlr4.Runtime.Tree;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -43,9 +45,25 @@ namespace TpIntegradorDiuj.Controllers
         public ActionResult Create(Indicador model)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            var indicadorAAgregar = serializer.Serialize(model);
-            //StreamReader file = File.OpenText(@"c:\videogames.json");
+            List<Indicador>  indicadores=DeserializarArchivoIndicadores();
+            int maxId = indicadores.Select(x => x.Id).Max();
+            model.Id = maxId+1;
+            indicadores.Add(model);
+            string jsonData = JsonConvert.SerializeObject(indicadores);
+            System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "indicadores.json", jsonData);
             return RedirectToAction("Index");
+        }
+        public CalcularValorByFormula(int id)
+        {
+
+            var formula = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == id).Formula;
+            string input = formula;
+            ICharStream stream = new StreamReader(file.InputStream);
+            ITokenSource lexer = new FormulasLexer(stream);
+            ITokenStream tokens = new CommonTokenStream(lexer);
+            FormulasParser parser = new FormulasParser(tokens);
+          //  parser.buildParseTrees = true;
+            IParseTree tree = parser.StartRule();
         }
     }
 }

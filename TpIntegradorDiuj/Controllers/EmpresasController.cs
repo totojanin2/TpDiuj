@@ -63,5 +63,15 @@ namespace TpIntegradorDiuj.Controllers
             }
             return Json(new { Success = false, Mensaje = "Hubo un error" });
         }
+        public CalcularValorByFormula()
+        {
+            String input = "your text to parse here";
+            ICharStream stream = CharStreams.fromString(input);
+            ITokenSource lexer = new MyGrammarLexer(stream);
+            ITokenStream tokens = new CommonTokenStream(lexer);
+            MyGrammarParser parser = new MyGrammarParser(tokens);
+            parser.buildParseTrees = true;
+            IParseTree tree = parser.StartRule();
+        }
     }
 }
