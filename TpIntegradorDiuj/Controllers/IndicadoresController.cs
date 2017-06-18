@@ -56,12 +56,12 @@ namespace TpIntegradorDiuj.Controllers
         public CalcularValorByFormula(int id)
         {
 
-            var formula = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == id).Formula;            
+            var formula = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == id).Formula;
             ICharStream stream = new AntlrInputStream(formula);
-            ITokenSource lexer = new FormulasLexer(stream);
-            ITokenStream tokens = new CommonTokenStream(lexer);
-            FormulasParser parser = new FormulasParser(tokens);
-          //  parser.buildParseTrees = true;
+            ITokenSource lexer = new FormulasLexer() as ITokenSource;
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            FormulasParser parser = new FormulasParser();
+            // parser.buildParseTrees = true;
             IParseTree tree = parser.StartRule();
         }
     }
