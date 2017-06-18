@@ -53,16 +53,16 @@ namespace TpIntegradorDiuj.Controllers
             System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "indicadores.json", jsonData);
             return RedirectToAction("Index");
         }
-       /* public CalcularValorByFormula(int id)
+        public CalcularValorByFormula(int id)
         {
 
             var formula = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == id).Formula;            
-            ICharStream stream = ;
+            ICharStream stream = new AntlrInputStream(formula);
             ITokenSource lexer = new FormulasLexer(stream);
             ITokenStream tokens = new CommonTokenStream(lexer);
             FormulasParser parser = new FormulasParser(tokens);
           //  parser.buildParseTrees = true;
             IParseTree tree = parser.StartRule();
-        }*/
+        }
     }
 }

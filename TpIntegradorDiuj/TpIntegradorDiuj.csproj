@@ -168,6 +168,7 @@
     <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Empresa.cs" />
+    <Compile Include="Models\FormulaVisitor.cs" />
     <Compile Include="Models\Indicador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
