@@ -8,19 +8,15 @@ namespace TpIntegradorDiuj.Models
     public class Balance
     {
         public int Id { get; set; }
-        public virtual List<Cuenta> Cuentas { get; set; }
+        public virtual Cuenta Cuenta { get; set; }
+        public int Cuenta_Id { get; set; }
         public int Periodo { get; set; }
         public int Empresa_Id { get; set; }
 
-       
-        public double TotalCuentas
-        {
-            get
-            {
-                return this.Cuentas.Sum(x => x.Valor);
-            }
-        }
+        public double Valor { get; set; }
 
-       
+
+
+
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TpIntegradorDiuj
 {
-    public class Visitador : FormulasBaseVisitor
+    public class Visitador 
     {
     }
 }

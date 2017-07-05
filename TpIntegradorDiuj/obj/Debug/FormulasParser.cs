@@ -31,18 +31,18 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 [System.CLSCompliant(false)]
 public partial class FormulasParser : Parser {
 	public const int
-		WS=1;
+		WS=1, WHITESPACE=2, OPERADOR=3, VALOR=4;
 	public const int
-		RULE_compileUnit = 0;
+		RULE_formula = 0, RULE_expresion = 1, RULE_valor = 2, RULE_operador = 3;
 	public static readonly string[] ruleNames = {
-		"compileUnit"
+		"formula", "expresion", "valor", "operador"
 	};
 
 	private static readonly string[] _LiteralNames = {
 		null, "' '"
 	};
 	private static readonly string[] _SymbolicNames = {
-		null, "WS"
+		null, "WS", "WHITESPACE", "OPERADOR", "VALOR"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -94,36 +94,187 @@ public partial class FormulasParser : Parser {
 	{
 		_interp = new ParserATNSimulator(this,_ATN);
 	}
-	public partial class CompileUnitContext : ParserRuleContext {
+	public partial class FormulaContext : ParserRuleContext {
+		public ExpresionContext[] expresion() {
+			return GetRuleContexts<ExpresionContext>();
+		}
+		public ExpresionContext expresion(int i) {
+			return GetRuleContext<ExpresionContext>(i);
+		}
+		public OperadorContext operador() {
+			return GetRuleContext<OperadorContext>(0);
+		}
 		public ITerminalNode Eof() { return GetToken(FormulasParser.Eof, 0); }
-		public CompileUnitContext(ParserRuleContext parent, int invokingState)
+		public FormulaContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_compileUnit; } }
+		public override int RuleIndex { get { return RULE_formula; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IFormulasListener typedListener = listener as IFormulasListener;
-			if (typedListener != null) typedListener.EnterCompileUnit(this);
+			if (typedListener != null) typedListener.EnterFormula(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IFormulasListener typedListener = listener as IFormulasListener;
-			if (typedListener != null) typedListener.ExitCompileUnit(this);
+			if (typedListener != null) typedListener.ExitFormula(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IFormulasVisitor<TResult> typedVisitor = visitor as IFormulasVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitCompileUnit(this);
+			if (typedVisitor != null) return typedVisitor.VisitFormula(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public CompileUnitContext compileUnit() {
-		CompileUnitContext _localctx = new CompileUnitContext(_ctx, State);
-		EnterRule(_localctx, 0, RULE_compileUnit);
+	public FormulaContext formula() {
+		FormulaContext _localctx = new FormulaContext(_ctx, State);
+		EnterRule(_localctx, 0, RULE_formula);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 2; Match(Eof);
+			State = 8; expresion();
+			State = 9; operador();
+			State = 10; expresion();
+			State = 11; Match(Eof);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ExpresionContext : ParserRuleContext {
+		public ValorContext[] valor() {
+			return GetRuleContexts<ValorContext>();
+		}
+		public ValorContext valor(int i) {
+			return GetRuleContext<ValorContext>(i);
+		}
+		public OperadorContext operador() {
+			return GetRuleContext<OperadorContext>(0);
+		}
+		public ExpresionContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_expresion; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFormulasListener typedListener = listener as IFormulasListener;
+			if (typedListener != null) typedListener.EnterExpresion(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFormulasListener typedListener = listener as IFormulasListener;
+			if (typedListener != null) typedListener.ExitExpresion(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFormulasVisitor<TResult> typedVisitor = visitor as IFormulasVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExpresion(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ExpresionContext expresion() {
+		ExpresionContext _localctx = new ExpresionContext(_ctx, State);
+		EnterRule(_localctx, 2, RULE_expresion);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 13; valor();
+			State = 14; operador();
+			State = 15; valor();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ValorContext : ParserRuleContext {
+		public ITerminalNode VALOR() { return GetToken(FormulasParser.VALOR, 0); }
+		public ValorContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_valor; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFormulasListener typedListener = listener as IFormulasListener;
+			if (typedListener != null) typedListener.EnterValor(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFormulasListener typedListener = listener as IFormulasListener;
+			if (typedListener != null) typedListener.ExitValor(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFormulasVisitor<TResult> typedVisitor = visitor as IFormulasVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValor(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ValorContext valor() {
+		ValorContext _localctx = new ValorContext(_ctx, State);
+		EnterRule(_localctx, 4, RULE_valor);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 17; Match(VALOR);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class OperadorContext : ParserRuleContext {
+		public ITerminalNode OPERADOR() { return GetToken(FormulasParser.OPERADOR, 0); }
+		public OperadorContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_operador; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFormulasListener typedListener = listener as IFormulasListener;
+			if (typedListener != null) typedListener.EnterOperador(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFormulasListener typedListener = listener as IFormulasListener;
+			if (typedListener != null) typedListener.ExitOperador(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFormulasVisitor<TResult> typedVisitor = visitor as IFormulasVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOperador(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public OperadorContext operador() {
+		OperadorContext _localctx = new OperadorContext(_ctx, State);
+		EnterRule(_localctx, 6, RULE_operador);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 19; Match(OPERADOR);
 			}
 		}
 		catch (RecognitionException re) {
@@ -138,9 +289,14 @@ public partial class FormulasParser : Parser {
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\x3\a\x4\x2\t\x2"+
-		"\x3\x2\x3\x2\x3\x2\x2\x2\x2\x3\x2\x2\x2\x2\x5\x2\x4\x3\x2\x2\x2\x4\x5"+
-		"\a\x2\x2\x3\x5\x3\x3\x2\x2\x2\x2";
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\x6\x18\x4\x2\t"+
+		"\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3"+
+		"\x3\x3\x3\x3\x3\x3\x3\x3\x4\x3\x4\x3\x5\x3\x5\x3\x5\x2\x2\x2\x6\x2\x2"+
+		"\x4\x2\x6\x2\b\x2\x2\x2\x13\x2\n\x3\x2\x2\x2\x4\xF\x3\x2\x2\x2\x6\x13"+
+		"\x3\x2\x2\x2\b\x15\x3\x2\x2\x2\n\v\x5\x4\x3\x2\v\f\x5\b\x5\x2\f\r\x5\x4"+
+		"\x3\x2\r\xE\a\x2\x2\x3\xE\x3\x3\x2\x2\x2\xF\x10\x5\x6\x4\x2\x10\x11\x5"+
+		"\b\x5\x2\x11\x12\x5\x6\x4\x2\x12\x5\x3\x2\x2\x2\x13\x14\a\x6\x2\x2\x14"+
+		"\a\x3\x2\x2\x2\x15\x16\a\x5\x2\x2\x16\t\x3\x2\x2\x2\x2";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

@@ -152,6 +152,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CuentasController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
@@ -166,10 +167,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Balance.cs" />
+    <Compile Include="Models\ComponenteOperando.cs" />
+    <Compile Include="Models\Condicion.cs" />
+    <Compile Include="Models\Creciente.cs" />
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Empresa.cs" />
+    <Compile Include="Models\ICondicion.cs" />
     <Compile Include="Models\Indicador.cs" />
-    <Compile Include="Models\Visitador.cs" />
+    <Compile Include="Models\MayorAUno.cs" />
+    <Compile Include="Models\Metodologia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visitador.cs" />
   </ItemGroup>
@@ -225,6 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Cuentas\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

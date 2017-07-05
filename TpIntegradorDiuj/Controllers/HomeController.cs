@@ -10,7 +10,6 @@ namespace TpIntegradorDiuj.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Mensaje = "moli se la come";
             return View();
         }
 

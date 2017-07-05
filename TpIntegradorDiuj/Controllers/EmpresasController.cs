@@ -49,11 +49,11 @@ namespace TpIntegradorDiuj.Controllers
             if (Request.Files.Count > 0)
             {                
                 List<Empresa> empresas = this.DeserializarArchivoEmpresas();
-                var empresa = empresas.FirstOrDefault(x => x.Id == idEmpresa);
-                var balance = empresa.Balances.FirstOrDefault(x => x.Periodo == anio);
-                if (balance != null)
+                Empresa empresa = empresas.FirstOrDefault(x => x.Id == idEmpresa);
+                var balances = empresa.Balances.Where(x => x.Periodo == anio);
+                if (balances != null)
                 {
-                    return Json(new { Success = true, Cuentas = balance.Cuentas.ToList() });
+                    return Json(new { Success = true, Balances = balances });
                 }
                 else
                 {

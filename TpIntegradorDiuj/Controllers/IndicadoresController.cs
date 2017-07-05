@@ -14,6 +14,7 @@ namespace TpIntegradorDiuj.Controllers
     public class IndicadoresController : Controller
     {
         // GET: Indicadores
+        EmpresasController empController = new EmpresasController();
         public ActionResult Index()
         {
             ViewBag.ListIndicadores = DeserializarArchivoIndicadores().Select(x => new SelectListItem {
@@ -53,16 +54,12 @@ namespace TpIntegradorDiuj.Controllers
             System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "indicadores.json", jsonData);
             return RedirectToAction("Index");
         }
-        public CalcularValorByFormula(int id)
+        public ActionResult EvaluarIndicadorParaEmpresa(int idIndicador,int idEmpresa,int periodo)
         {
-
-            var formula = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == id).Formula;
-            ICharStream stream = new AntlrInputStream(formula);
-            ITokenSource lexer = new FormulasLexer() as ITokenSource;
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            FormulasParser parser = new FormulasParser();
-            // parser.buildParseTrees = true;
-            IParseTree tree = parser.StartRule();
+            var indicador = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == idIndicador);
+            var empresa = empController.DeserializarArchivoEmpresas().FirstOrDefault(x => x.Id == idEmpresa);
+            double  indicador.ObtenerValor
         }
+       
     }
 }

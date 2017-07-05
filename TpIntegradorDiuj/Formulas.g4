@@ -5,19 +5,22 @@ grammar Formulas;
  */
 
 compileUnit
-formula	: expresion operando expresion	EOF;
-expresion : valor operando valor;
-valor : VALOR
-operando: OPERANDO;
+
+formula	: expresion operador expresion EOF;
+expresion : valor operador valor ;
+valor : VALOR;
+operador: OPERADOR;
 	
 
 /*
  * Lexer Rules
  */
-WS	:	' ' -> channel(HIDDEN);
 fragment LOWERCASE  : [a-z] ;
 fragment UPPERCASE  : [A-Z] ;
-OPERANDO : ('+' | '-');
-VALOR : (LOWERCASE || UPPERCASE);
-
-
+WHITESPACE  : (' ' | '\t') ;
+OPERADOR : (MAS | MENOS | PRODUCTO | COCIENTE) ;
+VALOR : (LOWERCASE | UPPERCASE)+ ;
+MAS : '+';
+MENOS : '-';
+PRODUCTO : '*';
+COCIENTE : '/';

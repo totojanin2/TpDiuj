@@ -32,14 +32,47 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IFormulasListener : IParseTreeListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FormulasParser.compileUnit"/>.
+	/// Enter a parse tree produced by <see cref="FormulasParser.formula"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterCompileUnit([NotNull] FormulasParser.CompileUnitContext context);
+	void EnterFormula([NotNull] FormulasParser.FormulaContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="FormulasParser.compileUnit"/>.
+	/// Exit a parse tree produced by <see cref="FormulasParser.formula"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitCompileUnit([NotNull] FormulasParser.CompileUnitContext context);
+	void ExitFormula([NotNull] FormulasParser.FormulaContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FormulasParser.expresion"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExpresion([NotNull] FormulasParser.ExpresionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FormulasParser.expresion"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExpresion([NotNull] FormulasParser.ExpresionContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FormulasParser.valor"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterValor([NotNull] FormulasParser.ValorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FormulasParser.valor"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitValor([NotNull] FormulasParser.ValorContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FormulasParser.operador"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOperador([NotNull] FormulasParser.OperadorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FormulasParser.operador"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOperador([NotNull] FormulasParser.OperadorContext context);
 }
 } // namespace TpIntegradorDiuj

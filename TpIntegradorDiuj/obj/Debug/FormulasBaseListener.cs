@@ -36,17 +36,56 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class FormulasBaseListener : IFormulasListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FormulasParser.compileUnit"/>.
+	/// Enter a parse tree produced by <see cref="FormulasParser.formula"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterCompileUnit([NotNull] FormulasParser.CompileUnitContext context) { }
+	public virtual void EnterFormula([NotNull] FormulasParser.FormulaContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="FormulasParser.compileUnit"/>.
+	/// Exit a parse tree produced by <see cref="FormulasParser.formula"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitCompileUnit([NotNull] FormulasParser.CompileUnitContext context) { }
+	public virtual void ExitFormula([NotNull] FormulasParser.FormulaContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FormulasParser.expresion"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterExpresion([NotNull] FormulasParser.ExpresionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FormulasParser.expresion"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitExpresion([NotNull] FormulasParser.ExpresionContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FormulasParser.valor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterValor([NotNull] FormulasParser.ValorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FormulasParser.valor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitValor([NotNull] FormulasParser.ValorContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FormulasParser.operador"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterOperador([NotNull] FormulasParser.OperadorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FormulasParser.operador"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitOperador([NotNull] FormulasParser.OperadorContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

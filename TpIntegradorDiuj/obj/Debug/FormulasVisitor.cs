@@ -33,10 +33,31 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IFormulasVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FormulasParser.compileUnit"/>.
+	/// Visit a parse tree produced by <see cref="FormulasParser.formula"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitCompileUnit([NotNull] FormulasParser.CompileUnitContext context);
+	Result VisitFormula([NotNull] FormulasParser.FormulaContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FormulasParser.expresion"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExpresion([NotNull] FormulasParser.ExpresionContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FormulasParser.valor"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitValor([NotNull] FormulasParser.ValorContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FormulasParser.operador"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOperador([NotNull] FormulasParser.OperadorContext context);
 }
 } // namespace TpIntegradorDiuj
