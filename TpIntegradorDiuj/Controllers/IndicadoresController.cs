@@ -50,6 +50,7 @@ namespace TpIntegradorDiuj.Controllers
             int maxId = indicadores.Select(x => x.Id).Max();
             model.Id = maxId+1;
             indicadores.Add(model);
+            //Guardo el indicador en lel JSON
             string jsonData = JsonConvert.SerializeObject(indicadores);
             System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "indicadores.json", jsonData);
             return RedirectToAction("Index");
@@ -58,7 +59,9 @@ namespace TpIntegradorDiuj.Controllers
         {
             var indicador = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == idIndicador);
             var empresa = empController.DeserializarArchivoEmpresas().FirstOrDefault(x => x.Id == idEmpresa);
-            double  indicador.ObtenerValor
+            //Aplico el indicador, es decir, hay que parsear la formula
+            double valorTrasAplicarIndicador = indicador.ObtenerValor(empresa, periodo);
+            return Json(new { Valor = valorTrasAplicarIndicador });
         }
        
     }
