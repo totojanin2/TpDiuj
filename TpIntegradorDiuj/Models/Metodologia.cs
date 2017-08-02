@@ -13,7 +13,7 @@ namespace TpIntegradorDiuj.Models
         public virtual List<ICondicion> Condiciones{get;set;}
         public bool EsDeseableInvertir(Empresa emp)
         {
-            return this.Condiciones.All(x => x.Analizar(emp);.
+            return this.Condiciones.All(x => x.Analizar(emp));
         }
     }
 }

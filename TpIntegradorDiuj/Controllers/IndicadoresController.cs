@@ -17,12 +17,8 @@ namespace TpIntegradorDiuj.Controllers
         EmpresasController empController = new EmpresasController();
         public ActionResult Index()
         {
-            ViewBag.ListIndicadores = DeserializarArchivoIndicadores().Select(x => new SelectListItem {
-                Text = x.Nombre,
-                Value = x.Id.ToString()
-            }).ToList();
-            
-            return View();
+            List<Indicador> indicadores = DeserializarArchivoIndicadores();            
+            return View(indicadores);
         }
         public List<Indicador> DeserializarArchivoIndicadores()
         {

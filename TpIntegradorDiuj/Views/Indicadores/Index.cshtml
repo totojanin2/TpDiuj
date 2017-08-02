@@ -1,17 +1,32 @@
-﻿
+﻿@model List<TpIntegradorDiuj.Models.Indicador>
 @{
     ViewBag.Title = "Indicadores";
-    List<SelectListItem> listIndicadores = new List<SelectListItem>();
-    List<SelectListItem> _listIndicadores = ViewBag.ListIndicadores as List<SelectListItem>;
-    listIndicadores.AddRange(_listIndicadores);
 }
 
-<h2>Indicadores</h2>
-<div class="col-md-7">
-    @Html.DropDownList("Indicadores",listIndicadores,"Seleccione indicador",new { @class="form-control"})
-</div>
-<div class="col-md-5">
+<div class="col-md-5 row">
     <a class="btn btn-primary" href="@Url.Action("Create")">Crear Indicador</a>
 </div>
+<h2>Indicadores</h2>
+<table id="tabla" class="dataTable table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Formula</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Nombre</td>
+                <td>@item.Formula</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
 
 
