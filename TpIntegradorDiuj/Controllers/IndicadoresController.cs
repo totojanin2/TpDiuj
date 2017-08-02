@@ -42,7 +42,8 @@ namespace TpIntegradorDiuj.Controllers
         public ActionResult Create(Indicador model)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            List<Indicador>  indicadores=DeserializarArchivoIndicadores();
+            List<Indicador> indicadores=DeserializarArchivoIndicadores();
+            //Obtengo la ultima id existente
             int maxId = indicadores.Select(x => x.Id).Max();
             model.Id = maxId+1;
             indicadores.Add(model);
@@ -53,8 +54,9 @@ namespace TpIntegradorDiuj.Controllers
         }
         public ActionResult EvaluarIndicadorParaEmpresa(int idIndicador,int idEmpresa,int periodo)
         {
-            var indicador = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == idIndicador);
-            var empresa = empController.DeserializarArchivoEmpresas().FirstOrDefault(x => x.Id == idEmpresa);
+           //Obtengo el indicador y empresa solicitada
+            Indicador indicador = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == idIndicador);
+            Empresa empresa = empController.DeserializarArchivoEmpresas().FirstOrDefault(x => x.Id == idEmpresa);
             //Aplico el indicador, es decir, hay que parsear la formula
             double valorTrasAplicarIndicador = indicador.ObtenerValor(empresa, periodo);
             return Json(new { Valor = valorTrasAplicarIndicador });

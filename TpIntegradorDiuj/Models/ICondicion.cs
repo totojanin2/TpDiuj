@@ -11,7 +11,7 @@ namespace TpIntegradorDiuj.Models
         Indicador Indicador { get;set; }
         int Indicador_Id { get; set; }
         string Descripcion { get; set; }
-
+        //Cada condicion será una clase, que tiene que implementar su metodo "ANALIZAR"
         bool Analizar(Empresa empresa);
     }
 }

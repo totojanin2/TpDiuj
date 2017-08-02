@@ -29,9 +29,15 @@ namespace TpIntegradorDiuj.Controllers
         public ActionResult Create(Balance balanceModel)
         {
             List<Empresa> empresas = empController.DeserializarArchivoEmpresas();
+            List<Balance> todosLosBalances = new List<Balance>();
+            //Obtengo el ultimo ID de balance de todo el JSON
+            foreach (var item in empresas)
+            {
+                //Agrego los balances de cada empresa a la lista de TODOS los balances
+                todosLosBalances.AddRange(item.Balances);
+            }
             Empresa empresa =empresas.FirstOrDefault(x => x.Id == balanceModel.Empresa_Id);
-            //Obtengo el ultimo ID de balance para esa empresa
-            int maxId = empresa.Balances.Select(x => x.Id).Max();
+            int maxId = todosLosBalances.Max(x => x.Id);
             balanceModel.Id = maxId + 1;
             //Guardo el balance en el JSON
             empresa.Balances.Add(balanceModel);

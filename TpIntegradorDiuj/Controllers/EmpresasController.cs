@@ -19,6 +19,7 @@ namespace TpIntegradorDiuj.Controllers
         }
         public List<Empresa> DeserializarArchivoEmpresas()
         {
+            //Metodo para desserializar el archivo json de empresas
             var file = Request.Files[0];
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             var buffer = new StreamReader(file.InputStream).ReadToEnd();
@@ -50,10 +51,11 @@ namespace TpIntegradorDiuj.Controllers
             {                
                 List<Empresa> empresas = this.DeserializarArchivoEmpresas();
                 Empresa empresa = empresas.FirstOrDefault(x => x.Id == idEmpresa);
-                var balances = empresa.Balances.Where(x => x.Periodo == anio);
-                if (balances != null)
+                //Obtengo el balance de la empresa para el año solicitado
+                Balance balance = empresa.Balances.FirstOrDefault(x => x.Periodo == anio);                
+                if(balance != null)
                 {
-                    return Json(new { Success = true, Balances = balances });
+                    return Json(new { Success = true, Cuentas = balance.Cuentas });
                 }
                 else
                 {
