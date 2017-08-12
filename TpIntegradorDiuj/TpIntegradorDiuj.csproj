@@ -702,6 +702,7 @@
     <Content Include="Views\Indicadores\Index.cshtml" />
     <Content Include="Views\Indicadores\Create.cshtml" />
     <Content Include="Views\Metodologias\Index.cshtml" />
+    <Content Include="Views\Balances\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

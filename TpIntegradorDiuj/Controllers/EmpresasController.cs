@@ -20,9 +20,18 @@ namespace TpIntegradorDiuj.Controllers
         public List<Empresa> DeserializarArchivoEmpresas()
         {
             //Metodo para desserializar el archivo json de empresas
-            var file = Request.Files[0];
+            string buffer;
+            if (Request != null)
+            {
+                var file = Request.Files[0];
+                buffer = new StreamReader(file.InputStream).ReadToEnd();
+            }
+            else
+            {
+                buffer = System.IO.File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\Archivos\\empresas.json"));
+            }
+
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            var buffer = new StreamReader(file.InputStream).ReadToEnd();
             List<Empresa> listaEmpresas =  serializer.Deserialize<List<Empresa>>(buffer);
             return listaEmpresas;
 

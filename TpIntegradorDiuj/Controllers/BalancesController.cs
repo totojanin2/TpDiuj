@@ -24,8 +24,14 @@ namespace TpIntegradorDiuj.Controllers
         }
         public ActionResult Create()
         {
+            ViewBag.Empresas = empController.DeserializarArchivoEmpresas().Select(x=>new SelectListItem
+            {
+                Text = x.Nombre,
+                Value = x.Id.ToString()
+            }).ToList();
             return View();
         }
+        [HttpPost]
         public ActionResult Create(Balance balanceModel)
         {
             List<Empresa> empresas = empController.DeserializarArchivoEmpresas();
