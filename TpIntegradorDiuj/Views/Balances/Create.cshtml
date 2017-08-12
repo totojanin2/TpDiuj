@@ -1,0 +1,37 @@
+﻿@model TpIntegradorDiuj.Models.Balance
+@using TpIntegradorDiuj.Models
+@{
+    ViewBag.Title = "Cargar balance";
+    List<SelectListItem> listEmpresas = new List<SelectListItem>();
+    List<SelectListItem> _listEmpresas = ViewBag.Empresas as List<SelectListItem>;
+    listEmpresas.AddRange(_listEmpresas);
+}
+<script>
+    $("#btnAgregar").click(function () {
+        var cant = $(".nombreCuenta").length +1;
+        var texto = '<input type="text" name="Cuentas[' + cant + '].Nombre" class="nombreCuenta form-control"';
+        texto += '<input type="text" name="Cuentas[' + cant + '].Valor" class=" form-control"';
+        $("#cuentas").html(texto);
+    });
+</script>
+
+<h2>Cargar balance</h2>
+<form method="post" action="@Url.Action("Create","Balances")">
+    <div class="form-group">
+        <label>Empresa</label>
+        @Html.DropDownList("Empresas", listEmpresas, "Seleccione empresa..", new { @class = "form-control", @name = "Empresa_Id" })
+
+    </div>
+    <div class="form-group">
+        <label>Periodo</label>
+        <input type="number" class="form-control" name="Periodo" />
+    </div>
+    <div>
+        <label>Cuentas</label>
+        <a href="#" id="btnAgregar" >Agregar cuenta</a>
+        <div id="cuentas">
+
+        </div>
+    </div>
+    <input type="submit" value="Guardar" />
+</form>
