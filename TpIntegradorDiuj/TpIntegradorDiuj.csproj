@@ -162,13 +162,13 @@
     </Compile>
     <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\ComponenteOperando.cs" />
-    <Compile Include="Models\Condicion.cs" />
-    <Compile Include="Models\Creciente.cs" />
+    <Compile Include="Models\Condiciones\Condicion.cs" />
+    <Compile Include="Models\Condiciones\Creciente.cs" />
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Empresa.cs" />
-    <Compile Include="Models\ICondicion.cs" />
+    <Compile Include="Models\Condiciones\ICondicion.cs" />
     <Compile Include="Models\Indicador.cs" />
-    <Compile Include="Models\MayorAUno.cs" />
+    <Compile Include="Models\Condiciones\MayorAUno.cs" />
     <Compile Include="Models\Metodologia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visitador.cs" />

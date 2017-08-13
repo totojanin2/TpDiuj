@@ -5,13 +5,9 @@ using System.Web;
 
 namespace TpIntegradorDiuj.Models
 {
-    public class Creciente : ICondicion
-    {
-        public Indicador Indicador { get; set; }
-        public int Indicador_Id { get; set; }
-        public string Descripcion { get; set; }
-
-        public bool Analizar(Empresa empresa)
+    public class Creciente : Condicion
+    { 
+        public override bool Analizar(Empresa empresa)
         {
             List<int> Periodos = new List<int>();
             bool result = true;
@@ -22,6 +18,7 @@ namespace TpIntegradorDiuj.Models
             while(i<Periodos.Count && result)
             {
                 result= this.Indicador.ObtenerValor(empresa, i) < this.Indicador.ObtenerValor(empresa, i + 1);
+                i++;
             }
             return result;
         }

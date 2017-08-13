@@ -15,7 +15,7 @@ namespace TpIntegradorDiuj.Controllers
         // GET: Metodologias
         public ActionResult Index()
         {
-            var metodologias = DeserializarArchivoMetodologias();
+            List<Metodologia> metodologias = DeserializarArchivoMetodologias();
             return View(metodologias);
         }
         public ActionResult Create()
