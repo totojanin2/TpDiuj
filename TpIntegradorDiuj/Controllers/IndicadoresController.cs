@@ -15,9 +15,10 @@ namespace TpIntegradorDiuj.Controllers
     {
         // GET: Indicadores
         EmpresasController empController = new EmpresasController();
+        TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
         public ActionResult Index()
         {
-            List<Indicador> indicadores = DeserializarArchivoIndicadores();            
+            List<Indicador> indicadores = db.Indicadores.ToList();            
             return View(indicadores);
         }
         public List<Indicador> DeserializarArchivoIndicadores()
@@ -41,7 +42,7 @@ namespace TpIntegradorDiuj.Controllers
         [HttpPost]
         public ActionResult Create(Indicador model)
         {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            /*JavaScriptSerializer serializer = new JavaScriptSerializer();
             List<Indicador> indicadores=DeserializarArchivoIndicadores();
             //Obtengo la ultima id existente
             int maxId = indicadores.Select(x => x.Id).Max();
@@ -49,7 +50,9 @@ namespace TpIntegradorDiuj.Controllers
             indicadores.Add(model);
             //Guardo el indicador en lel JSON
             string jsonData = JsonConvert.SerializeObject(indicadores);
-            System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "indicadores.json", jsonData);
+            System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "indicadores.json", jsonData);*/
+            db.Indicadores.Add(model);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
         public ActionResult EvaluarIndicadorParaEmpresa(int idIndicador,int idEmpresa,int periodo)

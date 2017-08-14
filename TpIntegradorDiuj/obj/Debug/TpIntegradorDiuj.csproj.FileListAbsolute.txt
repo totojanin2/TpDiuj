@@ -78,3 +78,5 @@ C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDi
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\es\System.Web.WebPages.Razor.resources.dll
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.dll
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.pdb
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.Migrations.estructuraInicial.resources
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.csproj.GenerateResource.Cache

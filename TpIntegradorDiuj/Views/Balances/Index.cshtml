@@ -1,0 +1,29 @@
+﻿@model List<TpIntegradorDiuj.Models.Balance>
+@{
+    ViewBag.Title = "Balances";
+}
+<h2>Balances</h2>
+<table id="tabla" class="dataTable table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Periodo</th>
+            <th>Empresa</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Periodo</td>
+                <td>@item.Empresa.Nombre</td>
+                <td>
+                    <a href="@Url.Action("Details","Balances",new { id = item.Id })"><i class="fa fa-eye"></i> Detalle</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

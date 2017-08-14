@@ -9,7 +9,8 @@ namespace TpIntegradorDiuj
 {
     public class TpIntegradorDbContext : DbContext
     {
-          public TpIntegradorDbContext() : base("DefaultConnection")
+        private static TpIntegradorDbContext Instance = null;
+        public TpIntegradorDbContext() : base("DefaultConnection")
         {
             this.Configuration.ValidateOnSaveEnabled = false;
             this.Database.CommandTimeout = 360;
@@ -22,9 +23,43 @@ namespace TpIntegradorDiuj
         public virtual DbSet<Condicion> Condiciones { get; set; }
         public virtual DbSet<Indicador> Indicadores { get; set; }
 
+        public static TpIntegradorDbContext GetInstance()
+        {
+            if (Instance == null)
+                Instance = new TpIntegradorDbContext();
+            return Instance;
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<>
+            modelBuilder.Entity<Empresa>()
+                .ToTable("Empresas")
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Balance>()
+                .ToTable("Balances")
+                .HasKey(x => x.Id)
+                .HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.Empresa_Id);
+
+            modelBuilder.Entity<Balance>().HasMany(x => x.Cuentas).WithRequired().HasForeignKey(x => x.Balance_Id);
+
+            modelBuilder.Entity<Indicador>()
+               // .ToTable("Indicadores")
+                .HasKey(x => x.Id)
+                  .HasMany(x => x.Operandos).WithOptional().HasForeignKey(x => x.IndicadorPadre_Id);
+
+            modelBuilder.Entity<Metodologia>().ToTable("Metodologias").HasKey(x => x.Id);
+            modelBuilder.Entity<Metodologia>().HasMany(x => x.Condiciones).WithMany();
+
+            modelBuilder.Entity<Cuenta>()
+               // .ToTable("Cuentas")
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Condicion>().ToTable("Condiciones")
+                .HasKey(x => x.Id).HasOptional(x => x.Indicador).WithMany().HasForeignKey(x => x.Indicador_Id);
+
+            modelBuilder.Entity<ComponenteOperando>().ToTable("Operandos")
+               .HasKey(x => x.Id);
+
         }
     }
 }

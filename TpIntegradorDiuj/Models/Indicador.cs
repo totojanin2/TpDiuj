@@ -7,7 +7,6 @@ namespace TpIntegradorDiuj.Models
 {
     public class Indicador : ComponenteOperando
     {
-        public int Id { get; set; }
         public string Formula { get; set; }
         public List<ComponenteOperando> Operandos { get; set; }
         public override double ObtenerValor(Empresa empresa, int periodo)

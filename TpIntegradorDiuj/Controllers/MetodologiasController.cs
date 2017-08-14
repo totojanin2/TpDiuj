@@ -13,9 +13,10 @@ namespace TpIntegradorDiuj.Controllers
     public class MetodologiasController : Controller
     {
         // GET: Metodologias
+        TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
         public ActionResult Index()
         {
-            List<Metodologia> metodologias = DeserializarArchivoMetodologias();
+            List<Metodologia> metodologias = db.Metodologias.ToList();
             return View(metodologias);
         }
         public ActionResult Create()
@@ -27,16 +28,28 @@ namespace TpIntegradorDiuj.Controllers
         public ActionResult Create(Metodologia model)
         {
             //
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            /* JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-            //Obtengo las metodologias del archivo JSON
-            List<Metodologia> metodologias = DeserializarArchivoMetodologias();
-            int maxId = metodologias.Select(x => x.Id).Max();
-            model.Id = maxId + 1;
-            metodologias.Add(model);
-            string jsonData = JsonConvert.SerializeObject(metodologias);
-            System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "metodologias.json", jsonData);
-            return RedirectToAction("Index");
+             //Obtengo las metodologias del archivo JSON
+             List<Metodologia> metodologias = DeserializarArchivoMetodologias();
+             int maxId = metodologias.Select(x => x.Id).Max();
+             model.Id = maxId + 1;
+             metodologias.Add(model);
+             string jsonData = JsonConvert.SerializeObject(metodologias);
+             System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "metodologias.json", jsonData);*/
+            try
+            {
+                db.Metodologias.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+                List<Metodologia> metodologias = db.Metodologias.ToList();
+                return View(metodologias);
+            }
         }
         
         public List<Metodologia> DeserializarArchivoMetodologias()

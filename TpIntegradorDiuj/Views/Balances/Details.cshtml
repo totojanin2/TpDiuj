@@ -1,0 +1,28 @@
+﻿@model TpIntegradorDiuj.Models.Balance
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Balance</h2>
+
+<div class="form-horizontal">
+    <label>Empresa : @Model.Empresa.Nombre</label>
+    <label>Periodo : @Model.Periodo</label>
+    <div>
+        <h4>Cuentas</h4>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Valor</th>
+            </tr>
+            @foreach (var item in Model.Cuentas)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Valor</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

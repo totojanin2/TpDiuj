@@ -8,7 +8,6 @@ namespace TpIntegradorDiuj.Models
     public class Cuenta : ComponenteOperando
     {
 
-        public int Id { get; set; }
         public int Balance_Id { get; set; }
         public double Valor { get; set; }
 

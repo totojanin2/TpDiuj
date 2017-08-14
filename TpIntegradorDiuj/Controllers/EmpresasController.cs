@@ -13,9 +13,11 @@ namespace TpIntegradorDiuj.Controllers
     public class EmpresasController : Controller
     {
         // GET: Empresas
+        TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
         public ActionResult Index()
         {
-            return View();
+            List<Empresa> empresas = db.Empresas.ToList();
+            return View(empresas);
         }
         public List<Empresa> DeserializarArchivoEmpresas()
         {
@@ -36,12 +38,12 @@ namespace TpIntegradorDiuj.Controllers
             return listaEmpresas;
 
         }
-        [HttpPost]
+       /* [HttpPost]
         public JsonResult ObtenerEmpresasYPeriodos()
         {
             if (Request.Files.Count>0)
             {               
-                List<Empresa> empresas = this.DeserializarArchivoEmpresas();
+                List<Empresa> empresas = db.Empresas.ToList();
                 List<int> periodos = new List<int>();
                 foreach (var balances in empresas.Select(x=>x.Balances))
                 {
@@ -52,16 +54,27 @@ namespace TpIntegradorDiuj.Controllers
                 return Json(new { Success = true, Empresas = empresas, Periodos = periodos });
             }
             return Json(new { Success = false, Mensaje = "Hubo un error" });
+        }*/
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Empresa emp)
+        {
+            db.Empresas.Add(emp);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
         [HttpPost]
         public JsonResult ObtenerBalancesDeEmpresaPorPeriodo(int idEmpresa,int anio)
         {
             if (Request.Files.Count > 0)
             {                
-                List<Empresa> empresas = this.DeserializarArchivoEmpresas();
+                List<Empresa> empresas = db.Empresas.ToList();
                 Empresa empresa = empresas.FirstOrDefault(x => x.Id == idEmpresa);
                 //Obtengo el balance de la empresa para el año solicitado
-                Balance balance = empresa.Balances.FirstOrDefault(x => x.Periodo == anio);                
+                Balance balance = db.Balances.FirstOrDefault(x =>x.Empresa_Id ==idEmpresa && x.Periodo == anio);                
                 if(balance != null)
                 {
                     return Json(new { Success = true, Cuentas = balance.Cuentas });

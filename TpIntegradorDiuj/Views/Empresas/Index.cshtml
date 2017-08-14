@@ -1,6 +1,12 @@
-﻿
+﻿@model List<TpIntegradorDiuj.Models.Empresa>
+@using TpIntegradorDiuj.Models
 @{
     ViewBag.Title = "Empresas";
+    List<SelectListItem> listEmpresas = Model.Select(x => new SelectListItem
+    {
+        Text = x.Nombre,
+        Value = x.Id.ToString()
+    }).ToList();
 }
 
 <script>
@@ -88,22 +94,49 @@
 
    
 </script>
+<div class="col-md-5 row" style="margin-top:10px">
+    <a class="btn btn-primary" href="@Url.Action("Create")">Crear Empresa</a>
+</div>
 <h2>Empresas</h2>
-<div class="form-group">
+<table id="tabla" class="dataTable table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Nombre</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*<div class="form-group">
 @using (Html.BeginForm("ObtenerEmpresasYPeriodos", "Empresas", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
 {
 
     <input type="file" name="fileEmpresas" id="fileEmpresas" />
-    @*<input type="submit" value="Cargar" />*@
+    <input type="submit" value="Cargar" />
  }
 
 
-</div>
-<div>
+</div>*@
+@*<div>
     <div class="col-md-4">
-        @Html.DropDownList("Empresas", new List<SelectListItem>(), "Seleccione empresa..", new { @class = "form-control", @id = "selectEmpresas" })
+        @Html.DropDownList("Empresas", listEmpresas, "Seleccione empresa..", new { @class = "form-control", @id = "selectEmpresas" })
         <br />
-        @Html.DropDownList("Periodos", new List<SelectListItem>(), "Seleccione periodo..", new { @class = "form-control", @id = "selectPeriodo" })
+       <select id="selectPeriodo" class="form-control">
+           @for (int i = 2012; i < 2018; i++)
+           {
+               <option value="@i">@i</option>
+           }
+       </select>
         <br />
         <input type="submit" value="Mostrar Cuentas" id="btnMostrarCuentas" />
     </div>
@@ -111,5 +144,5 @@
     <div id="cuentas" class="col-md-8">
 
     </div>
-</div>
+</div>*@
 

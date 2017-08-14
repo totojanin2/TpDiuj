@@ -160,17 +160,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708131509056_estructuraInicial.cs" />
+    <Compile Include="Migrations\201708131509056_estructuraInicial.Designer.cs">
+      <DependentUpon>201708131509056_estructuraInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\ComponenteOperando.cs" />
-    <Compile Include="Models\Condiciones\Condicion.cs" />
     <Compile Include="Models\Condiciones\Creciente.cs" />
+    <Compile Include="Models\Condiciones\RoeConsistente.cs" />
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Empresa.cs" />
-    <Compile Include="Models\Condiciones\ICondicion.cs" />
+    <Compile Include="Models\Condiciones\Condicion.cs" />
     <Compile Include="Models\Indicador.cs" />
     <Compile Include="Models\Condiciones\MayorAUno.cs" />
     <Compile Include="Models\Metodologia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TpIntegradorDbContext.cs" />
     <Compile Include="Visitador.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -703,6 +709,9 @@
     <Content Include="Views\Indicadores\Create.cshtml" />
     <Content Include="Views\Metodologias\Index.cshtml" />
     <Content Include="Views\Balances\Create.cshtml" />
+    <Content Include="Views\Empresas\Create.cshtml" />
+    <Content Include="Views\Balances\Index.cshtml" />
+    <Content Include="Views\Balances\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -719,6 +728,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708131509056_estructuraInicial.resx">
+      <DependentUpon>201708131509056_estructuraInicial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

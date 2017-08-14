@@ -12,44 +12,47 @@ namespace TpIntegradorDiuj.Controllers
     {
         // GET: Cuentas
         EmpresasController empController = new EmpresasController();
+        TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
 
         public ActionResult Index()
         {
-            List<Balance> balances = new List<Balance>();
-            foreach (var empresa in empController.DeserializarArchivoEmpresas())
-            {
-                balances.AddRange(empresa.Balances);
-            }         
+            List<Balance> balances = db.Balances.ToList();
             return View(balances);
         }
         public ActionResult Create()
         {
-            ViewBag.Empresas = empController.DeserializarArchivoEmpresas().Select(x=>new SelectListItem
+            ViewBag.Empresas = db.Empresas.Select(x => new SelectListItem
             {
                 Text = x.Nombre,
                 Value = x.Id.ToString()
             }).ToList();
             return View();
         }
+        public ActionResult Details(int id)
+        {
+            Balance bal = db.Balances.FirstOrDefault(x => x.Id == id);
+            return View(bal);
+        }
         [HttpPost]
         public ActionResult Create(Balance balanceModel)
         {
-            List<Empresa> empresas = empController.DeserializarArchivoEmpresas();
-            List<Balance> todosLosBalances = new List<Balance>();
-            //Obtengo el ultimo ID de balance de todo el JSON
-            foreach (var item in empresas)
+            try
             {
-                //Agrego los balances de cada empresa a la lista de TODOS los balances
-                todosLosBalances.AddRange(item.Balances);
+                db.Balances.Add(balanceModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            Empresa empresa =empresas.FirstOrDefault(x => x.Id == balanceModel.Empresa_Id);
-            int maxId = todosLosBalances.Max(x => x.Id);
-            balanceModel.Id = maxId + 1;
-            //Guardo el balance en el JSON
-            empresa.Balances.Add(balanceModel);
-            string jsonData = JsonConvert.SerializeObject(empresas);
-            System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "empresas.json", jsonData);
-            return RedirectToAction("Index");
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+                ViewBag.Empresas = db.Empresas.Select(x => new SelectListItem
+                {
+                    Text = x.Nombre,
+                    Value = x.Id.ToString()
+                }).ToList();
+                return View();
+            }
+
         }
     }
 }
