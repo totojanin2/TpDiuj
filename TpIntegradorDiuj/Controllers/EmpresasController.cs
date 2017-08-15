@@ -67,26 +67,26 @@ namespace TpIntegradorDiuj.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public JsonResult ObtenerBalancesDeEmpresaPorPeriodo(int idEmpresa,int anio)
-        {
-            if (Request.Files.Count > 0)
-            {                
-                List<Empresa> empresas = db.Empresas.ToList();
-                Empresa empresa = empresas.FirstOrDefault(x => x.Id == idEmpresa);
-                //Obtengo el balance de la empresa para el año solicitado
-                Balance balance = db.Balances.FirstOrDefault(x =>x.Empresa_Id ==idEmpresa && x.Periodo == anio);                
-                if(balance != null)
-                {
-                    return Json(new { Success = true, Cuentas = balance.Cuentas });
-                }
-                else
-                {
-                   return Json(new { Success = false, Mensaje="No hay cuentas para: "+empresa.Nombre + " en el periodo "+anio });
+            public JsonResult ObtenerBalancesDeEmpresaPorPeriodo(int idEmpresa,int anio)
+            {
+                if (Request.Files.Count > 0)
+                {                
+                    List<Empresa> empresas = db.Empresas.ToList();
+                    Empresa empresa = empresas.FirstOrDefault(x => x.Id == idEmpresa);
+                    //Obtengo el balance de la empresa para el año solicitado
+                    Balance balance = db.Balances.FirstOrDefault(x =>x.Empresa_Id ==idEmpresa && x.Periodo == anio);                
+                    if(balance != null)
+                    {
+                        return Json(new { Success = true, Cuentas = balance.Cuentas });
+                    }
+                    else
+                    {
+                       return Json(new { Success = false, Mensaje="No hay cuentas para: "+empresa.Nombre + " en el periodo "+anio });
 
+                    }
                 }
+                return Json(new { Success = false, Mensaje = "Hubo un error" });
             }
-            return Json(new { Success = false, Mensaje = "Hubo un error" });
-        }
    
     }
 }

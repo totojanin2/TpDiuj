@@ -50,9 +50,19 @@ namespace TpIntegradorDiuj.Controllers
                     Text = x.Nombre,
                     Value = x.Id.ToString()
                 }).ToList();
-                return View();
+               return View();
             }
 
+        }
+        [HttpPost]
+        public JsonResult obtener_periodos_empresa(int idEmpresa)
+        {
+            if (Request.Files.Count > 0)
+            {
+                List<int> periodos = db.Balances.Where(x => x.Empresa_Id == idEmpresa).Select(x => x.Periodo).ToList();
+                return Json(new { Success = true, Periodos = periodos });
+            }
+            return Json(new { Success = false, Mensaje = "Hubo un error" });
         }
     }
 }
