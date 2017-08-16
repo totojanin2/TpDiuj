@@ -712,6 +712,8 @@
     <Content Include="Views\Empresas\Create.cshtml" />
     <Content Include="Views\Balances\Index.cshtml" />
     <Content Include="Views\Balances\Details.cshtml" />
+    <Content Include="Views\Balances\Edit.cshtml" />
+    <Content Include="Views\Metodologias\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

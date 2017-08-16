@@ -7,6 +7,7 @@ using TpIntegradorDiuj.Models;
 
 namespace TpIntegradorDiuj
 {
+
     public class TpIntegradorDbContext : DbContext
     {
         private static TpIntegradorDbContext Instance = null;
@@ -15,7 +16,8 @@ namespace TpIntegradorDiuj
             this.Configuration.ValidateOnSaveEnabled = false;
             this.Database.CommandTimeout = 360;
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
-        }
+            this.AgregarCondiciones();
+        }       
         public virtual DbSet<Empresa> Empresas { get; set; }
         public virtual DbSet<Cuenta> Cuentas { get; set; }
         public virtual DbSet<Balance> Balances { get; set; }
@@ -23,6 +25,19 @@ namespace TpIntegradorDiuj
         public virtual DbSet<Condicion> Condiciones { get; set; }
         public virtual DbSet<Indicador> Indicadores { get; set; }
 
+        private void AgregarCondiciones()
+        {
+            List<Condicion> condiciones = this.Condiciones.ToList();
+            this.Condiciones.RemoveRange(condiciones);
+            this.SaveChanges();
+            Condicion creciente = new Creciente()
+            {
+                Descripcion = "Que los margenes de beneficio sean crecientes",
+                Indicador_Id = this.Indicadores.ToList().FirstOrDefault(x => x.Nombre.ToLower().Contains("margenes")).Id               
+            };
+            this.Condiciones.Add(creciente);
+            this.SaveChanges();
+        }
         public static TpIntegradorDbContext GetInstance()
         {
             if (Instance == null)

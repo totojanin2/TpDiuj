@@ -1,0 +1,88 @@
+﻿@model TpIntegradorDiuj.Models.Balance
+@using TpIntegradorDiuj.Models
+@{
+    ViewBag.Title = "Editar balance";
+    List<SelectListItem> listEmpresas = new List<SelectListItem>();
+    List<SelectListItem> _listEmpresas = ViewBag.Empresas as List<SelectListItem>;
+    listEmpresas.AddRange(_listEmpresas);
+
+}
+
+<script>
+    function nuevaCuenta(id) {
+
+    }
+    function cargarPeriodos() {
+        var idEmpresa = $("#selectEmpresas").val();
+        if (idEmpresa != undefined) {
+            var url = '@Url.Action("obtener_periodos_empresa","Balances",new { idEmpresa="__idEmpresa__"})';
+            url = url.replace("__idEmpresa__", idEmpresa);
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    if (data.Success) {
+                        var texto = '<option value="" disabled selected>Seleccione un periodo...</option><option value="-1">Nuevo periodo</option>';
+                        $.each(data.Periodos, function (index, item) {
+                            texto += '<option value="' + item + '">' + item + '</option>';
+                        });
+                        $("#selectPeriodos").html(texto);
+                    }
+                    else {
+                        alert(data.Mensaje);
+                        $("#selectPeriodos").html("");
+                    }
+                }
+
+            });
+        }
+
+    }
+    function rotarInputs() {
+        if ($("#selectPeriodos").val() == -1)
+        {
+            $("#selectPeriodos").hide();
+            $("#nuevoPer").show();
+            $("#inputPer").focus();
+        }
+    }
+</script>
+
+<h2>Cargar balance</h2>
+<div class="row " style="margin-top: 90px;">
+    <div class="col-md-5 col-md-offset-1">
+        <form method="post" action="@Url.Action("Create","Balances")">
+            <div class="form-group">
+                <label>Empresa</label>
+                @Html.DropDownList("Empresas", listEmpresas, "Seleccione empresa..", new { @id = "selectEmpresas", @class = "form-control", @name = "Empresa_Id", @onchange = "cargarPeriodos()" })
+            </div>
+            <label>Periodo</label>
+            <div class="form-group" id="nuevoPer" style="display:none">
+                <input type="number" class="form-control" name="Periodo" id="inputPer" />
+            </div>
+            <div class="form-group" id="selectPer">
+                <select class="form-control" name="" id="selectPeriodos" onchange="rotarInputs()">
+                    <option value="" disabled selected>Seleccione un periodo...</option>
+                    <option value="-1">Nuevo periodo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Nueva cuenta</label>
+                <input type="text" name="cuenta_nombre" placeholder="Nombre" class="nombreCuenta form-control" />
+            </div>
+            <div class="form-group">
+                <input type="text" name="cuenta_valor" placeholder="Valor" class="valorCuenta form-control" />
+            </div>
+            <div class="form-group">
+                <button id="agregarCuenta" class="btn btn-success">Agregar cuenta</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <label>Cuentas</label>
+        <!--aca van las cuentas existentes una vez seleccionados: empresa y periodo.
+            tambien se debe ir actualizando a medida que se agregan nuevas cuentas-->
+    </div>
+</div>

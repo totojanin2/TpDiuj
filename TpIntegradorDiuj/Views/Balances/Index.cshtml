@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Balances";
 }
+<a href="@Url.Action("Create","Balances")" >Crear balance</a>
 <h2>Balances</h2>
 <table id="tabla" class="dataTable table table-bordered table-condensed">
     <thead>
@@ -20,7 +21,7 @@
                 <td>@item.Periodo</td>
                 <td>@item.Empresa.Nombre</td>
                 <td>
-                    <a href="@Url.Action("Details","Balances",new { id = item.Id })"><i class="fa fa-eye"></i> Detalle</a>
+                    <a href="@Url.Action("Details","Balances",new { id = item.Id })" >Detalle </a>
                 </td>
 
             </tr>
