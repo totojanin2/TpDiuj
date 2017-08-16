@@ -56,11 +56,13 @@ namespace TpIntegradorDiuj
             modelBuilder.Entity<Empresa>()
                 .ToTable("Empresas")
                 .HasKey(x => x.Id);
+            modelBuilder.Entity<Empresa>()
+                .HasMany(x => x.Balances).WithRequired().HasForeignKey(x => x.Empresa_Id);
 
             modelBuilder.Entity<Balance>()
                 .ToTable("Balances")
-                .HasKey(x => x.Id)
-                .HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.Empresa_Id);
+                .HasKey(x => x.Id);
+               // .HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.Empresa_Id);
 
             modelBuilder.Entity<Balance>().HasMany(x => x.Cuentas).WithRequired().HasForeignKey(x => x.Balance_Id);
 

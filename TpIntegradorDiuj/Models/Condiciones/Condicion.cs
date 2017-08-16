@@ -14,5 +14,9 @@ namespace TpIntegradorDiuj.Models
         public string Descripcion { get; set; }
         //Cada condicion será una clase, que tiene que implementar su metodo "ANALIZAR"
         public abstract bool Analizar(Empresa empresa);
+        protected List<int> ObtenerPeriodosAConsultar(Empresa emp)
+        {
+            return emp.Balances.Select(x => x.Periodo).ToList();
+        }
     }
 }

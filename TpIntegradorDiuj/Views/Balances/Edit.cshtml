@@ -9,8 +9,45 @@
 }
 
 <script>
-    function nuevaCuenta(id) {
+    function agregarCuenta() {
+        var cantRows = $(".cuentasTable > tbody.cuerpo > tr").length;
+        var tr = '<tr>';
+        tr += '<td><input type="text" class=form-control name="Cuentas[' + cantRows + '].Nombre" /></td>';
+        tr += '<td><input type="text" class=form-control name="Cuentas[' + cantRows + '].Valor" /></td><td></td>';
+        tr += '</tr>';
+        $(".cuentasTable > tbody.cuerpo").append(tr);
+    };
+    function cargarCuentas() {
+        var idEmpresa = $("#selectEmpresas").val();
+        var periodo = $("#selectPeriodos").val();
+        if (idEmpresa != undefined) {
+            var url = '@Url.Action("ObtenerBalancesDeEmpresaPorPeriodo","Balances",new { idEmpresa="__idEmpresa__",anio="__anio__"})';
+            url = url.replace("__idEmpresa__", idEmpresa).replace("amp;", "").replace("__anio__", periodo);
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    if (data.Success) {
+                        var texto = '<label> Cuentas</label><table class="table table-condensed"><thead><tr><th>Cuenta</th><th>Valor</th></tr></thead><tbody>';
+                        $.each(data.Cuentas,function(index,item){
+                             texto+= '<tr><td>'+item.Nombre+'</td><td>$'+item.Valor +'</td></tr> '
+                        });
+                        texto += ' </tbody> </table>';
+                        $("#divCuentas").show();
+                        $("#cuentasAAgregar").show();
+                        $("#divCuentas").html(texto);
 
+                    }
+                    else {
+                        alert(data.Mensaje);
+                        $("#selectPeriodos").html("");
+                    }
+                }
+
+            });
+        }
     }
     function cargarPeriodos() {
         var idEmpresa = $("#selectEmpresas").val();
@@ -24,11 +61,14 @@
                 contentType: false,
                 success: function (data) {
                     if (data.Success) {
-                        var texto = '<option value="" disabled selected>Seleccione un periodo...</option><option value="-1">Nuevo periodo</option>';
+                        var texto = '<option value="" disabled selected>Seleccione un periodo...</option>';
                         $.each(data.Periodos, function (index, item) {
                             texto += '<option value="' + item + '">' + item + '</option>';
                         });
                         $("#selectPeriodos").html(texto);
+                        $("#divCuentas").hide();
+                        $("#cuentasAAgregar").hide();
+
                     }
                     else {
                         alert(data.Mensaje);
@@ -40,48 +80,47 @@
         }
 
     }
-    function rotarInputs() {
-        if ($("#selectPeriodos").val() == -1)
-        {
-            $("#selectPeriodos").hide();
-            $("#nuevoPer").show();
-            $("#inputPer").focus();
-        }
-    }
 </script>
 
-<h2>Cargar balance</h2>
+<h2>Editar balance</h2>
 <div class="row " style="margin-top: 90px;">
     <div class="col-md-5 col-md-offset-1">
-        <form method="post" action="@Url.Action("Create","Balances")">
+        <form method="post" action="@Url.Action("Edit","Balances")">
             <div class="form-group">
                 <label>Empresa</label>
-                @Html.DropDownList("Empresas", listEmpresas, "Seleccione empresa..", new { @id = "selectEmpresas", @class = "form-control", @name = "Empresa_Id", @onchange = "cargarPeriodos()" })
-            </div>
-            <label>Periodo</label>
-            <div class="form-group" id="nuevoPer" style="display:none">
-                <input type="number" class="form-control" name="Periodo" id="inputPer" />
+                @Html.DropDownList("Empresa_Id", listEmpresas, "Seleccione empresa..", new { @id = "selectEmpresas", @class = "form-control", @name = "Empresa_Id", @onchange = "cargarPeriodos()" })
             </div>
             <div class="form-group" id="selectPer">
-                <select class="form-control" name="" id="selectPeriodos" onchange="rotarInputs()">
+                <label>Periodo</label>
+                <select class="form-control" name="Periodo" id="selectPeriodos" onchange="cargarCuentas()">
                     <option value="" disabled selected>Seleccione un periodo...</option>
-                    <option value="-1">Nuevo periodo</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label>Nueva cuenta</label>
-                <input type="text" name="cuenta_nombre" placeholder="Nombre" class="nombreCuenta form-control" />
+            <div id="cuentasAAgregar" style="display:none" >
+                <h4>Agregar cuentas</h4>
+                <table class="cuentasTable table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Valor</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="cuerpo"></tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><a href="#" onclick="agregarCuenta()" value="+" id="agregarCuenta"> +</a></td>
+                    </tr>
+                </table>
             </div>
-            <div class="form-group">
-                <input type="text" name="cuenta_valor" placeholder="Valor" class="valorCuenta form-control" />
-            </div>
-            <div class="form-group">
-                <button id="agregarCuenta" class="btn btn-success">Agregar cuenta</button>
-            </div>
+            <br />
+            <input type="submit" value="Guardar" />
         </form>
     </div>
-    <div class="col-md-4 col-md-offset-1">
-        <label>Cuentas</label>
+    <div class="col-md-4 col-md-offset-1" style="display:none" id="divCuentas">
+        <h4>Cuentas</h4>
         <!--aca van las cuentas existentes una vez seleccionados: empresa y periodo.
             tambien se debe ir actualizando a medida que se agregan nuevas cuentas-->
     </div>

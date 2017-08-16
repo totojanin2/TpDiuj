@@ -14,6 +14,7 @@
             <th>Id</th>
             <th>Nombre</th>
             <th>Condiciones</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +30,9 @@
                             <li>@elem.Descripcion</li>
                         }
                     </ul>
+                </td>
+                <td>
+                    <a title="Empresas deseables para invertir" href="@Url.Action("ObtenerEmpresasDeseables","Metodologias",new { idMetodologia = item.Id })">Ver empresas deseables</a>
                 </td>
             </tr>
         }

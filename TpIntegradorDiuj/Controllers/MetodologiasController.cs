@@ -63,14 +63,21 @@ namespace TpIntegradorDiuj.Controllers
             return listMetodologias;
 
         }
-
+        public ActionResult ObtenerEmpresasDeseables(int idMetodologia)
+        {
+            Metodologia met = db.Metodologias.FirstOrDefault(x => x.Id == idMetodologia);
+            IEnumerable<Empresa> empresas = db.Empresas;
+            List<Empresa> deseables = met.ObtenerEmpresasDeseables(empresas);
+            ViewBag.Empresa_Nombre = met.Nombre;
+            return View(deseables);
+        }
         public ActionResult EvaluarConvenienciaInversion(int empresaId,int metodologiaId)
         {
             EmpresasController empController = new EmpresasController();
             //Obtengo la empresa solicitada
-            Empresa empresa = empController.DeserializarArchivoEmpresas().FirstOrDefault(x=>x.Id == empresaId);
+            Empresa empresa = db.Empresas.FirstOrDefault(x=>x.Id == empresaId);
             //Obtengo la metodologia solicitada
-            Metodologia metodologia = DeserializarArchivoMetodologias().FirstOrDefault(x => x.Id == metodologiaId);
+            Metodologia metodologia = db.Metodologias.FirstOrDefault(x => x.Id == metodologiaId);
             //Ejecuto las condiciones de la metodología, para tal empresa, para ver si conviene invertir o no
             bool result = metodologia.EsDeseableInvertir(empresa);
             return Json(new { EsDeseable = result });

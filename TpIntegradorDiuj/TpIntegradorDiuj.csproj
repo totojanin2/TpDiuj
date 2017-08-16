@@ -722,6 +722,7 @@
     <Content Include="Views\Balances\Details.cshtml" />
     <Content Include="Views\Balances\Edit.cshtml" />
     <Content Include="Views\Metodologias\Create.cshtml" />
+    <Content Include="Views\Metodologias\ObtenerEmpresasDeseables.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

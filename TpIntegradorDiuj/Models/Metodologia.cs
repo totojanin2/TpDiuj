@@ -20,5 +20,16 @@ namespace TpIntegradorDiuj.Models
             //Me fijo que se cumplan todas las condiciones de esta metodologia
             return this.Condiciones.All(x => x.Analizar(emp));
         }
+
+        public List<Empresa> ObtenerEmpresasDeseables(IEnumerable<Empresa> empresas)
+        {
+            List<Empresa> deseables = new List<Empresa>();
+            foreach (var emp in empresas)
+            {
+                if (this.EsDeseableInvertir(emp))
+                    deseables.Add(emp);
+            }
+            return deseables;
+        }
     }
 }
