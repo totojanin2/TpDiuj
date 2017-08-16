@@ -10,6 +10,7 @@
             <th>Id</th>
             <th>Periodo</th>
             <th>Empresa</th>
+            <th>Total en cuentas</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -20,6 +21,7 @@
                 <td>@item.Id</td>
                 <td>@item.Periodo</td>
                 <td>@item.Empresa.Nombre</td>
+                <td>$@item.Total</td>
                 <td>
                     <a href="@Url.Action("Details","Balances",new { id = item.Id })" >Detalle </a>
                 </td>

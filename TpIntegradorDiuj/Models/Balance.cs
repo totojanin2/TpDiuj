@@ -13,7 +13,11 @@ namespace TpIntegradorDiuj.Models
         public int Empresa_Id { get; set; }
         public virtual Empresa Empresa { get; set; }
 
-        public double Valor { get; set; }
+        public double Total {
+            get {
+                return this.Cuentas.Sum(x => x.Valor);
+            }
+        }
 
 
 

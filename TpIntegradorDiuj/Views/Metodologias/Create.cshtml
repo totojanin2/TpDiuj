@@ -1,7 +1,32 @@
 ﻿
 @{
     ViewBag.Title = "Create";
+    List<SelectListItem> listCondiciones = new List<SelectListItem>();
+    List<SelectListItem> _listCondiciones = ViewBag.ListCondiciones as List<SelectListItem>;
+    listCondiciones.AddRange(_listCondiciones);
 }
+<style>
+    #listCondiciones{
+        width:90%;
+        font-size:12px
+    }
+</style>
 
-<h2>Create</h2>
+<h2>Cargar metodologia</h2>
+<div class="form-horizontal">
+    <form method="post" action="@Url.Action("Create","Metodologias")">
+       
+        <label>Nombre</label>
+        <div class="form-group" id="nuevoPer">
+            <input type="text" class="form-control" name="Nombre"  required />
+        </div>
+
+        <div class="form-group">
+            <label>Condiciones</label>
+            @Html.ListBox("IdsCondiciones",listCondiciones,new { @class="form-control",@id="listCondiciones"})
+        </div>
+        <br />
+        <input type="submit" value="Guardar" />
+    </form>
+</div>
 

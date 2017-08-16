@@ -19,26 +19,28 @@ namespace TpIntegradorDiuj.Controllers
             List<Metodologia> metodologias = db.Metodologias.ToList();
             return View(metodologias);
         }
+        private void setViewBagCondiciones()
+        {
+            ViewBag.ListCondiciones = db.Condiciones.Select(x => new SelectListItem
+            {
+                Text = x.Descripcion,
+                Value = x.Id.ToString()
+            }).ToList();
+        }
         public ActionResult Create()
         {
+            setViewBagCondiciones();
             return View();
         }
       
         [HttpPost]
-        public ActionResult Create(Metodologia model)
+        public ActionResult Create(Metodologia model,List<int> IdsCondiciones)
         {
-            //
-            /* JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-             //Obtengo las metodologias del archivo JSON
-             List<Metodologia> metodologias = DeserializarArchivoMetodologias();
-             int maxId = metodologias.Select(x => x.Id).Max();
-             model.Id = maxId + 1;
-             metodologias.Add(model);
-             string jsonData = JsonConvert.SerializeObject(metodologias);
-             System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "metodologias.json", jsonData);*/
             try
             {
+                int[] arrayIds = IdsCondiciones.ToArray();
+                List<Condicion> condicionesAAgregar = db.Condiciones.Where(x => arrayIds.Contains(x.Id)).ToList();
+                model.Condiciones.AddRange(condicionesAAgregar);
                 db.Metodologias.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -47,8 +49,8 @@ namespace TpIntegradorDiuj.Controllers
             catch (Exception e)
             {
                 ModelState.AddModelError("", e.Message);
-                List<Metodologia> metodologias = db.Metodologias.ToList();
-                return View(metodologias);
+                setViewBagCondiciones();
+                return View();
             }
         }
         

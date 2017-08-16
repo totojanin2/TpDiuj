@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using TpIntegradorDiuj.Models;
+using TpIntegradorDiuj.Models.Condiciones;
 
 namespace TpIntegradorDiuj
 {
@@ -16,7 +17,7 @@ namespace TpIntegradorDiuj
             this.Configuration.ValidateOnSaveEnabled = false;
             this.Database.CommandTimeout = 360;
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
-            this.AgregarCondiciones();
+           // this.AgregarCondiciones();
         }       
         public virtual DbSet<Empresa> Empresas { get; set; }
         public virtual DbSet<Cuenta> Cuentas { get; set; }
@@ -35,6 +36,12 @@ namespace TpIntegradorDiuj
                 Descripcion = "Que los margenes de beneficio sean crecientes",
                 Indicador_Id = this.Indicadores.ToList().FirstOrDefault(x => x.Nombre.ToLower().Contains("margenes")).Id               
             };
+            Condicion roeConsistente = new RoeConsistente()
+            {
+                Descripcion = "La ROE tiene que ser consistente",
+                Indicador_Id = this.Indicadores.ToList().FirstOrDefault(x => x.Nombre.ToLower().Contains("roe")).Id
+            };
+            this.Condiciones.Add(roeConsistente);
             this.Condiciones.Add(creciente);
             this.SaveChanges();
         }

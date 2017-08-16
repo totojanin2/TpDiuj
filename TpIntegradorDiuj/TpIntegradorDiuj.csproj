@@ -164,6 +164,14 @@
     <Compile Include="Migrations\201708131509056_estructuraInicial.Designer.cs">
       <DependentUpon>201708131509056_estructuraInicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708160233319_nombreMetodologiaComoString.cs" />
+    <Compile Include="Migrations\201708160233319_nombreMetodologiaComoString.Designer.cs">
+      <DependentUpon>201708160233319_nombreMetodologiaComoString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708160330048_balanceSinCampoValor.cs" />
+    <Compile Include="Migrations\201708160330048_balanceSinCampoValor.Designer.cs">
+      <DependentUpon>201708160330048_balanceSinCampoValor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\ComponenteOperando.cs" />
@@ -734,6 +742,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708131509056_estructuraInicial.resx">
       <DependentUpon>201708131509056_estructuraInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708160233319_nombreMetodologiaComoString.resx">
+      <DependentUpon>201708160233319_nombreMetodologiaComoString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708160330048_balanceSinCampoValor.resx">
+      <DependentUpon>201708160330048_balanceSinCampoValor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

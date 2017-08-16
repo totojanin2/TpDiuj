@@ -23,7 +23,6 @@
 </script>
 @Html.ValidationSummary()
 <h2>Cargar balance</h2>
-<div class="row " style="margin-top: 90px;">
     <div class="col-md-5 col-md-offset-1">
         <form method="post" action="@Url.Action("Create","Balances")">
             <div class="form-group">
@@ -32,7 +31,7 @@
              </div>
             <label>Periodo</label>
             <div class="form-group" id="nuevoPer">
-                <input type="number" class="form-control" name="Periodo" id="inputPer"/>
+                <input type="number" class="form-control" name="Periodo" id="inputPer" required/>
             </div>
            
             <div>
@@ -61,4 +60,3 @@
     </form>
 </div>
    
-</div>

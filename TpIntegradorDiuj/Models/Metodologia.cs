@@ -7,8 +7,12 @@ namespace TpIntegradorDiuj.Models
 {
     public class Metodologia
     {
+        public Metodologia()
+        {
+            this.Condiciones = new List<Condicion>();
+        }
         public int Id { get; set; }
-        public int Nombre { get; set; }
+        public string Nombre { get; set; }
         //TODO: Fijarse si hay que agregar los indicadores o no
         public virtual List<Condicion> Condiciones{get;set;}
         public bool EsDeseableInvertir(Empresa emp)
