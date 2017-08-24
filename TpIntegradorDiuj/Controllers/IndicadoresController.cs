@@ -2,9 +2,11 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using TpIntegradorDiuj.Models;
@@ -42,18 +44,21 @@ namespace TpIntegradorDiuj.Controllers
         [HttpPost]
         public ActionResult Create(Indicador model)
         {
-            /*JavaScriptSerializer serializer = new JavaScriptSerializer();
-            List<Indicador> indicadores=DeserializarArchivoIndicadores();
-            //Obtengo la ultima id existente
-            int maxId = indicadores.Select(x => x.Id).Max();
-            model.Id = maxId+1;
-            indicadores.Add(model);
-            //Guardo el indicador en lel JSON
-            string jsonData = JsonConvert.SerializeObject(indicadores);
-            System.IO.File.WriteAllText(Server.MapPath("~/App_Data/Archivos/") + "indicadores.json", jsonData);*/
-            db.Indicadores.Add(model);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                bool result = model.ValidarExpresionFormula();
+                if (!result)
+                    throw new Exception("Error en la formula");
+                db.Indicadores.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch(Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+                return View(model);
+            }
+           
         }
         public ActionResult EvaluarIndicadorParaEmpresa(int idIndicador,int idEmpresa,int periodo)
         {

@@ -4,6 +4,7 @@
 }
 
 <h2>Crear Indicador</h2>
+@Html.ValidationSummary()
 @using (Html.BeginForm("Create","Indicadores",FormMethod.Post)){ 
     <div class="form-horizontal">
         <div class="form-group"><input type="text" name="Nombre" placeholder="Nombre"  class="form-control" /> </div>

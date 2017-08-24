@@ -15,6 +15,7 @@ namespace TpIntegradorDiuj.Models
             while (i < periodos.Count && result)
             {
                 result = this.Indicador.ObtenerValor(empresa, i)>1;
+                i++;
             }
             return result;
         }
