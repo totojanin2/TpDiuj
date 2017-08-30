@@ -7,6 +7,14 @@ namespace TpIntegradorDiuj.Models
 {
     public class MayorAUno : Condicion
     {
+        public MayorAUno()
+        {
+        }
+
+        public MayorAUno(string descripcion,int indicador_id): base(descripcion,indicador_id)
+        {
+
+        }
         public override bool Analizar(Empresa empresa)
         {
             bool result = true;

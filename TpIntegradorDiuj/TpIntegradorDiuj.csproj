@@ -153,6 +153,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BalancesController.cs" />
+    <Compile Include="Controllers\CondicionesController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
@@ -172,9 +173,15 @@
     <Compile Include="Migrations\201708160330048_balanceSinCampoValor.Designer.cs">
       <DependentUpon>201708160330048_balanceSinCampoValor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708292241560_TipoCondicion.cs" />
+    <Compile Include="Migrations\201708292241560_TipoCondicion.Designer.cs">
+      <DependentUpon>201708292241560_TipoCondicion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\ComponenteOperando.cs" />
+    <Compile Include="Models\Condiciones\CondicionesFactory.cs" />
+    <Compile Include="Models\Condiciones\CondicionModel.cs" />
     <Compile Include="Models\Condiciones\Creciente.cs" />
     <Compile Include="Models\Condiciones\RoeConsistente.cs" />
     <Compile Include="Models\Cuenta.cs" />
@@ -723,6 +730,8 @@
     <Content Include="Views\Balances\Edit.cshtml" />
     <Content Include="Views\Metodologias\Create.cshtml" />
     <Content Include="Views\Metodologias\ObtenerEmpresasDeseables.cshtml" />
+    <Content Include="Views\Condiciones\Create.cshtml" />
+    <Content Include="Views\Condiciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -749,6 +758,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708160330048_balanceSinCampoValor.resx">
       <DependentUpon>201708160330048_balanceSinCampoValor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708292241560_TipoCondicion.resx">
+      <DependentUpon>201708292241560_TipoCondicion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

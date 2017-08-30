@@ -1,0 +1,29 @@
+﻿@model List<TpIntegradorDiuj.Models.Condicion>
+@{
+    ViewBag.Title = "Index";
+}
+<a href="@Url.Action("Create")">Crear condicion</a>
+<h2>Condiciones</h2>
+<table id="tabla" class="dataTable table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Indicador</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Descripcion</td>
+                <td>@item.Tipo</td>
+                <td>@item.Indicador.Nombre </td>               
+            </tr>
+        }
+    </tbody>
+</table>
+

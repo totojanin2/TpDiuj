@@ -164,3 +164,4 @@ C:\Git\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.dll
 C:\Git\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.pdb
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.Migrations.nombreMetodologiaComoString.resources
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.Migrations.balanceSinCampoValor.resources
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.Migrations.TipoCondicion.resources

@@ -7,7 +7,14 @@ namespace TpIntegradorDiuj.Models.Condiciones
 {
     public class RoeConsistente : Condicion
     {
-       
+        public RoeConsistente()
+        {
+        }
+
+        public RoeConsistente(string descripcion, int indicador_id): base(descripcion,indicador_id)
+        {
+
+        }
         public override bool Analizar(Empresa empresa)
         {
             throw new NotImplementedException();

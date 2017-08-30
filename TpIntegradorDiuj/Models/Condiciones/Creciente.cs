@@ -6,7 +6,15 @@ using System.Web;
 namespace TpIntegradorDiuj.Models
 {
     public class Creciente : Condicion
-    { 
+    {
+        public Creciente()
+        {
+        }
+
+        public Creciente(string descripcion,int indicador_id) :base(descripcion,indicador_id)
+        {
+
+        }
         public override bool Analizar(Empresa empresa)
         {
             bool result = true;
