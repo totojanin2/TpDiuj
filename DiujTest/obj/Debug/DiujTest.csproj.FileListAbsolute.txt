@@ -1,0 +1,9 @@
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\DiujTest.dll
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\DiujTest.pdb
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\Antlr4.Runtime.dll
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\Antlr4.Runtime.xml
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\es\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\obj\Debug\DiujTest.csprojResolveAssemblyReference.cache
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\obj\Debug\DiujTest.dll
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\obj\Debug\DiujTest.pdb
