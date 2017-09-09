@@ -10,6 +10,6 @@ namespace TpIntegradorDiuj.Models
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public List<Balance> Balances { get; set; }
+        public virtual List<Balance> Balances { get; set; }
     }
 }

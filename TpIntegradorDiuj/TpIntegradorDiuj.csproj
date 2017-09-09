@@ -177,6 +177,14 @@
     <Compile Include="Migrations\201708292241560_TipoCondicion.Designer.cs">
       <DependentUpon>201708292241560_TipoCondicion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709021557268_agregueCuitAEmpresa.cs" />
+    <Compile Include="Migrations\201709021557268_agregueCuitAEmpresa.Designer.cs">
+      <DependentUpon>201709021557268_agregueCuitAEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709021600518_sacoElCuitDeEmpresa.cs" />
+    <Compile Include="Migrations\201709021600518_sacoElCuitDeEmpresa.Designer.cs">
+      <DependentUpon>201709021600518_sacoElCuitDeEmpresa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\ComponenteOperando.cs" />
@@ -761,6 +769,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708292241560_TipoCondicion.resx">
       <DependentUpon>201708292241560_TipoCondicion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709021557268_agregueCuitAEmpresa.resx">
+      <DependentUpon>201709021557268_agregueCuitAEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709021600518_sacoElCuitDeEmpresa.resx">
+      <DependentUpon>201709021600518_sacoElCuitDeEmpresa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

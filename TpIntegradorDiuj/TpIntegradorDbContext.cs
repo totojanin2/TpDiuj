@@ -56,6 +56,7 @@ namespace TpIntegradorDiuj
             modelBuilder.Entity<Empresa>()
                 .ToTable("Empresas")
                 .HasKey(x => x.Id);
+
             modelBuilder.Entity<Empresa>()
                 .HasMany(x => x.Balances).WithRequired().HasForeignKey(x => x.Empresa_Id);
 
@@ -79,7 +80,8 @@ namespace TpIntegradorDiuj
                 .HasKey(x => x.Id);
 
             modelBuilder.Entity<Condicion>().ToTable("Condiciones")
-                .HasKey(x => x.Id).HasOptional(x => x.Indicador).WithMany().HasForeignKey(x => x.Indicador_Id);
+                .HasKey(x => x.Id)
+                .HasOptional(x => x.Indicador).WithMany().HasForeignKey(x => x.Indicador_Id);
 
             modelBuilder.Entity<ComponenteOperando>().ToTable("Operandos")
                .HasKey(x => x.Id);

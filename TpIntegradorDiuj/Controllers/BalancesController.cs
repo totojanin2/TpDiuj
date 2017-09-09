@@ -23,6 +23,38 @@ namespace TpIntegradorDiuj.Controllers
             }
             return View(balances);
         }
+        [HttpPost]
+        public ActionResult Create(Balance balanceModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Hay errores en el formulario");
+                setViewBagEmpresa();
+                return View();
+            }
+           
+            try
+            {
+                //Busco en la base de datos si hay algun balance con ese periodo para esa empresa
+                bool hayBalancesIguales = db.Balances.Any(x => x.Periodo == balanceModel.Periodo && x.Empresa_Id == balanceModel.Empresa_Id);
+                if (hayBalancesIguales)
+                {
+                    ModelState.AddModelError("", "Ya existe un balance para esa empresa en ese período.");
+                    setViewBagEmpresa();
+                    return View();
+                }
+                db.Balances.Add(balanceModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+                setViewBagEmpresa();
+                return View();
+            }
+
+        }
         public ActionResult Create()
         {
             setViewBagEmpresa();
@@ -65,36 +97,7 @@ namespace TpIntegradorDiuj.Controllers
                 Value = x.Id.ToString()
             }).ToList();
         }
-        [HttpPost]
-        public ActionResult Create(Balance balanceModel)
-        {
-            if(!ModelState.IsValid)
-            {
-                ModelState.AddModelError("", "Hay errores en el formulario");
-                setViewBagEmpresa();
-                return View();
-            }
-            bool hayBalancesIguales = db.Balances.Any(x => x.Periodo == balanceModel.Periodo && x.Empresa_Id == balanceModel.Empresa_Id);
-            if(hayBalancesIguales)
-            {
-                ModelState.AddModelError("", "Ya existe un balance para esa empresa en ese período.");
-                setViewBagEmpresa();
-                return View();
-            }
-            try
-            {
-                db.Balances.Add(balanceModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            catch (Exception e)
-            {
-               ModelState.AddModelError("", e.Message);
-               setViewBagEmpresa();
-               return View();
-            }
-
-        }
+        
         [HttpPost]
         public JsonResult ObtenerBalancesDeEmpresaPorPeriodo(int idEmpresa, int anio)
         {
