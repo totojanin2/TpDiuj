@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using TpIntegradorDiuj.Models;
 
 namespace TpIntegradorDiuj.Controllers
@@ -23,6 +25,74 @@ namespace TpIntegradorDiuj.Controllers
             }
             return View(balances);
         }
+        public List<Balance> DeserializarArchivoBalances()
+        {
+            //Metodo para desserializar el archivo json de empresas
+            string buffer;
+            if (Request != null)
+            {
+                var file = Request.Files[0];
+                buffer = new StreamReader(file.InputStream).ReadToEnd();
+            }
+            else
+            {
+                buffer = System.IO.File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\Archivos\\balances.json"));
+            }
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<Balance> listBalances = serializer.Deserialize<List<Balance>>(buffer);
+            return listBalances;
+
+        }
+        [HttpPost]
+        public ActionResult CargarBalancesDesdeArchivo()
+        {
+            try
+            {
+                if (Request.Files.Count > 0)
+                {
+                    //Deserializo el archivo seleccionado
+                    List<Balance> balancesArchivo = this.DeserializarArchivoBalances();
+                    //Valido que no haya balances repetidos
+                    this.ValidarBalancesArchivo(balancesArchivo);
+                    db.Balances.AddRange(balancesArchivo);
+                    db.SaveChanges();
+                    return Json(new { Success = true });
+                }
+                else
+                {
+                    throw new Exception("Ingrese un archivo de balances");
+                }
+            }
+            catch (BalancesRepetidosException bre)
+            {
+                return Json(new { Success = false, Error = bre.Message,Balances = bre.Balances });
+
+            }
+            catch (Exception e)
+            {
+                return Json(new { Success = false, Error = e.Message });
+            }
+        }
+
+        private void ValidarBalancesArchivo(List<Balance> balancesArchivo)
+        {
+            List<Balance> balancesRepetidos = new List<Balance>();
+            foreach (var item in balancesArchivo)
+            {
+                bool hayUnBalanceIgual = db.Balances.Any(x => x.Periodo == item.Periodo && x.Empresa_Id == item.Empresa_Id);
+                if (hayUnBalanceIgual)
+                {
+                    balancesRepetidos.Add(item);
+                }
+
+            }
+            if (balancesRepetidos.Count > 0)
+            {
+                throw new BalancesRepetidosException("Hay balances del archivo que ya fueron cargados previamente") { Balances = balancesRepetidos };
+            }
+        }
+
         [HttpPost]
         public ActionResult Create(Balance balanceModel)
         {

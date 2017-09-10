@@ -4,7 +4,46 @@
 }
 <a href="@Url.Action("Create","Balances")" >Crear balance</a>
 <a href="@Url.Action("Edit","Balances")">Editar balances</a>
+<script>
+    function getFile() {
+        var $file = document.getElementById('fileBalances'),
+               $formData = new FormData();
 
+        if ($file.files.length > 0) {
+            for (var i = 0; i < $file.files.length; i++) {
+                $formData.append('file-' + i, $file.files[i]);
+            }
+        }
+        return $formData;
+    }
+    $(function () {
+        $("#btnCargarBalances").click(function () {
+            var file = getFile();
+            var url = '@Url.Action("CargarBalancesDesdeArchivo")';
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                data: file,
+                success: function (data) {
+                    if (data.Success) {
+                        alert("Los balances y sus cuentas que habían en el archivo fueron cargados correctamente");
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 5000);
+                    }
+                    else {
+                        alert(data.Error);
+
+                    }
+                }
+
+            });
+        });
+    });
+</script>
 <h2>Balances</h2>
 <table id="tabla" class="dataTable table table-bordered table-condensed">
     <thead>
@@ -32,3 +71,13 @@
         }
     </tbody>
 </table>
+<div class="form-group">
+    @*@using (Html.BeginForm("ObtenerEmpresasYPeriodos", "Empresas", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
+        {*@
+    <label>Cargar balances desde un archivo</label>
+    <input type="file" name="fileBalances" id="fileBalances" />
+    <input type="submit" id="btnCargarBalances" value="Cargar Balances"/>
+    @*}*@
+
+
+</div>

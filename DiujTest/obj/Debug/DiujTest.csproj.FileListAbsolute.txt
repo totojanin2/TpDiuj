@@ -1,6 +1,17 @@
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\DiujTest.dll
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\DiujTest.pdb
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\Antlr4.Runtime.dll
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\Antlr4.Runtime.xml
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\bin\Debug\es\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\obj\Debug\DiujTest.csprojResolveAssemblyReference.cache
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\obj\Debug\DiujTest.dll
+C:\Users\nahuel\Desktop\Diseño\TpDiuj\DiujTest\obj\Debug\DiujTest.pdb
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\bin\Debug\DiujTest.dll
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\bin\Debug\DiujTest.pdb
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\bin\Debug\Antlr4.Runtime.dll
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\bin\Debug\Antlr4.Runtime.xml
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\bin\Debug\es\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\obj\Debug\DiujTest.csprojResolveAssemblyReference.cache
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\obj\Debug\DiujTest.dll

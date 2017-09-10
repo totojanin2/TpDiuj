@@ -38,7 +38,7 @@ namespace TpIntegradorDiuj.Controllers
         [HttpPost]
         public JsonResult ObtenerFormulaDelIndicador(int idIndicador)
         {
-            var indicador = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == idIndicador);
+            var indicador = db.Indicadores.FirstOrDefault(x => x.Id == idIndicador);
             return Json(new { Formula = indicador.Formula });
         }
         [HttpPost]
@@ -63,8 +63,8 @@ namespace TpIntegradorDiuj.Controllers
         public ActionResult EvaluarIndicadorParaEmpresa(int idIndicador,int idEmpresa,int periodo)
         {
            //Obtengo el indicador y empresa solicitada
-            Indicador indicador = DeserializarArchivoIndicadores().FirstOrDefault(x => x.Id == idIndicador);
-            Empresa empresa = empController.DeserializarArchivoEmpresas().FirstOrDefault(x => x.Id == idEmpresa);
+            Indicador indicador = db.Indicadores.FirstOrDefault(x => x.Id == idIndicador);
+            Empresa empresa = db.Empresas.FirstOrDefault(x => x.Id == idEmpresa);
             //Aplico el indicador, es decir, hay que parsear la formula
             double valorTrasAplicarIndicador = indicador.ObtenerValor(empresa, periodo);
             return Json(new { Valor = valorTrasAplicarIndicador });
