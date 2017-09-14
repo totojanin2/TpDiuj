@@ -46,9 +46,8 @@ namespace TpIntegradorDiuj.Controllers
         {
             try
             {
-                bool result = model.ValidarExpresionFormula();
-                if (!result)
-                    throw new Exception("Error en la formula");
+                
+                model.ValidarExpresionFormula(db.Indicadores);               
                 db.Indicadores.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");

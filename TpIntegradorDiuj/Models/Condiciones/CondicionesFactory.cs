@@ -13,13 +13,19 @@ namespace TpIntegradorDiuj.Models.Condiciones
             switch (model.Tipo)
             {
                 case TipoCondicion.Creciente:
-                    condi = new Creciente();
+                    condi = new MargenesCreciente();
                 break;
                 case TipoCondicion.MayorAUno:
                     condi = new MayorAUno();
                 break;
                 case TipoCondicion.RoeConsistente:
                     condi = new RoeConsistente();
+                break;
+                case TipoCondicion.MinimizarDeuda:
+                    condi = new MinimizarDeuda();
+                break;
+                case TipoCondicion.Longevidad:
+                    condi = new Longevidad();
                 break;
                 default:
                     condi = new MayorAUno();

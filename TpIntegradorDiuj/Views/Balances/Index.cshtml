@@ -29,13 +29,13 @@
                 data: file,
                 success: function (data) {
                     if (data.Success) {
-                        alert("Los balances y sus cuentas que habían en el archivo fueron cargados correctamente");
+                        bootbox.alert("Los balances y sus cuentas que habían en el archivo fueron cargados correctamente");
                         setTimeout(function () {
                             window.location.reload();
                         }, 5000);
                     }
                     else {
-                        alert(data.Error);
+                        bootbox.alert(data.Error);
 
                     }
                 }

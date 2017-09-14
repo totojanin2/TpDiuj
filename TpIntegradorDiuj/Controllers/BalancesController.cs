@@ -105,6 +105,8 @@ namespace TpIntegradorDiuj.Controllers
            
             try
             {
+                if (model.Cuentas.Count == 0)
+                    throw new Exception("Debe ingresar por lo menos una cuenta para este balance");
                 //Busco en la base de datos si hay algun balance con ese periodo para esa empresa
                 bool hayBalancesIguales = db.Balances.Any(x => x.Periodo == balanceModel.Periodo && x.Empresa_Id == balanceModel.Empresa_Id);
                 if (hayBalancesIguales)
@@ -135,6 +137,8 @@ namespace TpIntegradorDiuj.Controllers
         {
             try
             {
+                if (model.Cuentas.Count == 0)
+                    throw new Exception("Debe ingresar por lo menos una cuenta para este balance");
                 Balance balanceAEdit = db.Balances.FirstOrDefault(x => x.Periodo == model.Periodo && x.Empresa_Id == model.Empresa_Id);
                 balanceAEdit.Cuentas.AddRange(model.Cuentas);
                 db.SaveChanges();

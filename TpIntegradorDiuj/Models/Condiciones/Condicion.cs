@@ -10,7 +10,10 @@ namespace TpIntegradorDiuj.Models
     {
         RoeConsistente = 0,
         Creciente = 1,
-        MayorAUno = 2
+        MayorAUno = 2,
+        MinimizarDeuda = 3,
+        Longevidad = 4,
+
     }
    public abstract class Condicion
     {

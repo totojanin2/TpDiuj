@@ -27,7 +27,7 @@
         <form method="post" action="@Url.Action("Create","Balances")">
             <div class="form-group">
                 <label>Empresa</label>
-                @Html.DropDownList("nroempresa", listEmpresas, "Seleccione empresa..", new { @id="selectEmpresas" , @class = "form-control"})
+                @Html.DropDownList("Empresa_Id", listEmpresas, "Seleccione empresa..", new { @id="selectEmpresas" , @class = "form-control"})
              </div>
             <label>Periodo</label>
             <div class="form-group" id="nuevoPer">

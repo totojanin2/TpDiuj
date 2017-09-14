@@ -8,6 +8,10 @@ namespace TpIntegradorDiuj.Models
 {
     public class Balance
     {
+        public Balance()
+        {
+            Cuentas = new List<Cuenta>();
+        }
         public int Id { get; set; }
         public virtual List<Cuenta> Cuentas { get; set; }
         public int Periodo { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Antlr4.Runtime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -18,10 +19,24 @@ namespace TpIntegradorDiuj.Models
             //Aplicar la formula
             return result;
         }
-        public bool ValidarExpresionFormula()
+        public void ValidarExpresionFormula(IEnumerable<Indicador> indicadores)
         {
-            string str = this.Formula.Trim().ToLower();
-            return Regex.IsMatch(str, pattern);
+            //GramaticaLexer lexer = new GramaticaLexer(new AntlrInputStream(this.Formula));
+            //CommonTokenStream tokens = new CommonTokenStream(lexer);
+            //GramaticaParser parser = new GramaticaParser(tokens);
+            //parser.BuildParseTree = true;
+            //GramaticaParser.IndicadorContext indicadorContext = parser.indicador();
+            //ParseTreeWalker walker = new ParseTreeWalker();
+            //Listener listener = new Listener(textBox2.Text);
+            //walker.Walk(listener, indicadorContext);
+
+            ////lo muestro en el tree view
+            //treeView1.Nodes.Clear();
+            //BinaryTreeNode<IContenidoNodo> nodo = listener.ArbolBinario.Root;
+            //treeView1.Nodes.Add(agregarAlTreeView(nodo));
+
+            ////guardar Listener.ArbolBinario
+            //Indicadores.listaDeIndicadores.Add(listener.ArbolBinario);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace TpIntegradorDiuj
             List<Condicion> condiciones = this.Condiciones.ToList();
             this.Condiciones.RemoveRange(condiciones);
             this.SaveChanges();
-            Condicion creciente = new Creciente()
+            Condicion creciente = new MargenesCreciente()
             {
                 Descripcion = "Que los margenes de beneficio sean crecientes",
                 Indicador_Id = this.Indicadores.ToList().FirstOrDefault(x => x.Nombre.ToLower().Contains("margenes")).Id               
