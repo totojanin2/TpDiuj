@@ -7,8 +7,8 @@
 @Html.ValidationSummary()
 @using (Html.BeginForm("Create","Indicadores",FormMethod.Post)){ 
     <div class="form-horizontal">
-        <div class="form-group"><input type="text" name="Nombre" placeholder="Nombre"  class="form-control" /> </div>
-        <div class="form-group"><input type="text" name="Formula" placeholder="Formula" class="form-control"/> </div>
+        <div class="form-group"><input type="text" name="Nombre" placeholder="Nombre"  class="form-control" required/> </div>
+        <div class="form-group"><input type="text" name="Formula" placeholder="Formula" class="form-control" required/> </div>
         <div class="form-group"> <input type="submit" value="Guardar" /></div>
     </div>
      

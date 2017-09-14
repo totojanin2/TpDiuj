@@ -23,7 +23,7 @@
 
         <div class="form-group">
             <label>Condiciones</label>
-            @Html.ListBox("IdsCondiciones",listCondiciones,new { @class="form-control",@id="listCondiciones"})
+            @Html.ListBox("IdsCondiciones",listCondiciones,new { @class="form-control",@id="listCondiciones",@required="true"})
         </div>
         <br />
         <input type="submit" value="Guardar" />

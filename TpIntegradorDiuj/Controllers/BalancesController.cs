@@ -105,7 +105,7 @@ namespace TpIntegradorDiuj.Controllers
            
             try
             {
-                if (model.Cuentas.Count == 0)
+                if (balanceModel.Cuentas.Count == 0)
                     throw new Exception("Debe ingresar por lo menos una cuenta para este balance");
                 //Busco en la base de datos si hay algun balance con ese periodo para esa empresa
                 bool hayBalancesIguales = db.Balances.Any(x => x.Periodo == balanceModel.Periodo && x.Empresa_Id == balanceModel.Empresa_Id);
