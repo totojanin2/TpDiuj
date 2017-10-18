@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using Antlr4.Runtime.Misc;
+using Antlr4.Runtime.Tree;
+using TpIntegradorDiuj.ANTLR;
 
 namespace TpIntegradorDiuj.Models
 {
@@ -14,10 +17,13 @@ namespace TpIntegradorDiuj.Models
         public List<ComponenteOperando> Operandos { get; set; }
         public override double ObtenerValor(Empresa empresa, int periodo)
         {
-            double result = 0;
-            //Parsear la formula
-            //Aplicar la formula
-            return result;
+            AntlrInputStream input = new AntlrInputStream(this.Formula);
+            Combined1Lexer lexer = new Combined1Lexer(input);
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            Combined1Parser parser = new Combined1Parser(tokens);
+            IParseTree tree = parser.expr();
+            MyVisitor visitor = new MyVisitor();
+            return visitor.Visit(tree);
         }
         public void ValidarExpresionFormula(IEnumerable<Indicador> indicadores)
         {

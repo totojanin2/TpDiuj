@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Git\TpDiuj\TpIntegradorDiuj\ANTLR\Combined1.g4 by ANTLR 4.6.4
+// Generated from C:\Users\nahuel\Desktop\Diseño\TpDiuj\TpIntegradorDiuj\ANTLR\Combined1.g4 by ANTLR 4.6.4
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -35,7 +35,44 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class Combined1BaseVisitor<Result> : AbstractParseTreeVisitor<Result>, ICombined1Visitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="Combined1Parser.indicador"/>.
+	/// Visit a parse tree produced by the <c>suma</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitSuma([NotNull] Combined1Parser.SumaContext context) { return VisitChildren(context); }
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>division</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitDivision([NotNull] Combined1Parser.DivisionContext context) { return VisitChildren(context); }
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>parentesis</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitParentesis([NotNull] Combined1Parser.ParentesisContext context) { return VisitChildren(context); }
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>indicador</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -46,7 +83,32 @@ public partial class Combined1BaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	public virtual Result VisitIndicador([NotNull] Combined1Parser.IndicadorContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="Combined1Parser.producto"/>.
+	/// Visit a parse tree produced by the <c>numero</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitNumero([NotNull] Combined1Parser.NumeroContext context) { return VisitChildren(context); }
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>resta</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitResta([NotNull] Combined1Parser.RestaContext context) { return VisitChildren(context); }
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>producto</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -57,7 +119,7 @@ public partial class Combined1BaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	public virtual Result VisitProducto([NotNull] Combined1Parser.ProductoContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="Combined1Parser.factor"/>.
+	/// Visit a parse tree produced by <see cref="Combined1Parser.num"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -65,10 +127,10 @@ public partial class Combined1BaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitFactor([NotNull] Combined1Parser.FactorContext context) { return VisitChildren(context); }
+	public virtual Result VisitNum([NotNull] Combined1Parser.NumContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="Combined1Parser.exponente"/>.
+	/// Visit a parse tree produced by <see cref="Combined1Parser.expr"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -76,17 +138,6 @@ public partial class Combined1BaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitExponente([NotNull] Combined1Parser.ExponenteContext context) { return VisitChildren(context); }
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="Combined1Parser.compileUnit"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitCompileUnit([NotNull] Combined1Parser.CompileUnitContext context) { return VisitChildren(context); }
+	public virtual Result VisitExpr([NotNull] Combined1Parser.ExprContext context) { return VisitChildren(context); }
 }
 } // namespace TpIntegradorDiuj.ANTLR

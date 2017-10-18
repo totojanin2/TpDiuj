@@ -1,43 +1,35 @@
 grammar Combined1;
 
+
 /*
  * Parser Rules
  */
-
- // expresion
  /*
- indicador: expresion (('+'|'-') indicador) | expresion ;
- 
- expresion : termino (('*'|'/') expresion) | termino ;
+num		: SEPARADORDECIMAL INT 
+		| INT ( SEPARADORDECIMAL INT )?
+		;
+*/
 
- termino : factor ('^' termino) | factor ;
-
- factor : '(' TERMINOFINAL ')' | TERMINOFINAL
- */
-
-indicador : producto (('+'|'-') indicador) | producto;
-producto : factor (('*'|'/') producto) | factor;
-factor : exponente ('^' factor) | exponente;
-exponente : '(' indicador ')' | TERMINO ; 
-
- // reglas
-
-
- TERMINO: NUMERO | CONSTANTE | CUENTA ;
-
- NUMERO: ('1'..'9')('0'..'9')* ;
-
- CONSTANTE: ('a'..'z')+ | ('A'..'Z')+ ;
-
- CUENTA: 'EBITDA' | 'FDS' | 'FCF' | 'INOD' | 'INOC' ;
-
-
-compileUnit
-	:	EOF
-	;
+expr	: expr MAS expr									# suma
+		| expr MENOS expr								# resta
+		| expr POR expr									# producto
+		| expr DIVIDIDO expr							# division
+		| PARENTESISIZQUIERDO expr PARENTESISDERECHO    # parentesis
+		| INDICADOR										# indicador
+		| num											# numero
+		;
 
 /*
  * Lexer Rules
  */
 
-WS : (' '|'\t'|'\n'|'\r') -> channel(HIDDEN);
+INT							: [0-9]+	;
+MAS							: '+'		;
+MENOS						: '-'		;
+POR							: '*'		;
+DIVIDIDO					: '/'		;
+PARENTESISIZQUIERDO			: '('		;
+PARENTESISDERECHO			: ')'		;
+INDICADOR					: [a-zA-Z]+ ;
+SEPARADORDECIMAL			: '.'|','	;
+WS							: (' '|'\t'|'\n'|'\r') -> channel(HIDDEN) ;

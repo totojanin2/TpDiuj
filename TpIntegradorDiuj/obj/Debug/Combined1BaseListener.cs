@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Git\TpDiuj\TpIntegradorDiuj\ANTLR\Combined1.g4 by ANTLR 4.6.4
+// Generated from C:\Users\nahuel\Desktop\Diseño\TpDiuj\TpIntegradorDiuj\ANTLR\Combined1.g4 by ANTLR 4.6.4
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -36,69 +36,135 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class Combined1BaseListener : ICombined1Listener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="Combined1Parser.indicador"/>.
+	/// Enter a parse tree produced by the <c>suma</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSuma([NotNull] Combined1Parser.SumaContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>suma</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSuma([NotNull] Combined1Parser.SumaContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>division</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDivision([NotNull] Combined1Parser.DivisionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>division</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDivision([NotNull] Combined1Parser.DivisionContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>parentesis</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterParentesis([NotNull] Combined1Parser.ParentesisContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>parentesis</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitParentesis([NotNull] Combined1Parser.ParentesisContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>indicador</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void EnterIndicador([NotNull] Combined1Parser.IndicadorContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="Combined1Parser.indicador"/>.
+	/// Exit a parse tree produced by the <c>indicador</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitIndicador([NotNull] Combined1Parser.IndicadorContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="Combined1Parser.producto"/>.
+	/// Enter a parse tree produced by the <c>numero</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNumero([NotNull] Combined1Parser.NumeroContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>numero</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNumero([NotNull] Combined1Parser.NumeroContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>resta</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterResta([NotNull] Combined1Parser.RestaContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>resta</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitResta([NotNull] Combined1Parser.RestaContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>producto</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void EnterProducto([NotNull] Combined1Parser.ProductoContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="Combined1Parser.producto"/>.
+	/// Exit a parse tree produced by the <c>producto</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitProducto([NotNull] Combined1Parser.ProductoContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="Combined1Parser.factor"/>.
+	/// Enter a parse tree produced by <see cref="Combined1Parser.num"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFactor([NotNull] Combined1Parser.FactorContext context) { }
+	public virtual void EnterNum([NotNull] Combined1Parser.NumContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="Combined1Parser.factor"/>.
+	/// Exit a parse tree produced by <see cref="Combined1Parser.num"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFactor([NotNull] Combined1Parser.FactorContext context) { }
+	public virtual void ExitNum([NotNull] Combined1Parser.NumContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="Combined1Parser.exponente"/>.
+	/// Enter a parse tree produced by <see cref="Combined1Parser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterExponente([NotNull] Combined1Parser.ExponenteContext context) { }
+	public virtual void EnterExpr([NotNull] Combined1Parser.ExprContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="Combined1Parser.exponente"/>.
+	/// Exit a parse tree produced by <see cref="Combined1Parser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitExponente([NotNull] Combined1Parser.ExponenteContext context) { }
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="Combined1Parser.compileUnit"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterCompileUnit([NotNull] Combined1Parser.CompileUnitContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="Combined1Parser.compileUnit"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitCompileUnit([NotNull] Combined1Parser.CompileUnitContext context) { }
+	public virtual void ExitExpr([NotNull] Combined1Parser.ExprContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

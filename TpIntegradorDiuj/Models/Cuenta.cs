@@ -10,10 +10,10 @@ namespace TpIntegradorDiuj.Models
 
         public int Balance_Id { get; set; }
         public double Valor { get; set; }
-
-        //TODO: Pensar en que consiste este metodo
+        
         public override double ObtenerValor(Empresa empresa, int periodo)
         {
+            // buscar cuenta en la db y devolver el valor correspondiente
             throw new NotImplementedException();
         }
     }

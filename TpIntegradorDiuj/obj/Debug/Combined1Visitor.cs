@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Git\TpDiuj\TpIntegradorDiuj\ANTLR\Combined1.g4 by ANTLR 4.6.4
+// Generated from C:\Users\nahuel\Desktop\Diseño\TpDiuj\TpIntegradorDiuj\ANTLR\Combined1.g4 by ANTLR 4.6.4
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -33,38 +33,73 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface ICombined1Visitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="Combined1Parser.indicador"/>.
+	/// Visit a parse tree produced by the <c>suma</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSuma([NotNull] Combined1Parser.SumaContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>division</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDivision([NotNull] Combined1Parser.DivisionContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>parentesis</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitParentesis([NotNull] Combined1Parser.ParentesisContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>indicador</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitIndicador([NotNull] Combined1Parser.IndicadorContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="Combined1Parser.producto"/>.
+	/// Visit a parse tree produced by the <c>numero</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNumero([NotNull] Combined1Parser.NumeroContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>resta</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitResta([NotNull] Combined1Parser.RestaContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>producto</c>
+	/// labeled alternative in <see cref="Combined1Parser.expr"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitProducto([NotNull] Combined1Parser.ProductoContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="Combined1Parser.factor"/>.
+	/// Visit a parse tree produced by <see cref="Combined1Parser.num"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitFactor([NotNull] Combined1Parser.FactorContext context);
+	Result VisitNum([NotNull] Combined1Parser.NumContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="Combined1Parser.exponente"/>.
+	/// Visit a parse tree produced by <see cref="Combined1Parser.expr"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitExponente([NotNull] Combined1Parser.ExponenteContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="Combined1Parser.compileUnit"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitCompileUnit([NotNull] Combined1Parser.CompileUnitContext context);
+	Result VisitExpr([NotNull] Combined1Parser.ExprContext context);
 }
 } // namespace TpIntegradorDiuj.ANTLR
