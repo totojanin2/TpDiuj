@@ -11,6 +11,8 @@ namespace TpIntegradorDiuj.Models
     {
         const string pattern = @"((\b([A-z]*[0-9]*|[0-9]*[A-z]*)[a-z0-9]*\b)([+\-\*\/]\(?(\b([a-z]*[0-9]*|[0-9]*[a-z]*)[a-z0-9]*\b)\)?)+)";
         public string Formula { get; set; }
+        public string UsuarioCreador_Id { get; set; }
+        //public virtual ApplicationUser UsuarioCreador { get; set; }
         public List<ComponenteOperando> Operandos { get; set; }
         public override double ObtenerValor(Empresa empresa, int periodo)
         {

@@ -1,6 +1,8 @@
 ﻿
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,11 @@ namespace TpIntegradorDiuj.Controllers
         TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
         public ActionResult Index()
         {
-            List<Indicador> indicadores = db.Indicadores.ToList();            
+            var store = new UserStore<ApplicationUser>(new TpIntegradorDbContext());
+            var userManager = new UserManager<ApplicationUser>(store);
+            ApplicationUser user = userManager.FindById(User.Identity.GetUserId());
+            List<Indicador> indicadores = user.Indicadores;
+            //List<Indicador> indicadores = db.Indicadores.ToList();            
             return View(indicadores);
         }
         public List<Indicador> DeserializarArchivoIndicadores()
@@ -46,8 +52,10 @@ namespace TpIntegradorDiuj.Controllers
         {
             try
             {
-                
-                model.ValidarExpresionFormula(db.Indicadores);               
+                //Valido la formula ingresada
+                model.ValidarExpresionFormula(db.Indicadores);
+                //Obtengo el id del usuario que esta usando el sistema y creó el indicador
+                model.UsuarioCreador_Id = this.User.Identity.GetUserId();           
                 db.Indicadores.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -61,12 +69,22 @@ namespace TpIntegradorDiuj.Controllers
         }
         public ActionResult EvaluarIndicadorParaEmpresa(int idIndicador,int idEmpresa,int periodo)
         {
-           //Obtengo el indicador y empresa solicitada
-            Indicador indicador = db.Indicadores.FirstOrDefault(x => x.Id == idIndicador);
-            Empresa empresa = db.Empresas.FirstOrDefault(x => x.Id == idEmpresa);
-            //Aplico el indicador, es decir, hay que parsear la formula
-            double valorTrasAplicarIndicador = indicador.ObtenerValor(empresa, periodo);
-            return Json(new { Valor = valorTrasAplicarIndicador });
+            try
+            {
+                //Obtengo el indicador y empresa solicitada
+                Indicador indicador = db.Indicadores.FirstOrDefault(x => x.Id == idIndicador);
+                Empresa empresa = db.Empresas.FirstOrDefault(x => x.Id == idEmpresa);
+                //Aplico el indicador, es decir, hay que parsear la formula
+                double valorTrasAplicarIndicador = 500;
+                //valorTrasAplicarIndicador = indicador.ObtenerValor(empresa, periodo);
+
+                return Json(new { Success = true, Valor = valorTrasAplicarIndicador });
+            }
+            catch(Exception e)
+            {
+                return Json(new { Success = false, Error = e.Message });
+            }
+           
         }
        
     }

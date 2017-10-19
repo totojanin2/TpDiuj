@@ -273,3 +273,25 @@ C:\Git\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.Migrations.FechaFundac
 C:\Git\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.csproj.GenerateResource.Cache
 C:\Git\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.dll
 C:\Git\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.pdb
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.Migrations.Usuarios.resources
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.Security.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Owin.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.Security.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.Cors.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\System.Web.Cors.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\bin\Microsoft.Owin.Cors.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.Migrations.usuarioTieneIndicadores.resources

@@ -2,8 +2,7 @@
 @{
     ViewBag.Title = "Balances";
 }
-<a href="@Url.Action("Create","Balances")" >Crear balance</a>
-<a href="@Url.Action("Edit","Balances")">Editar balances</a>
+
 <script>
     function getFile() {
         var $file = document.getElementById('fileBalances'),
@@ -17,6 +16,7 @@
         return $formData;
     }
     $(function () {
+        $("#tabla").dataTable();
         $("#btnCargarBalances").click(function () {
             var file = getFile();
             var url = '@Url.Action("CargarBalancesDesdeArchivo")';
@@ -44,6 +44,8 @@
         });
     });
 </script>
+<a class="btn btn-primary" href="@Url.Action("Create","Balances")"><i class="fa fa-plus"></i> Crear balance</a>
+<a class="btn btn-primary" href="@Url.Action("Edit","Balances")"><i class="fa fa-pencil"></i> Editar balances</a>
 <h2>Balances</h2>
 <table id="tabla" class="dataTable table table-bordered table-condensed">
     <thead>
@@ -64,7 +66,7 @@
                 <td>@item.Empresa.Nombre</td>
                 <td>$@item.Total</td>
                 <td>
-                    <a href="@Url.Action("Details","Balances",new { id = item.Id })" >Detalle </a>
+                    <a href="@Url.Action("Details","Balances",new { id = item.Id })" ><i class="fa fa-eye"></i> Detalle </a>
                 </td>
 
             </tr>
@@ -75,8 +77,8 @@
     @*@using (Html.BeginForm("ObtenerEmpresasYPeriodos", "Empresas", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
         {*@
     <label>Cargar balances desde un archivo</label>
-    <input type="file" name="fileBalances" id="fileBalances" />
-    <input type="submit" id="btnCargarBalances" value="Cargar Balances"/>
+    <input type="file" name="fileBalances" id="fileBalances" /><br />
+    <input class="btn btn-primary" type="submit" id="btnCargarBalances" value="Cargar Balances"/>
     @*}*@
 
 

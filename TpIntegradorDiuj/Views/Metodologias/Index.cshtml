@@ -2,9 +2,13 @@
 @{
     ViewBag.Title = "Metodologias";
 }
-
+<script>
+    $(function () {
+        $("#tabla").dataTable();
+    });
+</script>
 <div class="col-md-5 row" style="margin-top:10px">
-    <a class="btn btn-primary" href="@Url.Action("Create")">Crear Metodologia</a>
+    <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Crear Metodologia</a>
 </div>
 <h2>Metodologias</h2>
 
@@ -32,7 +36,7 @@
                     </ul>
                 </td>
                 <td>
-                    <a title="Empresas deseables para invertir" href="@Url.Action("ObtenerEmpresasDeseables","Metodologias",new { idMetodologia = item.Id })">Ver empresas deseables</a>
+                    <a title="Empresas deseables para invertir" href="@Url.Action("ObtenerEmpresasDeseables","Metodologias",new { idMetodologia = item.Id })"><i class="fa fa-line-chart"></i> Ver empresas deseables</a>
                 </td>
             </tr>
         }

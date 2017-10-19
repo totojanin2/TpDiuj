@@ -2,7 +2,12 @@
 @{
     ViewBag.Title = "Index";
 }
-<a href="@Url.Action("Create")">Crear condicion</a>
+<script>
+    $(function () {
+        $("#tabla").dataTable();
+    });
+</script>
+<a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Crear condicion</a>
 <h2>Condiciones</h2>
 <table id="tabla" class="dataTable table table-bordered table-condensed">
     <thead>
