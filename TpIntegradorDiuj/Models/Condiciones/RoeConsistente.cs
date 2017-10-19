@@ -15,7 +15,7 @@ namespace TpIntegradorDiuj.Models.Condiciones
         {
 
         }
-        public override bool Analizar(Empresa empresa)
+        public override bool Analizar(Empresa empresa, List<ComponenteOperando> lista)
         {
             throw new NotImplementedException();
         }

@@ -5,52 +5,61 @@ using System.Text;
 using Antlr4.Runtime;
 using TpIntegradorDiuj.ANTLR;
 using Antlr4.Runtime.Misc;
+using TpIntegradorDiuj.Models;
 
 namespace TpIntegradorDiuj
 {
-    class MyVisitor : Combined1BaseVisitor<double>
+    class MyVisitor : gramaticaBaseVisitor<double>
     {
-        public override double VisitParentesis([NotNull] Combined1Parser.ParentesisContext context)
+        public int periodo;
+        public Empresa empresa;
+        public List<ComponenteOperando> listaOperandos;
+        public MyVisitor(Empresa _empresa, int _periodo, List<ComponenteOperando> _listaOperandos)
+        {
+            this.empresa = _empresa;
+            this.periodo = _periodo;
+            this.listaOperandos = _listaOperandos;
+        }
+        public override double VisitParentesis([NotNull] gramaticaParser.ParentesisContext context)
         {
             return base.Visit(context.expr());
         }
-        public override double VisitSuma([NotNull] Combined1Parser.SumaContext context)
+        public override double VisitSuma([NotNull] gramaticaParser.SumaContext context)
         {
             double left = Visit(context.expr(0));
             double right = Visit(context.expr(1));
             return left + right;
         }
-        public override double VisitResta([NotNull] Combined1Parser.RestaContext context)
+        public override double VisitResta([NotNull] gramaticaParser.RestaContext context)
         {
             double left = Visit(context.expr(0));
             double right = Visit(context.expr(1));
             return left - right;
         }
-        public override double VisitProducto([NotNull] Combined1Parser.ProductoContext context)
+        public override double VisitProducto([NotNull] gramaticaParser.ProductoContext context)
         {
             double left = Visit(context.expr(0));
             double right = Visit(context.expr(1));
             return left * right;
         }
-        public override double VisitDivision([NotNull] Combined1Parser.DivisionContext context)
+        public override double VisitDivision([NotNull] gramaticaParser.DivisionContext context)
         {
             double left = Visit(context.expr(0));
             double right = Visit(context.expr(1));
             return left / right;
         }
-        public override double VisitNumero([NotNull] Combined1Parser.NumeroContext context)
+        public override double VisitNumero([NotNull] gramaticaParser.NumeroContext context)
         {
             return double.Parse(context.num().GetText());
         }
-        public override double VisitIndicador([NotNull] Combined1Parser.IndicadorContext context)
+        public override double VisitIndicador([NotNull] gramaticaParser.IndicadorContext context)
         {
             string indicadorBuscado = context.INDICADOR().GetText();
-            // buscar en la db, el nombre del indicadorBuscado
-            // if existe
-            // return indicadorEncontrado.obtenerValor()
-            // else
-            // error
-            return 0.5;
+            ComponenteOperando indicadorEncontrado = listaOperandos.FirstOrDefault(x => x.Nombre.ToLower() == indicadorBuscado.ToLower());
+            if (indicadorEncontrado != null)
+                return indicadorEncontrado.ObtenerValor(this.empresa, this.periodo, listaOperandos);
+            else
+                throw new Exception();
         }
     }
 }

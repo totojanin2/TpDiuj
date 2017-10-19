@@ -67,7 +67,7 @@ namespace TpIntegradorDiuj.Controllers
         {
             Metodologia met = db.Metodologias.FirstOrDefault(x => x.Id == idMetodologia);
             IEnumerable<Empresa> empresas = db.Empresas;
-            List<Empresa> deseables = met.ObtenerEmpresasDeseables(empresas);
+            List<Empresa> deseables = met.ObtenerEmpresasDeseables(empresas,db.Operandos.ToList());
             ViewBag.Empresa_Nombre = met.Nombre;
             return View(deseables);
         }
@@ -79,7 +79,7 @@ namespace TpIntegradorDiuj.Controllers
             //Obtengo la metodologia solicitada
             Metodologia metodologia = db.Metodologias.FirstOrDefault(x => x.Id == metodologiaId);
             //Ejecuto las condiciones de la metodología, para tal empresa, para ver si conviene invertir o no
-            bool result = metodologia.EsDeseableInvertir(empresa);
+            bool result = metodologia.EsDeseableInvertir(empresa,db.Operandos.ToList());
             return Json(new { EsDeseable = result });
         }
     }

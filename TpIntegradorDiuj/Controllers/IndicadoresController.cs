@@ -65,7 +65,8 @@ namespace TpIntegradorDiuj.Controllers
             Indicador indicador = db.Indicadores.FirstOrDefault(x => x.Id == idIndicador);
             Empresa empresa = db.Empresas.FirstOrDefault(x => x.Id == idEmpresa);
             //Aplico el indicador, es decir, hay que parsear la formula
-            double valorTrasAplicarIndicador = indicador.ObtenerValor(empresa, periodo);
+            List<ComponenteOperando> listaOperandos = db.Operandos.ToList();
+            double valorTrasAplicarIndicador = indicador.ObtenerValor(empresa, periodo,listaOperandos);
             return Json(new { Valor = valorTrasAplicarIndicador });
         }
        

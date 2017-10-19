@@ -32,7 +32,7 @@ namespace TpIntegradorDiuj.Models
         public int? Indicador_Id { get; set; }
         public string Descripcion { get; set; }
         //Cada condicion será una clase, que tiene que implementar su metodo "ANALIZAR"
-        public abstract bool Analizar(Empresa empresa);
+        public abstract bool Analizar(Empresa empresa, List<ComponenteOperando> lista);
         protected List<int> ObtenerPeriodosAConsultar(Empresa emp)
         {
             return emp.Balances.Select(x => x.Periodo).ToList();

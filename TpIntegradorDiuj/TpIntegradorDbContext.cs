@@ -25,6 +25,7 @@ namespace TpIntegradorDiuj
         public virtual DbSet<Metodologia> Metodologias { get; set; }
         public virtual DbSet<Condicion> Condiciones { get; set; }
         public virtual DbSet<Indicador> Indicadores { get; set; }
+        public virtual DbSet<ComponenteOperando> Operandos { get; set; }
 
         private void AgregarCondiciones()
         {

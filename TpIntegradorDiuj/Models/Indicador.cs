@@ -15,14 +15,14 @@ namespace TpIntegradorDiuj.Models
         const string pattern = @"((\b([A-z]*[0-9]*|[0-9]*[A-z]*)[a-z0-9]*\b)([+\-\*\/]\(?(\b([a-z]*[0-9]*|[0-9]*[a-z]*)[a-z0-9]*\b)\)?)+)";
         public string Formula { get; set; }
         public List<ComponenteOperando> Operandos { get; set; }
-        public override double ObtenerValor(Empresa empresa, int periodo)
+        public override double ObtenerValor(Empresa empresa, int periodo, List<ComponenteOperando> listaOperandos)
         {
             AntlrInputStream input = new AntlrInputStream(this.Formula);
-            Combined1Lexer lexer = new Combined1Lexer(input);
+            gramaticaLexer lexer = new gramaticaLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
-            Combined1Parser parser = new Combined1Parser(tokens);
+            gramaticaParser parser = new gramaticaParser(tokens);
             IParseTree tree = parser.expr();
-            MyVisitor visitor = new MyVisitor();
+            MyVisitor visitor = new MyVisitor(empresa,periodo,listaOperandos);
             return visitor.Visit(tree);
         }
         public void ValidarExpresionFormula(IEnumerable<Indicador> indicadores)

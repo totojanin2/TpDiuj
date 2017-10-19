@@ -16,3 +16,34 @@ C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDi
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\obj\Debug\DiujTest.csprojResolveAssemblyReference.cache
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\obj\Debug\DiujTest.dll
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\DiujTest\obj\Debug\DiujTest.pdb
+C:\Git\TpDiuj\DiujTest\bin\Debug\ApplicationInsights.config
+C:\Git\TpDiuj\DiujTest\bin\Debug\DiujTest.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\DiujTest.pdb
+C:\Git\TpDiuj\DiujTest\bin\Debug\Antlr4.Runtime.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\TpIntegradorDiuj.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.Optimization.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.Mvc.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\EntityFramework.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.Razor.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.WebPages.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\TpIntegradorDiuj.pdb
+C:\Git\TpDiuj\DiujTest\bin\Debug\Antlr4.Runtime.xml
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.Optimization.xml
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.Mvc.xml
+C:\Git\TpDiuj\DiujTest\bin\Debug\EntityFramework.xml
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.Razor.xml
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.WebPages.xml
+C:\Git\TpDiuj\DiujTest\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Git\TpDiuj\DiujTest\bin\Debug\es\System.Web.Optimization.resources.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\es\System.Web.Mvc.resources.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\es\System.Web.Razor.resources.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\es\System.Web.WebPages.resources.dll
+C:\Git\TpDiuj\DiujTest\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+C:\Git\TpDiuj\DiujTest\obj\Debug\DiujTest.csprojResolveAssemblyReference.cache
+C:\Git\TpDiuj\DiujTest\obj\Debug\DiujTest.dll
+C:\Git\TpDiuj\DiujTest\obj\Debug\DiujTest.pdb
