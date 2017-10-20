@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,7 +10,7 @@ using TpIntegradorDiuj.Models.Condiciones;
 namespace TpIntegradorDiuj
 {
 
-    public class TpIntegradorDbContext : DbContext
+    public class TpIntegradorDbContext : IdentityDbContext<ApplicationUser>
     {
         private static TpIntegradorDbContext Instance = null;
         public TpIntegradorDbContext() : base("DefaultConnection")
@@ -54,6 +55,19 @@ namespace TpIntegradorDiuj
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasKey(x => x.Id)
+                .ToTable("Usuarios")
+                .HasMany(x=>x.Indicadores).WithOptional().HasForeignKey(x=>x.UsuarioCreador_Id);
+            modelBuilder.Entity<IdentityUserRole>()
+            .HasKey(r => new { r.UserId, r.RoleId })
+            .ToTable("AspNetUserRoles");
+
+            modelBuilder.Entity<IdentityUserLogin>()
+                .HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId })
+                .ToTable("AspNetUserLogins");
+
             modelBuilder.Entity<Empresa>()
                 .ToTable("Empresas")
                 .HasKey(x => x.Id);
@@ -69,9 +83,13 @@ namespace TpIntegradorDiuj
             modelBuilder.Entity<Balance>().HasMany(x => x.Cuentas).WithRequired().HasForeignKey(x => x.Balance_Id);
 
             modelBuilder.Entity<Indicador>()
-               // .ToTable("Indicadores")
-                .HasKey(x => x.Id)
-                  .HasMany(x => x.Operandos).WithOptional().HasForeignKey(x => x.IndicadorPadre_Id);
+                // .ToTable("Indicadores")
+                .HasKey(x => x.Id);
+                //.HasOptional(x => x.UsuarioCreador).WithMany().HasForeignKey(x => x.UsuarioCreador_Id);
+
+            modelBuilder.Entity<Indicador>()
+                .HasMany(x => x.Operandos).WithOptional().HasForeignKey(x => x.IndicadorPadre_Id);
+
 
             modelBuilder.Entity<Metodologia>().ToTable("Metodologias").HasKey(x => x.Id);
             modelBuilder.Entity<Metodologia>().HasMany(x => x.Condiciones).WithMany();
@@ -87,6 +105,10 @@ namespace TpIntegradorDiuj
             modelBuilder.Entity<ComponenteOperando>().ToTable("Operandos")
                .HasKey(x => x.Id);
 
+        }
+        public static TpIntegradorDbContext Create()
+        {
+            return new TpIntegradorDbContext();
         }
     }
 }

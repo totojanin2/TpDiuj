@@ -1,6 +1,7 @@
 ﻿using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -38,6 +39,34 @@ namespace TpIntegradorDiuj.Controllers
             return listaEmpresas;
 
         }
+        public ActionResult TraerEmpresas()
+        {
+            List<Empresa> empresas = db.Empresas.ToList();
+            return Json(new { Empresas = empresas},JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Edit(int idEmpresa)
+        {
+            Empresa empresaAModificar = db.Empresas.FirstOrDefault(x => x.Id == idEmpresa);
+            return View(empresaAModificar);
+        }
+        [HttpPost]
+        public ActionResult Edit(Empresa model)
+        {
+            Empresa empresaOriginal = db.Empresas.FirstOrDefault(x => x.Id == model.Id);
+            empresaOriginal.Editar(model);
+            //db.Empresas.Attach(model);
+            //db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int idEmpresa)
+        {
+            Empresa empresaAEliminar = db.Empresas.FirstOrDefault(x => x.Id == idEmpresa);
+            db.Empresas.Remove(empresaAEliminar);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        } 
        /* [HttpPost]
         public JsonResult ObtenerEmpresasYPeriodos()
         {

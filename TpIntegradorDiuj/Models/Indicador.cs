@@ -14,6 +14,8 @@ namespace TpIntegradorDiuj.Models
     {
         const string pattern = @"((\b([A-z]*[0-9]*|[0-9]*[A-z]*)[a-z0-9]*\b)([+\-\*\/]\(?(\b([a-z]*[0-9]*|[0-9]*[a-z]*)[a-z0-9]*\b)\)?)+)";
         public string Formula { get; set; }
+        public string UsuarioCreador_Id { get; set; }
+        //public virtual ApplicationUser UsuarioCreador { get; set; }
         public List<ComponenteOperando> Operandos { get; set; }
         public override double ObtenerValor(Empresa empresa, int periodo, List<ComponenteOperando> listaOperandos)
         {
@@ -23,7 +25,7 @@ namespace TpIntegradorDiuj.Models
             gramaticaParser parser = new gramaticaParser(tokens);
             IParseTree tree = parser.expr();
             MyVisitor visitor = new MyVisitor(empresa,periodo,listaOperandos);
-            return visitor.Visit(tree);
+            return Math.Round(visitor.Visit(tree),2);
         }
         public void ValidarExpresionFormula(IEnumerable<Indicador> indicadores)
         {

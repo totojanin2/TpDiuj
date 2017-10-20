@@ -22,7 +22,7 @@
         return $formData;
     }
     $(document).ready(function () {
-       
+        $("#tabla").dataTable();
         $("#btnMostrarCuentas").click(function () {
             var file = getFile();
             var idEmpresa = $("#selectEmpresas").val();
@@ -95,15 +95,15 @@
    
 </script>
 <div class="col-md-5 row" style="margin-top:10px">
-    <a class="btn btn-primary" href="@Url.Action("Create")">Crear Empresa</a>
+    <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Crear Empresa</a>
 </div>
 <h2>Empresas</h2>
-<table id="tabla" class="dataTable table table-bordered table-condensed">
+<table id="tabla" class="table table-bordered table-striped table-condensed">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Nombre</th>
             <th>Fecha de fundación</th>
+            <th>Acciones</th>
 
         </tr>
     </thead>
@@ -111,9 +111,12 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id</td>
                 <td>@item.Nombre</td>
-                <td>@item.FechaFundacion</td>
+                <td>@item.FechaFundacion.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a href="@Url.Action("Edit","Empresas",new { idEmpresa = item.Id })"> <i class="fa fa-pencil"></i> Editar</a><br />
+                    <a href="@Url.Action("Delete","Empresas",new { idEmpresa = item.Id})"> <i class="fa fa-trash"></i> Eliminar</a>
+                </td>
 
             </tr>
         }

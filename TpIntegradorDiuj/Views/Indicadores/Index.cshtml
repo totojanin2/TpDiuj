@@ -2,10 +2,60 @@
 @{
     ViewBag.Title = "Indicadores";
 }
+<style>
+    .modal-dialog {
+        margin-left: -200px;
+    }
+</style>
 
-
+<script>
+    $(function () {
+        $("#tabla").dataTable();
+    });
+    function evaluarIndicador(idIndicador) {
+        var empresaSeleccionada = $("#selectEmpresa").val();
+        var anioIngresado = $("#inputAnio").val();
+        var url = '@Url.Action("EvaluarIndicadorParaEmpresa","Indicadores",new { idIndicador = "__idIndicador__", idEmpresa = "__empresa__",periodo = "__periodo__"})';
+        url = url.replace("__idIndicador__", idIndicador).replace("amp;", "").replace("__empresa__", empresaSeleccionada).replace("amp;", "").replace("__periodo__", anioIngresado).replace("amp;", "");
+        $.ajax({
+            url: url,
+            type: 'post',
+            success: function (data) {
+                if (data.Success) {
+                    bootbox.alert("El resultado de evaluar el indicador para esa empresa en el año " + anioIngresado+ " es $" +data.Valor);
+                }
+                else {
+                    bootbox.alert(data.Error);
+                }
+            }
+        });
+    }
+    function mostrarFiltrosEvaluacion(idIndicador) {
+        var texto = '<div><span> Ingrese para que año y que empresa evaluar con este indicador. </span><br/><label>Año</label> <input class="form-control" type="number" name="Anio" placeholder="Año" id="inputAnio" required/> <br/>';
+        texto += '<label>Empresa</label> <select class="form-control" id="selectEmpresa" required>';
+        //texto += '<input type="hidden" name ="idIndicador" value=""'
+        var url = '@Url.Action("TraerEmpresas","Empresas")';       
+        texto += '</select><br/>';
+        var onclickString = "javascript:evaluarIndicador(" + idIndicador + ")";
+        texto += '<input type="submit" class="btn btn-primary" value="Evaluar" onclick='+onclickString+' />';
+        $.ajax({
+            url: url,
+            success: function (data) {
+                $.each(data.Empresas, function (index, item) {
+                    $("#selectEmpresa").append($("<option></option>")
+                    .attr("value", item.Id)
+                    .text(item.Nombre));
+                });
+            }
+        });
+        bootbox.dialog({
+            title: "Indicador",
+            message: texto
+        });
+    }
+</script>
 <div class="col-md-5 row" style="margin-top:10px">
-    <a class="btn btn-primary" href="@Url.Action("Create")">Crear Indicador</a>
+    <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Crear Indicador</a>
 </div>
 <h2>Indicadores</h2>
 <table id="tabla" class="dataTable table table-bordered table-condensed">
@@ -14,6 +64,7 @@
             <th>Id</th>
             <th>Nombre</th>
             <th>Formula</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +74,9 @@
                 <td>@item.Id</td>
                 <td>@item.Nombre</td>
                 <td>@item.Formula</td>
+                <td>
+                    <a href="#" onclick="javascript: mostrarFiltrosEvaluacion(@item.Id)"><i class="fa fa-usd"></i> Evaluar</a>
+                </td>
 
             </tr>
         }

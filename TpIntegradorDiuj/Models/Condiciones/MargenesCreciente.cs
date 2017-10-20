@@ -22,7 +22,7 @@ namespace TpIntegradorDiuj.Models
             int i=0;        
             while(i<periodos.Count && result)
             {
-                result= this.Indicador.ObtenerValor(empresa, i, lista) < this.Indicador.ObtenerValor(empresa, i + 1, lista);
+                result= this.Indicador.ObtenerValor(empresa, periodos[i], lista) < this.Indicador.ObtenerValor(empresa, periodos[i+1], lista);
                 i++;
             }
             return result;

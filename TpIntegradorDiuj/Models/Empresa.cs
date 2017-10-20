@@ -12,5 +12,11 @@ namespace TpIntegradorDiuj.Models
         public string Nombre { get; set; }
         public virtual List<Balance> Balances { get; set; }
         public DateTime FechaFundacion { get; set; }
+
+        public void Editar(Empresa empresaEditada)
+        {
+            this.Nombre = empresaEditada.Nombre;
+            this.FechaFundacion = empresaEditada.FechaFundacion;
+        }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Git\TpDiuj\TpIntegradorDiuj\gramatica.g4 by ANTLR 4.6.4
+// Generated from C:\Users\nahuel\Desktop\TpDiuj\TpIntegradorDiuj\gramatica.g4 by ANTLR 4.6.4
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -180,20 +180,26 @@ public partial class gramaticaParser : Parser {
 			base.CopyFrom(context);
 		}
 	}
-	public partial class IndicadorContext : ExprContext {
-		public ITerminalNode INDICADOR() { return GetToken(gramaticaParser.INDICADOR, 0); }
-		public IndicadorContext(ExprContext context) { CopyFrom(context); }
+	public partial class SumaContext : ExprContext {
+		public ExprContext[] expr() {
+			return GetRuleContexts<ExprContext>();
+		}
+		public ExprContext expr(int i) {
+			return GetRuleContext<ExprContext>(i);
+		}
+		public ITerminalNode MAS() { return GetToken(gramaticaParser.MAS, 0); }
+		public SumaContext(ExprContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			IgramaticaListener typedListener = listener as IgramaticaListener;
-			if (typedListener != null) typedListener.EnterIndicador(this);
+			if (typedListener != null) typedListener.EnterSuma(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IgramaticaListener typedListener = listener as IgramaticaListener;
-			if (typedListener != null) typedListener.ExitIndicador(this);
+			if (typedListener != null) typedListener.ExitSuma(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IgramaticaVisitor<TResult> typedVisitor = visitor as IgramaticaVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitIndicador(this);
+			if (typedVisitor != null) return typedVisitor.VisitSuma(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -220,29 +226,6 @@ public partial class gramaticaParser : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
-	public partial class SumaContext : ExprContext {
-		public ExprContext[] expr() {
-			return GetRuleContexts<ExprContext>();
-		}
-		public ExprContext expr(int i) {
-			return GetRuleContext<ExprContext>(i);
-		}
-		public ITerminalNode MAS() { return GetToken(gramaticaParser.MAS, 0); }
-		public SumaContext(ExprContext context) { CopyFrom(context); }
-		public override void EnterRule(IParseTreeListener listener) {
-			IgramaticaListener typedListener = listener as IgramaticaListener;
-			if (typedListener != null) typedListener.EnterSuma(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IgramaticaListener typedListener = listener as IgramaticaListener;
-			if (typedListener != null) typedListener.ExitSuma(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IgramaticaVisitor<TResult> typedVisitor = visitor as IgramaticaVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitSuma(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
 	public partial class ParentesisContext : ExprContext {
 		public ITerminalNode PARENTESISIZQUIERDO() { return GetToken(gramaticaParser.PARENTESISIZQUIERDO, 0); }
 		public ExprContext expr() {
@@ -264,26 +247,39 @@ public partial class gramaticaParser : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
-	public partial class ProductoContext : ExprContext {
-		public ExprContext[] expr() {
-			return GetRuleContexts<ExprContext>();
-		}
-		public ExprContext expr(int i) {
-			return GetRuleContext<ExprContext>(i);
-		}
-		public ITerminalNode POR() { return GetToken(gramaticaParser.POR, 0); }
-		public ProductoContext(ExprContext context) { CopyFrom(context); }
+	public partial class IndicadorContext : ExprContext {
+		public ITerminalNode INDICADOR() { return GetToken(gramaticaParser.INDICADOR, 0); }
+		public IndicadorContext(ExprContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			IgramaticaListener typedListener = listener as IgramaticaListener;
-			if (typedListener != null) typedListener.EnterProducto(this);
+			if (typedListener != null) typedListener.EnterIndicador(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IgramaticaListener typedListener = listener as IgramaticaListener;
-			if (typedListener != null) typedListener.ExitProducto(this);
+			if (typedListener != null) typedListener.ExitIndicador(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IgramaticaVisitor<TResult> typedVisitor = visitor as IgramaticaVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitProducto(this);
+			if (typedVisitor != null) return typedVisitor.VisitIndicador(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class NumeroContext : ExprContext {
+		public NumContext num() {
+			return GetRuleContext<NumContext>(0);
+		}
+		public NumeroContext(ExprContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IgramaticaListener typedListener = listener as IgramaticaListener;
+			if (typedListener != null) typedListener.EnterNumero(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IgramaticaListener typedListener = listener as IgramaticaListener;
+			if (typedListener != null) typedListener.ExitNumero(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IgramaticaVisitor<TResult> typedVisitor = visitor as IgramaticaVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNumero(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -310,22 +306,26 @@ public partial class gramaticaParser : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
-	public partial class NumeroContext : ExprContext {
-		public NumContext num() {
-			return GetRuleContext<NumContext>(0);
+	public partial class ProductoContext : ExprContext {
+		public ExprContext[] expr() {
+			return GetRuleContexts<ExprContext>();
 		}
-		public NumeroContext(ExprContext context) { CopyFrom(context); }
+		public ExprContext expr(int i) {
+			return GetRuleContext<ExprContext>(i);
+		}
+		public ITerminalNode POR() { return GetToken(gramaticaParser.POR, 0); }
+		public ProductoContext(ExprContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			IgramaticaListener typedListener = listener as IgramaticaListener;
-			if (typedListener != null) typedListener.EnterNumero(this);
+			if (typedListener != null) typedListener.EnterProducto(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IgramaticaListener typedListener = listener as IgramaticaListener;
-			if (typedListener != null) typedListener.ExitNumero(this);
+			if (typedListener != null) typedListener.ExitProducto(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IgramaticaVisitor<TResult> typedVisitor = visitor as IgramaticaVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitNumero(this);
+			if (typedVisitor != null) return typedVisitor.VisitProducto(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
