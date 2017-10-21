@@ -13,7 +13,10 @@ namespace TpIntegradorDiuj.Models
         
         public override double ObtenerValor(Empresa empresa, int periodo, List<ComponenteOperando> listaOperandos)
         {
-            return this.Valor;
+            List<Balance> balances = empresa.Balances;
+            Balance balanceBuscado = balances.FirstOrDefault(x => x.Periodo == periodo);
+            Cuenta cuentaBuscada = balanceBuscado.Cuentas.FirstOrDefault(x => x.Nombre == this.Nombre);
+            return cuentaBuscada.Valor;
         }
     }
 }
