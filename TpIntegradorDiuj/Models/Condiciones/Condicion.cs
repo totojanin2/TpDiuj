@@ -35,7 +35,7 @@ namespace TpIntegradorDiuj.Models
         public abstract bool Analizar(Empresa empresa, List<ComponenteOperando> lista);
         protected List<int> ObtenerPeriodosAConsultar(Empresa emp)
         {
-            return emp.Balances.Select(x => x.Periodo).ToList();
+            return emp.Balances.Select(x => x.Periodo).OrderBy(x=>x).ToList();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace TpIntegradorDiuj.Models
             bool result = true;
             List<int> periodos = this.ObtenerPeriodosAConsultar(empresa);
             int i=0;        
-            while(i<periodos.Count && result)
+            while(i<periodos.Count-1 && result)
             {
                 result= this.Indicador.ObtenerValor(empresa, periodos[i], lista) < this.Indicador.ObtenerValor(empresa, periodos[i+1], lista);
                 i++;

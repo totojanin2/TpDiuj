@@ -66,9 +66,9 @@ namespace TpIntegradorDiuj.Controllers
         public ActionResult ObtenerEmpresasDeseables(int idMetodologia)
         {
             Metodologia met = db.Metodologias.FirstOrDefault(x => x.Id == idMetodologia);
-            IEnumerable<Empresa> empresas = db.Empresas;
+            List<Empresa> empresas = db.Empresas.ToList();
             List<Empresa> deseables = met.ObtenerEmpresasDeseables(empresas,db.Operandos.ToList());
-            ViewBag.Empresa_Nombre = met.Nombre;
+            ViewBag.Metodologia_Nombre = met.Nombre;
             return View(deseables);
         }
         public ActionResult EvaluarConvenienciaInversion(int empresaId,int metodologiaId)

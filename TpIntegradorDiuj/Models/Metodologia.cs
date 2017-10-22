@@ -21,14 +21,10 @@ namespace TpIntegradorDiuj.Models
             return this.Condiciones.All(x => x.Analizar(emp, lista));
         }
 
-        public List<Empresa> ObtenerEmpresasDeseables(IEnumerable<Empresa> empresas, List<ComponenteOperando> lista)
+        public List<Empresa> ObtenerEmpresasDeseables(List<Empresa> empresas, List<ComponenteOperando> lista)
         {
             List<Empresa> deseables = new List<Empresa>();
-            foreach (var emp in empresas)
-            {
-                if (this.EsDeseableInvertir(emp,lista))
-                    deseables.Add(emp);
-            }
+            deseables = empresas.Where(x => this.EsDeseableInvertir(x, lista)).ToList();            
             return deseables;
         }
     }

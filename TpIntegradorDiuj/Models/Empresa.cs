@@ -8,6 +8,10 @@ namespace TpIntegradorDiuj.Models
 {
     public class Empresa
     {
+        public Empresa()
+        {
+            this.Balances = new List<Balance>();
+        }
         public int Id { get; set; }
         public string Nombre { get; set; }
         public virtual List<Balance> Balances { get; set; }
