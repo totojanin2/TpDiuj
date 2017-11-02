@@ -27,6 +27,13 @@ namespace TpIntegradorDiuj.Models
             MyVisitor visitor = new MyVisitor(empresa,periodo,listaOperandos);
             return Math.Round(visitor.Visit(tree),2);
         }
+        public void Editar(Indicador indEdited)
+        {
+            this.Nombre = indEdited.Nombre;
+            this.Formula = indEdited.Formula;
+            this.UsuarioCreador_Id = indEdited.UsuarioCreador_Id;
+            this.Operandos = indEdited.Operandos;
+        }
         public void ValidarExpresionFormula(IEnumerable<Indicador> indicadores)
         {
             //GramaticaLexer lexer = new GramaticaLexer(new AntlrInputStream(this.Formula));

@@ -76,7 +76,7 @@ namespace TpIntegradorDiuj.Controllers
             {
                 return View(model);
             }
-
+            TpIntegradorDbContext db = new TpIntegradorDbContext();
             // This doesn't count login failures towards account lockout 
             // To enable password failures to trigger account lockout, change to shouldLockout: true 
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
@@ -90,7 +90,11 @@ namespace TpIntegradorDiuj.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    bool existeUsuario = db.Users.Any(x => x.UserName == model.UserName);
+                    if (existeUsuario)
+                        ModelState.AddModelError("", "Contraseña incorrecta.");
+                    else
+                        ModelState.AddModelError("", "El usuario ingresado no existe.");
                     return View(model);
             }
         }

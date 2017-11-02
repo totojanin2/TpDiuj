@@ -41,6 +41,29 @@ namespace TpIntegradorDiuj.Controllers
         {
             return View();
         }
+        public ActionResult Edit(int idInd)
+        {
+            Indicador indAMod = db.Indicadores.FirstOrDefault(x => x.Id == idInd);
+            return View(indAMod);
+        }
+        [HttpPost]
+        public ActionResult Edit(Indicador model)
+        {
+            Indicador indOriginal = db.Indicadores.FirstOrDefault(x => x.Id == model.Id);
+            indOriginal.Editar(model);
+            //db.Empresas.Attach(model);
+            //db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int idInd)
+        {
+            Indicador indAEliminar = db.Indicadores.FirstOrDefault(x => x.Id == idInd);
+            db.Indicadores.Remove(indAEliminar);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public JsonResult ObtenerFormulaDelIndicador(int idIndicador)
         {
