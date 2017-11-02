@@ -75,13 +75,19 @@ namespace TpIntegradorDiuj.Controllers
                 Indicador indicador = db.Indicadores.FirstOrDefault(x => x.Id == idIndicador);
                 Empresa empresa = db.Empresas.FirstOrDefault(x => x.Id == idEmpresa);
                 //Aplico el indicador, es decir, hay que parsear la formula
-                List<ComponenteOperando> listaOperandos = db.Operandos.ToList();
+                List<ComponenteOperando> listaOperandos = new List<ComponenteOperando>();
+                listaOperandos.AddRange(db.Operandos.OfType<Cuenta>());
+                var store = new UserStore<ApplicationUser>(new TpIntegradorDbContext());
+                var userManager = new UserManager<ApplicationUser>(store);
+                ApplicationUser user = userManager.FindById(User.Identity.GetUserId());
+                List<Indicador> indicadores = user.Indicadores;
+                listaOperandos.AddRange(indicadores);
                 double valorTrasAplicarIndicador = indicador.ObtenerValor(empresa, periodo,listaOperandos);
                 return Json(new { Success = true, Valor = valorTrasAplicarIndicador });
             }
             catch(Exception e)
             {
-                return Json(new { Success = false, Error = e.Message });
+                return Json(new { Success = false, Error = "Error: verificar que haya operandos para el año seleccionado." });
             }
         }
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpIntegradorDiuj\gramatica.g4 by ANTLR 4.6.4
+// Generated from C:\Git\TpDiuj\TpIntegradorDiuj\gramatica.g4 by ANTLR 4.6.4
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -36,19 +36,19 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class gramaticaBaseListener : IgramaticaListener {
 	/// <summary>
-	/// Enter a parse tree produced by the <c>suma</c>
+	/// Enter a parse tree produced by the <c>indicador</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterSuma([NotNull] gramaticaParser.SumaContext context) { }
+	public virtual void EnterIndicador([NotNull] gramaticaParser.IndicadorContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by the <c>suma</c>
+	/// Exit a parse tree produced by the <c>indicador</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitSuma([NotNull] gramaticaParser.SumaContext context) { }
+	public virtual void ExitIndicador([NotNull] gramaticaParser.IndicadorContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>division</c>
@@ -66,6 +66,21 @@ public partial class gramaticaBaseListener : IgramaticaListener {
 	public virtual void ExitDivision([NotNull] gramaticaParser.DivisionContext context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by the <c>suma</c>
+	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSuma([NotNull] gramaticaParser.SumaContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>suma</c>
+	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSuma([NotNull] gramaticaParser.SumaContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by the <c>parentesis</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -81,34 +96,19 @@ public partial class gramaticaBaseListener : IgramaticaListener {
 	public virtual void ExitParentesis([NotNull] gramaticaParser.ParentesisContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by the <c>indicador</c>
+	/// Enter a parse tree produced by the <c>producto</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterIndicador([NotNull] gramaticaParser.IndicadorContext context) { }
+	public virtual void EnterProducto([NotNull] gramaticaParser.ProductoContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by the <c>indicador</c>
+	/// Exit a parse tree produced by the <c>producto</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitIndicador([NotNull] gramaticaParser.IndicadorContext context) { }
-
-	/// <summary>
-	/// Enter a parse tree produced by the <c>numero</c>
-	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterNumero([NotNull] gramaticaParser.NumeroContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by the <c>numero</c>
-	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitNumero([NotNull] gramaticaParser.NumeroContext context) { }
+	public virtual void ExitProducto([NotNull] gramaticaParser.ProductoContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>resta</c>
@@ -126,19 +126,19 @@ public partial class gramaticaBaseListener : IgramaticaListener {
 	public virtual void ExitResta([NotNull] gramaticaParser.RestaContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by the <c>producto</c>
+	/// Enter a parse tree produced by the <c>numero</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterProducto([NotNull] gramaticaParser.ProductoContext context) { }
+	public virtual void EnterNumero([NotNull] gramaticaParser.NumeroContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by the <c>producto</c>
+	/// Exit a parse tree produced by the <c>numero</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitProducto([NotNull] gramaticaParser.ProductoContext context) { }
+	public virtual void ExitNumero([NotNull] gramaticaParser.NumeroContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="gramaticaParser.num"/>.
