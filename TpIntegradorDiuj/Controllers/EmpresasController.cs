@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using TpIntegradorDiuj.Models;
+using TpIntegradorDiuj.Services;
 
 namespace TpIntegradorDiuj.Controllers
 {
@@ -17,7 +18,7 @@ namespace TpIntegradorDiuj.Controllers
         TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
         public ActionResult Index()
         {
-            List<Empresa> empresas = db.Empresas.ToList();
+            List<Empresa> empresas = EmpresasService.GetAll();
             return View(empresas);
         }
         public List<Empresa> DeserializarArchivoEmpresas()
@@ -41,49 +42,27 @@ namespace TpIntegradorDiuj.Controllers
         }
         public ActionResult TraerEmpresas()
         {
-            List<Empresa> empresas = db.Empresas.ToList();
+            List<Empresa> empresas = EmpresasService.GetAll();
             return Json(new { Empresas = empresas},JsonRequestBehavior.AllowGet);
         }
         public ActionResult Edit(int idEmpresa)
         {
-            Empresa empresaAModificar = db.Empresas.FirstOrDefault(x => x.Id == idEmpresa);
+            Empresa empresaAModificar = EmpresasService.GetById(idEmpresa);
             return View(empresaAModificar);
         }
         [HttpPost]
         public ActionResult Edit(Empresa model)
         {
-            Empresa empresaOriginal = db.Empresas.FirstOrDefault(x => x.Id == model.Id);
-            empresaOriginal.Editar(model);
-            //db.Empresas.Attach(model);
-            //db.Entry(model).State = EntityState.Modified;
-            db.SaveChanges();
+            EmpresasService.Editar(model);          
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int idEmpresa)
         {
-            Empresa empresaAEliminar = db.Empresas.FirstOrDefault(x => x.Id == idEmpresa);
-            db.Empresas.Remove(empresaAEliminar);
-            db.SaveChanges();
+            EmpresasService.Eliminar(idEmpresa);         
             return RedirectToAction("Index");
         } 
-       /* [HttpPost]
-        public JsonResult ObtenerEmpresasYPeriodos()
-        {
-            if (Request.Files.Count>0)
-            {               
-                List<Empresa> empresas = db.Empresas.ToList();
-                List<int> periodos = new List<int>();
-                foreach (var balances in empresas.Select(x=>x.Balances))
-                {
-                    foreach (var item in balances)                    
-                        periodos.Add(item.Periodo);                   
-                }
-                periodos = periodos.Distinct().ToList();
-                return Json(new { Success = true, Empresas = empresas, Periodos = periodos });
-            }
-            return Json(new { Success = false, Mensaje = "Hubo un error" });
-        }*/
+    
         public ActionResult Create()
         {
             return View();
@@ -91,8 +70,7 @@ namespace TpIntegradorDiuj.Controllers
         [HttpPost]
         public ActionResult Create(Empresa emp)
         {
-            db.Empresas.Add(emp);
-            db.SaveChanges();
+            EmpresasService.Crear(emp);
             return RedirectToAction("Index");
         }
         

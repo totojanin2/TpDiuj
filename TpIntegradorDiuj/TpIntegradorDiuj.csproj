@@ -275,6 +275,8 @@
     <Compile Include="Models\Metodologia.cs" />
     <Compile Include="MyVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\EmpresasService.cs" />
+    <Compile Include="Services\IndicadoresService.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="TpIntegradorDbContext.cs" />
     <Compile Include="Visitador.cs" />

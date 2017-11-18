@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Git\TpDiuj\TpIntegradorDiuj\gramatica.g4 by ANTLR 4.6.4
+// Generated from C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\gramatica.g4 by ANTLR 4.6.4
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -33,12 +33,12 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IgramaticaVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by the <c>indicador</c>
+	/// Visit a parse tree produced by the <c>suma</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitIndicador([NotNull] gramaticaParser.IndicadorContext context);
+	Result VisitSuma([NotNull] gramaticaParser.SumaContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>division</c>
@@ -49,14 +49,6 @@ public interface IgramaticaVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitDivision([NotNull] gramaticaParser.DivisionContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by the <c>suma</c>
-	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitSuma([NotNull] gramaticaParser.SumaContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by the <c>parentesis</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// </summary>
@@ -65,12 +57,20 @@ public interface IgramaticaVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitParentesis([NotNull] gramaticaParser.ParentesisContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by the <c>producto</c>
+	/// Visit a parse tree produced by the <c>indicador</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitProducto([NotNull] gramaticaParser.ProductoContext context);
+	Result VisitIndicador([NotNull] gramaticaParser.IndicadorContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>numero</c>
+	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNumero([NotNull] gramaticaParser.NumeroContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>resta</c>
@@ -81,12 +81,12 @@ public interface IgramaticaVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitResta([NotNull] gramaticaParser.RestaContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by the <c>numero</c>
+	/// Visit a parse tree produced by the <c>producto</c>
 	/// labeled alternative in <see cref="gramaticaParser.expr"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitNumero([NotNull] gramaticaParser.NumeroContext context);
+	Result VisitProducto([NotNull] gramaticaParser.ProductoContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="gramaticaParser.num"/>.
