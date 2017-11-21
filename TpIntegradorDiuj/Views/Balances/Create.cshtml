@@ -12,12 +12,22 @@
     function agregarCuenta(){
         var cantRows = $(".cuentasTable > tbody.cuerpo > tr").length;
         var tr = '<tr>';
-        tr += '<td><input type="text" class=form-control name="Cuentas[' + cantRows + '].Nombre" required/></td>';
-        tr += '<td><input type="text" class=form-control name="Cuentas[' + cantRows + '].Valor" required/></td><td></td>';
+        tr += '<td><input type="text" class="form-control nombre " name="Cuentas[' + cantRows + '].Nombre" required/></td>';
+        tr += '<td><input type="text" class="form-control valor "name="Cuentas[' + cantRows + '].Valor" required/></td>';
+        tr+= '<td> <a class="eliminar" href="#">X</a> </td>';
         tr += '</tr>';
         $(".cuentasTable > tbody.cuerpo").append(tr);
     };
-  
+    $(function () {
+        $('.cuentasTable > tbody.cuerpo').on('click', 'tr > td > a', function () {
+            $(this).closest('tr').remove();
+            $.each($(".cuentasTable > tbody.cuerpo > tr"), function (index, item) {
+                $(item).find("td>input.valor").attr("name", function (i) { return "Cuentas[" + index + "].Valor"; })
+                $(item).find("td>input.nombre").attr("name", function (i) { return "Cuentas[" + index + "].Nombre"; })
+            });
+        });
+    });
+   
 
 
 </script>

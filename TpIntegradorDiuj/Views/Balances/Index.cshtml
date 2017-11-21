@@ -69,6 +69,8 @@
                 <td>$@item.Total</td>
                 <td>
                     <a href="@Url.Action("Details","Balances",new { id = item.Id })" ><i class="fa fa-eye"></i> Detalle </a>
+                    <a href="@Url.Action("Edit","Balances",new { id = item.Id })"><i class="fa fa-pencil"></i> Editar </a>
+
                 </td>
 
             </tr>

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using TpIntegradorDiuj.Models;
+using TpIntegradorDiuj.Services;
 
 namespace TpIntegradorDiuj.Controllers
 {
@@ -21,7 +22,7 @@ namespace TpIntegradorDiuj.Controllers
             List<Balance> balances = db.Balances.ToList();
             foreach (var item in balances)
             {
-                item.Empresa = db.Empresas.FirstOrDefault(x => x.Id == item.Empresa_Id);
+                item.Empresa = EmpresasService.GetById(item.Empresa_Id);
             }
             return View(balances);
         }
