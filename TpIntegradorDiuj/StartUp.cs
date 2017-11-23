@@ -4,6 +4,8 @@ using Microsoft.Owin;
 using TpIntegradorDiuj.Models;
 using Owin;
 using System.Security.Claims;
+using Hangfire;
+using TpIntegradorDiuj.Services;
 
 [assembly: OwinStartupAttribute(typeof(TpIntegradorDiuj.Startup))]
 namespace TpIntegradorDiuj
@@ -13,7 +15,12 @@ namespace TpIntegradorDiuj
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            GlobalConfiguration.Configuration.UseSqlServerStorage("DefaultConnection");
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
             //createRolesandUsers();
+
+            RecurringJob.AddOrUpdate(()=>BalancesService.BatchArchivosBalances(),Cron.Daily);
         }
 
 

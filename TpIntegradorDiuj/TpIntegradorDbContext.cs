@@ -70,10 +70,10 @@ namespace TpIntegradorDiuj
 
             modelBuilder.Entity<Empresa>()
                 .ToTable("Empresas")
-                .HasKey(x => x.Id);
+                .HasKey(x => x.CUIT);
 
             modelBuilder.Entity<Empresa>()
-                .HasMany(x => x.Balances).WithRequired().HasForeignKey(x => x.Empresa_Id);
+                .HasMany(x => x.Balances).WithRequired().HasForeignKey(x => x.Empresa_CUIT);
 
             modelBuilder.Entity<Balance>()
                 .ToTable("Balances")

@@ -30,8 +30,15 @@
 @using (Html.BeginForm("Create", "Indicadores", FormMethod.Post))
 {
     <div class="form-horizontal">
-        <div class="form-group"><input type="text" name="Nombre" placeholder="Nombre" id="nombre" class="form-control" required /> </div>
-        <div class="form-group"><input type="text" name="Formula" placeholder="Formula" id="formula" class="form-control" required /> </div>
+        <div class="form-group"><label>Nombre </label><input type="text" name="Nombre" placeholder="Nombre" id="nombre" class="form-control" required /> </div>     
+
+        <div class="form-group"><label>Formula</label><input type="text" name="Formula" placeholder="Formula" id="formula" class="form-control" required /> </div>
+        <ul style="color:orange">
+            <li>La formula a ingresar acepta las operaciones +,-,/ y * </li>
+            <li>Para Cuentas e Indicadores, debe ingresar la cadena de caracteres correspondiente (Sin espacios ni numeros)</li>
+            <li>Se permite el ingreso de parentesis en la expresión de la formula</li>
+            <li>Ejemplo: EBITDA * (3+ROE) siendo ROE un indicador y EBITDA una cuenta</li>
+        </ul>
         <div class="form-group"> <input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:validaciones()" /></div>
     </div>
 

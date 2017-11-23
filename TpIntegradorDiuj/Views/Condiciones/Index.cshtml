@@ -1,6 +1,6 @@
 ﻿@model List<TpIntegradorDiuj.Models.Condicion>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Condiciones";
 }
 <script>
     $(function () {
@@ -12,7 +12,7 @@
 <table id="tabla" class="dataTable table table-bordered table-condensed">
     <thead>
         <tr>
-            <th>Id</th>
+            @*<th>Id</th>*@
             <th>Nombre</th>
             <th>Tipo</th>
             <th>Indicador</th>
@@ -23,7 +23,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id</td>
+                @*<td>@item.Id</td>*@
                 <td>@item.Descripcion</td>
                 <td>@item.Tipo</td>
                 <td>@(item.Indicador != null ? item.Indicador.Nombre : "SIN INDICADOR") </td>               

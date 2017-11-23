@@ -15,7 +15,7 @@
 		}		
 		],      
         "Periodo": "2016",
-		"Empresa_Id": "5"
+		"Empresa_CUIT": "20334566550"
       },
 	  {
 		"Cuentas": [
@@ -29,6 +29,6 @@
 		}			
 		],      
         "Periodo": "2015",
-		"Empresa_Id": "7"
+		"Empresa_CUIT": "20222566550"
       }
 ]

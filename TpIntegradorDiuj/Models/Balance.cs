@@ -16,8 +16,9 @@ namespace TpIntegradorDiuj.Models
         public int Id { get; set; }
         public virtual List<Cuenta> Cuentas { get; set; }
         public int Periodo { get; set; }
-        public int Empresa_Id { get; set; }
+        //public int Empresa_Id { get; set; }
 
+        public string Empresa_CUIT { get; set; }
 
         [NotMapped]
         [ScriptIgnore]

@@ -71,11 +71,11 @@ namespace TpIntegradorDiuj.Controllers
             ViewBag.Metodologia_Nombre = met.Nombre;
             return View(deseables);
         }
-        public ActionResult EvaluarConvenienciaInversion(int empresaId,int metodologiaId)
+        public ActionResult EvaluarConvenienciaInversion(string empresaCuit,int metodologiaId)
         {
             EmpresasController empController = new EmpresasController();
             //Obtengo la empresa solicitada
-            Empresa empresa = db.Empresas.FirstOrDefault(x=>x.Id == empresaId);
+            Empresa empresa = db.Empresas.FirstOrDefault(x=>x.CUIT == empresaCuit);
             //Obtengo la metodologia solicitada
             Metodologia metodologia = db.Metodologias.FirstOrDefault(x => x.Id == metodologiaId);
             //Ejecuto las condiciones de la metodología, para tal empresa, para ver si conviene invertir o no

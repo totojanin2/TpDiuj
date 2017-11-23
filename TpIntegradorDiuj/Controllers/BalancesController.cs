@@ -22,7 +22,7 @@ namespace TpIntegradorDiuj.Controllers
             List<Balance> balances = BalancesService.GetAll();
             foreach (var item in balances)
             {
-                item.Empresa = EmpresasService.GetById(item.Empresa_Id);
+                item.Empresa = EmpresasService.GetByCUIT(item.Empresa_CUIT);
             }
             return View(balances);
         }
@@ -72,7 +72,11 @@ namespace TpIntegradorDiuj.Controllers
                 return Json(new { Success = false, Error = e.Message });
             }
         }
-
+        public ActionResult Delete(int id)
+        {
+            BalancesService.Eliminar(id);
+            return RedirectToAction("Index");
+        }
   
 
         [HttpPost]
@@ -90,7 +94,7 @@ namespace TpIntegradorDiuj.Controllers
                 if (balanceModel.Cuentas.Count == 0)
                     throw new Exception("Debe ingresar por lo menos una cuenta para este balance");
                 //Busco en la base de datos si hay algun balance con ese periodo para esa empresa
-                bool hayBalancesIguales = BalancesService.ExisteBalanceParaEmpresaEnPeriodo(balanceModel.Periodo, balanceModel.Empresa_Id);
+                bool hayBalancesIguales = BalancesService.ExisteBalanceParaEmpresaEnPeriodo(balanceModel.Periodo, balanceModel.Empresa_CUIT);
                 if (hayBalancesIguales)
                 {
                     ModelState.AddModelError("", "Ya existe un balance para esa empresa en ese período.");
@@ -148,18 +152,18 @@ namespace TpIntegradorDiuj.Controllers
             ViewBag.Empresas = EmpresasService.GetAll().Select(x => new SelectListItem
             {
                 Text = x.Nombre,
-                Value = x.Id.ToString()
+                Value = x.CUIT
             }).ToList();
         }
         
         [HttpPost]
-        public JsonResult ObtenerBalancesDeEmpresaPorPeriodo(int idEmpresa, int anio)
+        public JsonResult ObtenerBalancesDeEmpresaPorPeriodo(string cuitEmpresa, int anio)
         {
             try
             {
-                Empresa empresa = EmpresasService.GetById(idEmpresa);
+                Empresa empresa = EmpresasService.GetByCUIT(cuitEmpresa);
                 //Obtengo el balance de la empresa para el año solicitado
-                Balance balance = BalancesService.GetBalanceByPeriodoYEmpresa(anio, idEmpresa);
+                Balance balance = BalancesService.GetBalanceByPeriodoYEmpresa(anio, cuitEmpresa);
                 if (balance != null)
                 {
                     return Json(new { Success = true, Cuentas = balance.Cuentas });
@@ -180,11 +184,11 @@ namespace TpIntegradorDiuj.Controllers
 
         }
         [HttpPost]
-        public JsonResult obtener_periodos_empresa(int idEmpresa)
+        public JsonResult obtener_periodos_empresa(string cuit)
         {
             try
             {
-                List<int> periodos = BalancesService.GetPeriodosDeBalancesDeEmpresa(idEmpresa);
+                List<int> periodos = BalancesService.GetPeriodosDeBalancesDeEmpresa(cuit);
                 return Json(new { Success = true, Periodos = periodos });
 
             }

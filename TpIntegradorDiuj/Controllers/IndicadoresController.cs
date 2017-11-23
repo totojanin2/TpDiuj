@@ -79,7 +79,7 @@ namespace TpIntegradorDiuj.Controllers
             }
            
         }
-        public ActionResult EvaluarIndicadorParaEmpresa(int idIndicador,int idEmpresa,int periodo)
+        public ActionResult EvaluarIndicadorParaEmpresa(int idIndicador,string cuit,int periodo)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace TpIntegradorDiuj.Controllers
                 var userManager = new UserManager<ApplicationUser>(store);
                 ApplicationUser user = userManager.FindById(User.Identity.GetUserId());
                 List<Indicador> indicadoresDelUsuario = user.Indicadores;
-                double valorTrasAplicarIndicador = IndicadoresService.EvaluarIndicadorParaEmpresa(idIndicador, idEmpresa, periodo, indicadoresDelUsuario);       
+                double valorTrasAplicarIndicador = IndicadoresService.EvaluarIndicadorParaEmpresa(idIndicador, cuit, periodo, indicadoresDelUsuario);       
                 return Json(new { Success = true, Valor = valorTrasAplicarIndicador });
             }
             catch(Exception e)

@@ -45,9 +45,9 @@ namespace TpIntegradorDiuj.Controllers
             List<Empresa> empresas = EmpresasService.GetAll();
             return Json(new { Empresas = empresas},JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Edit(int idEmpresa)
+        public ActionResult Edit(string cuit)
         {
-            Empresa empresaAModificar = EmpresasService.GetById(idEmpresa);
+            Empresa empresaAModificar = EmpresasService.GetByCUIT(cuit);
             return View(empresaAModificar);
         }
         [HttpPost]
@@ -57,9 +57,9 @@ namespace TpIntegradorDiuj.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(int idEmpresa)
+        public ActionResult Delete(string cuit)
         {
-            EmpresasService.Eliminar(idEmpresa);         
+            EmpresasService.Eliminar(cuit);         
             return RedirectToAction("Index");
         } 
     

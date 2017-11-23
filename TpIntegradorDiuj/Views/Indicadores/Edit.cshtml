@@ -12,12 +12,18 @@
 
         <div class="form-group">
             <label>Nombre</label>
-            @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control", @required = true })
+            @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control", @required = true , @disabled = true})
         </div>
         <div class="form-group">
             <label>Formula</label>
             @Html.TextBoxFor(x => x.Formula, new { @class = "form-control", @required = true, @Value = Model.Formula })
         </div>
+        <ul style="color:orange">
+            <li>La formula a ingresar acepta las operaciones +,-,/ y * </li>
+            <li>Para Cuentas e Indicadores, debe ingresar la cadena de caracteres correspondiente (Sin espacios ni numeros)</li>
+            <li>Se permite el ingreso de parentesis en la expresión de la formula</li>
+            <li>Ejemplo: EBITDA * (3+ROE) siendo ROE un indicador y EBITDA una cuenta</li>
+        </ul>
         <input type="submit" value="Editar" class="btn btn-primary" />
     </div>
 }

@@ -407,3 +407,9 @@ C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDi
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\DiujTest\obj\Debug\DiujTest.csprojResolveAssemblyReference.cache
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\DiujTest\obj\Debug\DiujTest.dll
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\DiujTest\obj\Debug\DiujTest.pdb
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\DiujTest\bin\Debug\Hangfire.Core.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\DiujTest\bin\Debug\Hangfire.SqlServer.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\DiujTest\bin\Debug\Hangfire.Core.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\DiujTest\bin\Debug\Hangfire.SqlServer.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\DiujTest\bin\Debug\es\Hangfire.Core.resources.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\DiujTest\bin\Debug\zh\Hangfire.Core.resources.dll

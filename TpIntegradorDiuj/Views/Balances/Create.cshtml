@@ -7,7 +7,12 @@
     listEmpresas.AddRange(_listEmpresas);
 
 }
-
+<style>
+    ul{
+        font-size:14px;
+        color:indianred;
+    }
+</style>
 <script>
     function agregarCuenta(){
         var cantRows = $(".cuentasTable > tbody.cuerpo > tr").length;
@@ -31,13 +36,15 @@
 
 
 </script>
+<div>
 @Html.ValidationSummary()
+</div>
 <h2>Cargar balance</h2>
     <div class="col-md-5 col-md-offset-1">
         <form method="post" action="@Url.Action("Create","Balances")">
             <div class="form-group">
                 <label>Empresa</label>
-                @Html.DropDownList("Empresa_Id", listEmpresas, "Seleccione empresa..", new { @required="true", @id="selectEmpresas" , @class = "form-control"})
+                @Html.DropDownList("Empresa_CUIT", listEmpresas, "Seleccione empresa..", new { @required="true", @id="selectEmpresas" , @class = "form-control"})
              </div>
             <label>Periodo</label>
             <div class="form-group" id="nuevoPer">

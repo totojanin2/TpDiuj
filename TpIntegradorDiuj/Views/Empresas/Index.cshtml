@@ -5,7 +5,7 @@
     List<SelectListItem> listEmpresas = Model.Select(x => new SelectListItem
     {
         Text = x.Nombre,
-        Value = x.Id.ToString()
+        Value = x.CUIT
     }).ToList();
 }
 
@@ -102,6 +102,7 @@
     <thead>
         <tr>
             <th>Nombre</th>
+            <th>CUIT</th>
             <th>Fecha de fundación</th>
             <th>Acciones</th>
 
@@ -112,10 +113,11 @@
         {
             <tr>
                 <td>@item.Nombre</td>
+                <td>@item.CUIT</td>
                 <td>@item.FechaFundacion.ToString("dd/MM/yyyy")</td>
                 <td>
-                    <a href="@Url.Action("Edit","Empresas",new { idEmpresa = item.Id })"> <i class="fa fa-pencil"></i> Editar</a><br />
-                    <a href="@Url.Action("Delete","Empresas",new { idEmpresa = item.Id})"> <i class="fa fa-trash"></i> Eliminar</a>
+                    <a href="@Url.Action("Edit","Empresas",new { cuit = item.CUIT })"> <i class="fa fa-pencil"></i> Editar</a><br />
+                    <a href="@Url.Action("Delete","Empresas",new { cuit = item.CUIT})"> <i class="fa fa-trash"></i> Eliminar</a>
                 </td>
 
             </tr>

@@ -14,10 +14,10 @@ namespace TpIntegradorDiuj.Services
             TpIntegradorDbContext db = new TpIntegradorDbContext();
             return db.Empresas.ToList();
         }
-        public static Empresa GetById(int id)
+        public static Empresa GetByCUIT(string cuit)
         {
             TpIntegradorDbContext db = new TpIntegradorDbContext();
-            return db.Empresas.FirstOrDefault(x => x.Id == id);
+            return db.Empresas.FirstOrDefault(x => x.CUIT == cuit);
         }
         public static void Crear(Empresa empresa)
         {
@@ -28,14 +28,14 @@ namespace TpIntegradorDiuj.Services
         public static void Editar(Empresa empresaEditada)
         {
             TpIntegradorDbContext db = new TpIntegradorDbContext();
-            Empresa empresaOriginal = EmpresasService.GetById(empresaEditada.Id);
+            Empresa empresaOriginal = EmpresasService.GetByCUIT(empresaEditada.CUIT);
             empresaOriginal.Editar(empresaEditada);
             db.SaveChanges();
         }
-        public static void Eliminar(int id)
+        public static void Eliminar(string cuit)
         {
             TpIntegradorDbContext db = new TpIntegradorDbContext();
-            Empresa empresaAEliminar = EmpresasService.GetById(id);
+            Empresa empresaAEliminar = EmpresasService.GetByCUIT(cuit);
             db.Empresas.Remove(empresaAEliminar);
             db.SaveChanges();
         }

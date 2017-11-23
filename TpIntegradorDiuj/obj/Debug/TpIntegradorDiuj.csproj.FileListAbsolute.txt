@@ -479,3 +479,11 @@ C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDi
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.csproj.GenerateResource.Cache
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.dll
 C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.pdb
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.Migrations.cuitEnEmpresa.resources
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\bin\Hangfire.Core.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\bin\Hangfire.SqlServer.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\bin\Hangfire.Core.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\bin\Hangfire.SqlServer.xml
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\bin\es\Hangfire.Core.resources.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\bin\zh\Hangfire.Core.resources.dll
+C:\Users\uri_a\Desktop\UTN\2017\DDS\Integrador\TP Integrador .NET\TpIntegradorDiuj\TpDiuj\TpIntegradorDiuj\obj\Debug\TpIntegradorDiuj.Migrations.referenciasAEmpresaCuit.resources

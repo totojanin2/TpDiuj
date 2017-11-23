@@ -42,12 +42,12 @@ namespace TpIntegradorDiuj.Services
             db.SaveChanges();
         }
 
-        public static double EvaluarIndicadorParaEmpresa(int idIndicador, int idEmpresa, int periodo, List<Indicador> indicadoresDelUsuario)
+        public static double EvaluarIndicadorParaEmpresa(int idIndicador, string cuit, int periodo, List<Indicador> indicadoresDelUsuario)
         {
             TpIntegradorDbContext db = new TpIntegradorDbContext();
             //Obtengo el indicador y empresa solicitada
             Indicador indicador = IndicadoresService.GetById(idIndicador);
-            Empresa empresa = EmpresasService.GetById(idEmpresa);
+            Empresa empresa = EmpresasService.GetByCUIT(cuit);
             //Aplico el indicador, es decir, hay que parsear la formula
             List<ComponenteOperando> listaOperandos = new List<ComponenteOperando>();
             listaOperandos.AddRange(db.Operandos.OfType<Cuenta>());

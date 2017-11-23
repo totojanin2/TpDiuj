@@ -16,7 +16,7 @@ namespace TpIntegradorDiuj.Models
             List<Balance> balances = empresa.Balances;
             Balance balanceBuscado = balances.FirstOrDefault(x => x.Periodo == periodo);
             Cuenta cuentaBuscada = balanceBuscado.Cuentas.FirstOrDefault(x => x.Nombre.ToLower() == this.Nombre.ToLower());
-            return cuentaBuscada.Valor;
+            return cuentaBuscada != null ? cuentaBuscada.Valor : 0;
         }
     }
 }

@@ -44,10 +44,11 @@
         });
     });
 </script>
-<div style="margin-top: 15px;">
+<div style="margin-top: 15px;" class="col-md-6">
     <a class="btn btn-primary" href="@Url.Action("Create","Balances")"><i class="fa fa-plus"></i> Crear balance</a>
     @*<a class="btn btn-primary" href="@Url.Action("Edit","Balances")"><i class="fa fa-pencil"></i> Editar balances</a>*@
 </div>
+
 <h2>Balances</h2>
 <table id="tabla" class="dataTable table table-bordered table-condensed">
     <thead>
@@ -68,8 +69,10 @@
                 <td>@item.Empresa.Nombre</td>
                 <td>$@item.Total</td>
                 <td>
-                    <a href="@Url.Action("Details","Balances",new { id = item.Id })" ><i class="fa fa-eye"></i> Detalle </a>
-                    <a href="@Url.Action("Edit","Balances",new { id = item.Id })"><i class="fa fa-pencil"></i> Editar </a>
+                    <a href="@Url.Action("Details","Balances",new { id = item.Id })" ><i class="fa fa-eye"></i> Detalle </a><br />
+                    <a href="@Url.Action("Edit","Balances",new { id = item.Id })"><i class="fa fa-pencil"></i> Editar </a><br />
+                    <a href="@Url.Action("Delete","Balances",new { id = item.Id })"><i class="fa fa-remove"></i> Eliminar </a><br />
+
 
                 </td>
 
@@ -77,13 +80,3 @@
         }
     </tbody>
 </table>
-<div class="form-group">
-    @*@using (Html.BeginForm("ObtenerEmpresasYPeriodos", "Empresas", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
-        {*@
-    <label>Cargar balances desde un archivo</label>
-    <input type="file" name="fileBalances" id="fileBalances" /><br />
-    <input class="btn btn-primary" type="submit" id="btnCargarBalances" value="Cargar Balances"/>
-    @*}*@
-
-
-</div>
