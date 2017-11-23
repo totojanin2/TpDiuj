@@ -19,7 +19,7 @@ namespace TpIntegradorDiuj.Controllers
 
         public ActionResult Index()
         {
-            List<Balance> balances = db.Balances.ToList();
+            List<Balance> balances = BalancesService.GetAll();
             foreach (var item in balances)
             {
                 item.Empresa = EmpresasService.GetById(item.Empresa_Id);
@@ -54,10 +54,7 @@ namespace TpIntegradorDiuj.Controllers
                 {
                     //Deserializo el archivo seleccionado
                     List<Balance> balancesArchivo = this.DeserializarArchivoBalances();
-                    //Valido que no haya balances repetidos
-                    this.ValidarBalancesArchivo(balancesArchivo);
-                    db.Balances.AddRange(balancesArchivo);
-                    db.SaveChanges();
+                    BalancesService.CargarBalances(balancesArchivo);                  
                     return Json(new { Success = true });
                 }
                 else
@@ -76,23 +73,7 @@ namespace TpIntegradorDiuj.Controllers
             }
         }
 
-        private void ValidarBalancesArchivo(List<Balance> balancesArchivo)
-        {
-            List<Balance> balancesRepetidos = new List<Balance>();
-            foreach (var item in balancesArchivo)
-            {
-                bool hayUnBalanceIgual = db.Balances.Any(x => x.Periodo == item.Periodo && x.Empresa_Id == item.Empresa_Id);
-                if (hayUnBalanceIgual)
-                {
-                    balancesRepetidos.Add(item);
-                }
-
-            }
-            if (balancesRepetidos.Count > 0)
-            {
-                throw new BalancesRepetidosException("Hay balances del archivo que ya fueron cargados previamente") { Balances = balancesRepetidos };
-            }
-        }
+  
 
         [HttpPost]
         public ActionResult Create(Balance balanceModel)
@@ -109,15 +90,14 @@ namespace TpIntegradorDiuj.Controllers
                 if (balanceModel.Cuentas.Count == 0)
                     throw new Exception("Debe ingresar por lo menos una cuenta para este balance");
                 //Busco en la base de datos si hay algun balance con ese periodo para esa empresa
-                bool hayBalancesIguales = db.Balances.Any(x => x.Periodo == balanceModel.Periodo && x.Empresa_Id == balanceModel.Empresa_Id);
+                bool hayBalancesIguales = BalancesService.ExisteBalanceParaEmpresaEnPeriodo(balanceModel.Periodo, balanceModel.Empresa_Id);
                 if (hayBalancesIguales)
                 {
                     ModelState.AddModelError("", "Ya existe un balance para esa empresa en ese período.");
                     setViewBagEmpresa();
                     return View();
                 }
-                db.Balances.Add(balanceModel);
-                db.SaveChanges();
+                BalancesService.Crear(balanceModel);              
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -140,33 +120,32 @@ namespace TpIntegradorDiuj.Controllers
             {
                 if (model.Cuentas.Count == 0)
                     throw new Exception("Debe ingresar por lo menos una cuenta para este balance");
-                Balance balanceAEdit = db.Balances.FirstOrDefault(x => x.Periodo == model.Periodo && x.Empresa_Id == model.Empresa_Id);
-                balanceAEdit.Cuentas.AddRange(model.Cuentas);
-                db.SaveChanges();
+                BalancesService.Editar(model);
                 return RedirectToAction("Index");
             }
             catch(Exception e)
             {
                 ModelState.AddModelError("", e.Message);
                 setViewBagEmpresa();
-                return View();
+                Balance balance = BalancesService.GetById(model.Id);
+                return View(balance);
             }
            
         }
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
             setViewBagEmpresa();
-            return View();
+            Balance balance = BalancesService.GetById(id);
+            return View(balance);
         }
         public ActionResult Details(int id)
         {
-            Balance bal = db.Balances.FirstOrDefault(x => x.Id == id);
-            bal.Empresa = db.Empresas.First(x => x.Id == bal.Empresa_Id);
+            Balance bal = BalancesService.GetById(id);
             return View(bal);
         }
         private void setViewBagEmpresa()
         {
-            ViewBag.Empresas = db.Empresas.Select(x => new SelectListItem
+            ViewBag.Empresas = EmpresasService.GetAll().Select(x => new SelectListItem
             {
                 Text = x.Nombre,
                 Value = x.Id.ToString()
@@ -178,10 +157,9 @@ namespace TpIntegradorDiuj.Controllers
         {
             try
             {
-                List<Empresa> empresas = db.Empresas.ToList();
-                Empresa empresa = empresas.FirstOrDefault(x => x.Id == idEmpresa);
+                Empresa empresa = EmpresasService.GetById(idEmpresa);
                 //Obtengo el balance de la empresa para el año solicitado
-                Balance balance = db.Balances.FirstOrDefault(x => x.Empresa_Id == idEmpresa && x.Periodo == anio);
+                Balance balance = BalancesService.GetBalanceByPeriodoYEmpresa(anio, idEmpresa);
                 if (balance != null)
                 {
                     return Json(new { Success = true, Cuentas = balance.Cuentas });
@@ -206,7 +184,7 @@ namespace TpIntegradorDiuj.Controllers
         {
             try
             {
-                List<int> periodos = db.Balances.Where(x => x.Empresa_Id == idEmpresa).Select(x => x.Periodo).ToList();
+                List<int> periodos = BalancesService.GetPeriodosDeBalancesDeEmpresa(idEmpresa);
                 return Json(new { Success = true, Periodos = periodos });
 
             }

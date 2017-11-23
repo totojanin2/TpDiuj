@@ -12,8 +12,9 @@
     function agregarCuenta() {
         var cantRows = $(".cuentasTable > tbody.cuerpo > tr").length;
         var tr = '<tr>';
-        tr += '<td><input type="text" class=form-control name="Cuentas[' + cantRows + '].Nombre" /></td>';
-        tr += '<td><input type="text" class=form-control name="Cuentas[' + cantRows + '].Valor" /></td><td></td>';
+        tr += '<td><input type="text" class="form-control nombre" name="Cuentas[' + cantRows + '].Nombre" required/></td>';
+        tr += '<td><input type="text" class="form-control valor" name="Cuentas[' + cantRows + '].Valor" required/></td>';
+        tr+= '<td> <a class="eliminar" href="#">X</a> </td>';
         tr += '</tr>';
         $(".cuentasTable > tbody.cuerpo").append(tr);
     };
@@ -80,13 +81,37 @@
         }
 
     }
+    $(function () {
+        var cuentas = @Html.Raw(Json.Encode(Model.Cuentas));
+        var texto = "";
+        $.each(cuentas, function (index, item) {
+            texto +="<tr>";
+            texto+='<td><input type="text" class="form-control nombre" value="' + item.Nombre + '" name="Cuentas['+index +'].Nombre"</td>';
+            texto+='<td><input type="text" class="form-control valor" value="' + item.Valor + '" name="Cuentas['+index +'].Valor"</td>';
+            texto += '<td> <a class="eliminar" href="#">X</a> </td></tr>';
+            $(".cuentasTable > tbody.cuerpo").append($(texto));
+            texto="";
+        });
+        $('.cuentasTable > tbody.cuerpo').on('click', 'tr > td > a', function () {
+            $(this).closest('tr').remove();
+            $.each($(".cuentasTable > tbody.cuerpo > tr"), function (index, item) {
+                $(item).find("td>input.valor").attr("name", function (i) { return "Cuentas[" + index + "].Valor"; })
+                $(item).find("td>input.nombre").attr("name", function (i) { return "Cuentas[" + index + "].Nombre"; })
+            });
+        });
+    });
 </script>
+@Html.ValidationSummary()
+
 
 <h2>Editar balance</h2>
 <div class="row " style="margin-top: 90px;">
     <div class="col-md-5 col-md-offset-1">
         <form method="post" action="@Url.Action("Edit","Balances")">
-            <div class="form-group">
+          <label>Periodo</label>  <input type="number" class="form-control" value="@Model.Periodo" disabled/>
+          <label>Empresa</label>  <input type="text" class="form-control" value="@Model.Empresa.Nombre" disabled/>
+
+            @*<div class="form-group">
                 <label>Empresa</label>
                 @Html.DropDownList("Empresa_Id", listEmpresas, "Seleccione empresa..", new { @id = "selectEmpresas", @class = "form-control", @name = "Empresa_Id", @onchange = "cargarPeriodos()" })
             </div>
@@ -95,9 +120,14 @@
                 <select class="form-control" name="Periodo" id="selectPeriodos" onchange="cargarCuentas()">
                     <option value="" disabled selected>Seleccione un periodo...</option>
                 </select>
-            </div>
-            <div id="cuentasAAgregar" style="display:none" >
-                <h4>Agregar cuentas</h4>
+            </div>*@
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.Empresa_Id)
+            @Html.HiddenFor(x => x.Periodo)
+
+
+            <div id="cuentasAAgregar">
+                <h4>Cuentas</h4>
                 <table class="cuentasTable table-condensed table-bordered" style="width:500px;">
                     <thead>
                         <tr>

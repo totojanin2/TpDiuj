@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TpIntegradorDiuj.Models;
 using TpIntegradorDiuj.Models.Condiciones;
+using TpIntegradorDiuj.Services;
 
 namespace TpIntegradorDiuj.Controllers
 {
@@ -14,12 +15,12 @@ namespace TpIntegradorDiuj.Controllers
         // GET: Condiciones
         public ActionResult Index()
         {
-            List<Condicion> condiciones = db.Condiciones.Include("Indicador").ToList();
+            List<Condicion> condiciones = CondicionesService.GetAll();
             return View(condiciones);
         }
         private void setViewbag()
         {
-            ViewBag.ListIndicadores = db.Indicadores.Select(x => new SelectListItem
+            ViewBag.ListIndicadores = IndicadoresService.GetAll().Select(x => new SelectListItem
             {
                 Text = x.Nombre,
                 Value = x.Id.ToString()
@@ -36,8 +37,7 @@ namespace TpIntegradorDiuj.Controllers
             try
             {
                 Condicion condicion = CondicionesFactory.CreateCondicion(model);
-                db.Condiciones.Add(condicion);
-                db.SaveChanges();
+                CondicionesService.Crear(condicion);
                 return RedirectToAction("Index");
             }
             catch(Exception e)

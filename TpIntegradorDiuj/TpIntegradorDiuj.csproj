@@ -205,7 +205,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BalancesController.cs" />
-    <Compile Include="Controllers\BalancesRepetidosException.cs" />
     <Compile Include="Controllers\CondicionesController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -269,6 +268,7 @@
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Condiciones\Condicion.cs" />
+    <Compile Include="Models\Excepciones\BalancesRepetidosException.cs" />
     <Compile Include="Models\Indicador.cs" />
     <Compile Include="Models\Condiciones\MayorAUno.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -276,6 +276,7 @@
     <Compile Include="MyVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BalancesService.cs" />
+    <Compile Include="Services\CondicionesService.cs" />
     <Compile Include="Services\EmpresasService.cs" />
     <Compile Include="Services\IndicadoresService.cs" />
     <Compile Include="StartUp.cs" />
