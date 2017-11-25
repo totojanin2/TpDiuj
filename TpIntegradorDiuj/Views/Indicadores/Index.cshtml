@@ -15,8 +15,8 @@
     function evaluarIndicador(idIndicador) {
         var empresaSeleccionada = $("#selectEmpresa").val();
         var anioIngresado = $("#inputAnio").val();
-        var url = '@Url.Action("EvaluarIndicadorParaEmpresa","Indicadores",new { idIndicador = "__idIndicador__", idEmpresa = "__empresa__",periodo = "__periodo__"})';
-        url = url.replace("__idIndicador__", idIndicador).replace("amp;", "").replace("__empresa__", empresaSeleccionada).replace("amp;", "").replace("__periodo__", anioIngresado).replace("amp;", "");
+        var url = '@Url.Action("EvaluarIndicadorParaEmpresa","Indicadores",new { idIndicador = "__idIndicador__", cuit = "__cuit__",periodo = "__periodo__"})';
+        url = url.replace("__idIndicador__", idIndicador).replace("amp;", "").replace("__cuit__", empresaSeleccionada).replace("amp;", "").replace("__periodo__", anioIngresado).replace("amp;", "");
         $.ajax({
             url: url,
             type: 'post',
@@ -43,7 +43,7 @@
             success: function (data) {
                 $.each(data.Empresas, function (index, item) {
                     $("#selectEmpresa").append($("<option></option>")
-                    .attr("value", item.Id)
+                    .attr("value", item.CUIT)
                     .text(item.Nombre));
                 });
             }

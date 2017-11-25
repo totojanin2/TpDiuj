@@ -53,7 +53,7 @@
 <table id="tabla" class="dataTable table table-bordered table-condensed">
     <thead>
         <tr>
-            <th>Id</th>
+            @*<th>Id</th>*@
             <th>Periodo</th>
             <th>Empresa</th>
             <th>Total en cuentas</th>
@@ -64,7 +64,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id</td>
+                @*<td>@item.Id</td>*@
                 <td>@item.Periodo</td>
                 <td>@item.Empresa.Nombre</td>
                 <td>$@item.Total</td>

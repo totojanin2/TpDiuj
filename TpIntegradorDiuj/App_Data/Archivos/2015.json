@@ -1,0 +1,30 @@
+[
+	 {
+		"Cuentas": [
+		{
+			"Nombre": "URI",
+			"Valor": "82"
+		},
+		{
+			"Nombre": "PDY",
+			"Valor": "66"
+		}				
+		],      
+        "Periodo": "2015",
+		"Empresa_CUIT": "20334566550"
+      },
+	  {
+		"Cuentas": [
+		{
+			"Nombre": "CLARO",
+			"Valor": "144"
+		},
+		{
+			"Nombre": "ALE",
+			"Valor": "1200"
+		}			
+		],      
+        "Periodo": "2015",
+		"Empresa_CUIT": "20222566550"
+      }
+]

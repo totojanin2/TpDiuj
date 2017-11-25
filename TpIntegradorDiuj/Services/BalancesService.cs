@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using TpIntegradorDiuj.Controllers;
 using TpIntegradorDiuj.Models;
 
@@ -9,6 +11,8 @@ namespace TpIntegradorDiuj.Services
 {
     public class BalancesService
     {
+       static string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\Balances");
+
         public static List<Balance> GetAll()
         {
             TpIntegradorDbContext db = new TpIntegradorDbContext();
@@ -25,7 +29,7 @@ namespace TpIntegradorDiuj.Services
         {
             TpIntegradorDbContext db = new TpIntegradorDbContext();
             Balance balanceAEdit = BalancesService.GetBalanceByPeriodoYEmpresa(balanceEditado.Periodo, balanceEditado.Empresa_CUIT);
-            IQueryable<Cuenta> cuentasAEliminar = db.Cuentas.Where(x => x.Balance_Id == balanceEditado.Id);
+            IQueryable<Cuenta> cuentasAEliminar = db.Cuentas.Where(x => x.Balance_Id == balanceAEdit.Id);
             db.Cuentas.RemoveRange(cuentasAEliminar);
             db.SaveChanges();
             List<Cuenta> cuentasNuevas = balanceEditado.Cuentas;
@@ -35,7 +39,6 @@ namespace TpIntegradorDiuj.Services
             }          
             db.Cuentas.AddRange(cuentasNuevas);
 
-           // db.Entry(balanceEditado).State = System.Data.Entity.EntityState.Unchanged;
             db.SaveChanges();
         }
         public static bool ExisteBalanceParaEmpresaEnPeriodo(int periodo,string empresaCuit)
@@ -87,13 +90,53 @@ namespace TpIntegradorDiuj.Services
                 throw new BalancesRepetidosException("Hay balances del archivo que ya fueron cargados previamente") { Balances = balancesRepetidos };
             }
         }
+        public static void ProcesarArchivo(string nameFile)
+        {
+            string buffer = System.IO.File.ReadAllText(nameFile);
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<Balance> listBalances = serializer.Deserialize<List<Balance>>(buffer);
+            //Obtengo los balances del archivo en procesamiento
+            foreach (var balance in listBalances)
+            {
+                bool hayUnBalanceIgual = BalancesService.ExisteBalanceParaEmpresaEnPeriodo(balance.Periodo, balance.Empresa_CUIT);
+                if (hayUnBalanceIgual)
+                {
+                    //Modifico el balance
+                    BalancesService.Editar(balance);
+                }
+                else
+                {
+                    //Agrego el balance
+                    BalancesService.Crear(balance);
+                }
+            }
+        }
         public static void BatchArchivosBalances()
         {
-            //Obtener archivos en la carpeta del directorio predeterminada
-            //Por cada archivo obtenido, procesarlo:
-            //      Agregar los balances que no existen y modificar los balances existentes
-            //      Eliminar el archivo procesado del directorio
-            //Guardar cambios de la BD
+            TpIntegradorDbContext db = new TpIntegradorDbContext();
+            using (var tx = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    //Obtener archivos en la carpeta del directorio predeterminada
+                    string[] namesFiles = Directory.GetFiles(directorio);
+                    foreach (var nameFile in namesFiles)
+                    {
+                     //Por cada archivo obtenido, procesarlo:
+                        //      Agregar los balances que no existen y modificar los balances existentes
+                        BalancesService.ProcesarArchivo(nameFile);
+                        //      Eliminar el archivo procesado del directorio
+                        File.Delete(nameFile);
+                    }
+                    tx.Commit();
+                }
+                catch(Exception e)
+                {
+                    tx.Rollback();
+                }
+
+            }
+           
         }
         public static List<int> GetPeriodosDeBalancesDeEmpresa(string cuit)
         {
