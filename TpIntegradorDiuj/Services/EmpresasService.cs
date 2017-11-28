@@ -9,33 +9,35 @@ namespace TpIntegradorDiuj.Services
     
     public class EmpresasService
     {
-        public static List<Empresa> GetAll()
+        private TpIntegradorDbContext db;
+
+        public EmpresasService(TpIntegradorDbContext _db)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
+            this.db = _db;
+        }
+
+        public List<Empresa> GetAll()
+        {
             return db.Empresas.ToList();
         }
-        public static Empresa GetByCUIT(string cuit)
+        public  Empresa GetByCUIT(string cuit)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
             return db.Empresas.FirstOrDefault(x => x.CUIT == cuit);
         }
-        public static void Crear(Empresa empresa)
+        public  void Crear(Empresa empresa)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
             db.Empresas.Add(empresa);
             db.SaveChanges();
         }
-        public static void Editar(Empresa empresaEditada)
+        public  void Editar(Empresa empresaEditada)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
-            Empresa empresaOriginal = EmpresasService.GetByCUIT(empresaEditada.CUIT);
+            Empresa empresaOriginal = GetByCUIT(empresaEditada.CUIT);
             empresaOriginal.Editar(empresaEditada);
             db.SaveChanges();
         }
-        public static void Eliminar(string cuit)
+        public void Eliminar(string cuit)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
-            Empresa empresaAEliminar = EmpresasService.GetByCUIT(cuit);
+            Empresa empresaAEliminar = GetByCUIT(cuit);
             db.Empresas.Remove(empresaAEliminar);
             db.SaveChanges();
         }

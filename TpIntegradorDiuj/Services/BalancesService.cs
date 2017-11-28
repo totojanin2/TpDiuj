@@ -22,7 +22,9 @@ namespace TpIntegradorDiuj.Services
         {
             TpIntegradorDbContext db = new TpIntegradorDbContext();
             Balance bal = db.Balances.FirstOrDefault(x => x.Id == id);
-            bal.Empresa = EmpresasService.GetByCUIT(bal.Empresa_CUIT);
+            ////////////////////////////////////////////////////////////
+            //bal.Empresa = EmpresasService.GetByCUIT(bal.Empresa_CUIT);
+            ////////////////////////////////////////////////////////////
             return bal;
         }
         public static void Editar(Balance balanceEditado)

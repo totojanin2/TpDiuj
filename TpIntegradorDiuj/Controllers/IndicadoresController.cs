@@ -20,7 +20,7 @@ namespace TpIntegradorDiuj.Controllers
     {
         // GET: Indicadores
         EmpresasController empController = new EmpresasController();
-        TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
+        IndicadoresService sv = new IndicadoresService(new TpIntegradorDbContext());
         public ActionResult Index()
         {
             var store = new UserStore<ApplicationUser>(new TpIntegradorDbContext());
@@ -43,25 +43,25 @@ namespace TpIntegradorDiuj.Controllers
         }
         public ActionResult Edit(int idInd)
         {
-            Indicador indAMod = IndicadoresService.GetById(idInd);
+            Indicador indAMod = sv.GetById(idInd);
             return View(indAMod);
         }
         [HttpPost]
         public ActionResult Edit(Indicador model)
         {
-            IndicadoresService.Editar(model);
+            sv.Editar(model);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int idInd)
         {
-            IndicadoresService.Eliminar(idInd);
+            sv.Eliminar(idInd);
             return RedirectToAction("Index");
         }
         [HttpPost]
         public JsonResult ObtenerFormulaDelIndicador(int idIndicador)
         {
-            Indicador indicador = IndicadoresService.GetById(idIndicador);
+            Indicador indicador = sv.GetById(idIndicador);
             return Json(new { Formula = indicador.Formula });
         }
         [HttpPost]
@@ -69,7 +69,7 @@ namespace TpIntegradorDiuj.Controllers
         {
             try
             {
-                IndicadoresService.Crear(model, this.User.Identity.GetUserId());              
+                sv.Crear(model, this.User.Identity.GetUserId());              
                 return RedirectToAction("Index");
             }
             catch(Exception e)
@@ -87,7 +87,7 @@ namespace TpIntegradorDiuj.Controllers
                 var userManager = new UserManager<ApplicationUser>(store);
                 ApplicationUser user = userManager.FindById(User.Identity.GetUserId());
                 List<Indicador> indicadoresDelUsuario = user.Indicadores;
-                double valorTrasAplicarIndicador = IndicadoresService.EvaluarIndicadorParaEmpresa(idIndicador, cuit, periodo, indicadoresDelUsuario);       
+                double valorTrasAplicarIndicador = sv.EvaluarIndicadorParaEmpresa(idIndicador, cuit, periodo, indicadoresDelUsuario);       
                 return Json(new { Success = true, Valor = valorTrasAplicarIndicador });
             }
             catch(Exception e)

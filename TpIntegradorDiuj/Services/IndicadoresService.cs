@@ -8,46 +8,46 @@ namespace TpIntegradorDiuj.Services
 {
     public class IndicadoresService
     {
-        public static Indicador GetById(int id)
+        private TpIntegradorDbContext db;
+        public IndicadoresService(TpIntegradorDbContext _db)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
+            this.db = _db;
+        }
+        public Indicador GetById(int id)
+        {
             return db.Indicadores.FirstOrDefault(x => x.Id == id);
         }
-        public static List<Indicador> GetAll()
+        public List<Indicador> GetAll()
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
             return db.Indicadores.ToList();
         }
-        public static void Editar(Indicador indicadorEditado)
+        public void Editar(Indicador indicadorEditado)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
-            Indicador indOriginal = IndicadoresService.GetById(indicadorEditado.Id);
+            Indicador indOriginal = GetById(indicadorEditado.Id);
             indOriginal.Editar(indicadorEditado);
             db.SaveChanges();
         }
-        public static void Crear(Indicador indicador,string usuarioID)
+        public void Crear(Indicador indicador,string usuarioID)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
             //Obtengo el id del usuario que esta usando el sistema y creó el indicador
             indicador.UsuarioCreador_Id = usuarioID;
             db.Indicadores.Add(indicador);
             db.SaveChanges();
 
         }
-        public static void Eliminar(int id)
+        public void Eliminar(int id)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
-            Indicador indAEliminar = IndicadoresService.GetById(id);
+            Indicador indAEliminar = GetById(id);
             db.Indicadores.Remove(indAEliminar);
             db.SaveChanges();
         }
 
-        public static double EvaluarIndicadorParaEmpresa(int idIndicador, string cuit, int periodo, List<Indicador> indicadoresDelUsuario)
+        public double EvaluarIndicadorParaEmpresa(int idIndicador, string cuit, int periodo, List<Indicador> indicadoresDelUsuario)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
             //Obtengo el indicador y empresa solicitada
-            Indicador indicador = IndicadoresService.GetById(idIndicador);
-            Empresa empresa = EmpresasService.GetByCUIT(cuit);
+            Indicador indicador = GetById(idIndicador);
+            EmpresasService empSv = new EmpresasService(db);
+            Empresa empresa = empSv.GetByCUIT(cuit);
             //Aplico el indicador, es decir, hay que parsear la formula
             List<ComponenteOperando> listaOperandos = new List<ComponenteOperando>();
             listaOperandos.AddRange(db.Operandos.OfType<Cuenta>());
