@@ -11,11 +11,18 @@ namespace TpIntegradorDiuj.Controllers
 {
     public class CondicionesController : Controller
     {
-        TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
+
+        TpIntegradorDbContext db;
+        CondicionesService condicionesService;
+        public CondicionesController()
+        {
+            db = TpIntegradorDbContext.GetInstance();
+            condicionesService = new CondicionesService(db);
+        }
         // GET: Condiciones
         public ActionResult Index()
         {
-            List<Condicion> condiciones = CondicionesService.GetAll();
+            List<Condicion> condiciones = condicionesService.GetAll();
             return View(condiciones);
         }
         private void setViewbag()
@@ -37,7 +44,7 @@ namespace TpIntegradorDiuj.Controllers
             try
             {
                 Condicion condicion = CondicionesFactory.CreateCondicion(model);
-                CondicionesService.Crear(condicion);
+                condicionesService.Crear(condicion);
                 return RedirectToAction("Index");
             }
             catch(Exception e)

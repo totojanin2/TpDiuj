@@ -29,7 +29,9 @@ namespace TpIntegradorDiuj.Services
         {
             TpIntegradorDbContext db = new TpIntegradorDbContext();
             Empresa empresaOriginal = EmpresasService.GetByCUIT(empresaEditada.CUIT);
-            empresaOriginal.Editar(empresaEditada);
+            empresaEditada.Balances = empresaOriginal.Balances;
+            db.Entry(empresaEditada).State = System.Data.Entity.EntityState.Modified;
+            //empresaOriginal.Editar(empresaEditada);
             db.SaveChanges();
         }
         public static void Eliminar(string cuit)

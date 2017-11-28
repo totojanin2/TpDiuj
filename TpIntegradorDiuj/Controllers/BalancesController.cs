@@ -15,11 +15,17 @@ namespace TpIntegradorDiuj.Controllers
     {
         // GET: Cuentas
         EmpresasController empController = new EmpresasController();
-        TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
+        TpIntegradorDbContext db;
+        BalancesService balanceService;
+        public BalancesController()
+        {
+            db = TpIntegradorDbContext.GetInstance();
+            balanceService = new BalancesService(db);
+        }
 
         public ActionResult Index()
         {
-            List<Balance> balances = BalancesService.GetAll();
+            List<Balance> balances = balanceService.GetAll();
             foreach (var item in balances)
             {
                 item.Empresa = EmpresasService.GetByCUIT(item.Empresa_CUIT);
@@ -54,7 +60,7 @@ namespace TpIntegradorDiuj.Controllers
                 {
                     //Deserializo el archivo seleccionado
                     List<Balance> balancesArchivo = this.DeserializarArchivoBalances();
-                    BalancesService.CargarBalances(balancesArchivo);                  
+                    balanceService.CargarBalances(balancesArchivo);                  
                     return Json(new { Success = true });
                 }
                 else
@@ -74,7 +80,7 @@ namespace TpIntegradorDiuj.Controllers
         }
         public ActionResult Delete(int id)
         {
-            BalancesService.Eliminar(id);
+            balanceService.Eliminar(id);
             return RedirectToAction("Index");
         }
   
@@ -94,14 +100,14 @@ namespace TpIntegradorDiuj.Controllers
                 if (balanceModel.Cuentas.Count == 0)
                     throw new Exception("Debe ingresar por lo menos una cuenta para este balance");
                 //Busco en la base de datos si hay algun balance con ese periodo para esa empresa
-                bool hayBalancesIguales = BalancesService.ExisteBalanceParaEmpresaEnPeriodo(balanceModel.Periodo, balanceModel.Empresa_CUIT);
+                bool hayBalancesIguales = balanceService.ExisteBalanceParaEmpresaEnPeriodo(balanceModel.Periodo, balanceModel.Empresa_CUIT);
                 if (hayBalancesIguales)
                 {
                     ModelState.AddModelError("", "Ya existe un balance para esa empresa en ese período.");
                     setViewBagEmpresa();
                     return View();
                 }
-                BalancesService.Crear(balanceModel);              
+                balanceService.Crear(balanceModel);              
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -124,14 +130,14 @@ namespace TpIntegradorDiuj.Controllers
             {
                 if (model.Cuentas.Count == 0)
                     throw new Exception("Debe ingresar por lo menos una cuenta para este balance");
-                BalancesService.Editar(model);
+                balanceService.Editar(model);
                 return RedirectToAction("Index");
             }
             catch(Exception e)
             {
                 ModelState.AddModelError("", e.Message);
                 setViewBagEmpresa();
-                Balance balance = BalancesService.GetById(model.Id);
+                Balance balance = balanceService.GetById(model.Id);
                 return View(balance);
             }
            
@@ -139,12 +145,12 @@ namespace TpIntegradorDiuj.Controllers
         public ActionResult Edit(int id)
         {
             setViewBagEmpresa();
-            Balance balance = BalancesService.GetById(id);
+            Balance balance = balanceService.GetById(id);
             return View(balance);
         }
         public ActionResult Details(int id)
         {
-            Balance bal = BalancesService.GetById(id);
+            Balance bal = balanceService.GetById(id);
             return View(bal);
         }
         private void setViewBagEmpresa()
@@ -163,7 +169,7 @@ namespace TpIntegradorDiuj.Controllers
             {
                 Empresa empresa = EmpresasService.GetByCUIT(cuitEmpresa);
                 //Obtengo el balance de la empresa para el año solicitado
-                Balance balance = BalancesService.GetBalanceByPeriodoYEmpresa(anio, cuitEmpresa);
+                Balance balance = balanceService.GetBalanceByPeriodoYEmpresa(anio, cuitEmpresa);
                 if (balance != null)
                 {
                     return Json(new { Success = true, Cuentas = balance.Cuentas });
@@ -188,7 +194,7 @@ namespace TpIntegradorDiuj.Controllers
         {
             try
             {
-                List<int> periodos = BalancesService.GetPeriodosDeBalancesDeEmpresa(cuit);
+                List<int> periodos = balanceService.GetPeriodosDeBalancesDeEmpresa(cuit);
                 return Json(new { Success = true, Periodos = periodos });
 
             }

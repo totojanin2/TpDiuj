@@ -8,14 +8,17 @@ namespace TpIntegradorDiuj.Services
 {
     public class CondicionesService
     {
-        public static List<Condicion> GetAll()
+        TpIntegradorDbContext db;
+        public CondicionesService(TpIntegradorDbContext _db)
         {
-           TpIntegradorDbContext db = new TpIntegradorDbContext();
+            this.db = _db;
+        }
+        public List<Condicion> GetAll()
+        {
            return db.Condiciones.Include("Indicador").ToList();
         }
-        public static void Crear(Condicion condicion)
+        public void Crear(Condicion condicion)
         {
-            TpIntegradorDbContext db = new TpIntegradorDbContext();
             db.Condiciones.Add(condicion);
             db.SaveChanges();
         }

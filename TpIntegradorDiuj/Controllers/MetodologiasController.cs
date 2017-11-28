@@ -7,21 +7,31 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using TpIntegradorDiuj.Models;
+using TpIntegradorDiuj.Services;
 
 namespace TpIntegradorDiuj.Controllers
 {
     public class MetodologiasController : Controller
     {
         // GET: Metodologias
-        TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
+        TpIntegradorDbContext db;
+        MetodologiasService metService;
+        CondicionesService condService;
+         public MetodologiasController()
+        {
+            db = TpIntegradorDbContext.GetInstance();
+            condService = new CondicionesService(db);
+            metService = new MetodologiasService(db);           
+
+        }
         public ActionResult Index()
         {
-            List<Metodologia> metodologias = db.Metodologias.ToList();
+            List<Metodologia> metodologias = metService.GetAll();
             return View(metodologias);
         }
         private void setViewBagCondiciones()
         {
-            ViewBag.ListCondiciones = db.Condiciones.Select(x => new SelectListItem
+            ViewBag.ListCondiciones = condService.GetAll().Select(x => new SelectListItem
             {
                 Text = x.Descripcion,
                 Value = x.Id.ToString()
@@ -38,11 +48,7 @@ namespace TpIntegradorDiuj.Controllers
         {
             try
             {
-                int[] arrayIds = IdsCondiciones.ToArray();
-                List<Condicion> condicionesAAgregar = db.Condiciones.Where(x => arrayIds.Contains(x.Id)).ToList();
-                model.Condiciones.AddRange(condicionesAAgregar);
-                db.Metodologias.Add(model);
-                db.SaveChanges();
+                metService.Agregar(model, IdsCondiciones);
                 return RedirectToAction("Index");
 
             }
@@ -65,7 +71,7 @@ namespace TpIntegradorDiuj.Controllers
         }
         public ActionResult ObtenerEmpresasDeseables(int idMetodologia)
         {
-            Metodologia met = db.Metodologias.FirstOrDefault(x => x.Id == idMetodologia);
+            Metodologia met = metService.GetById(idMetodologia);
             List<Empresa> empresas = db.Empresas.ToList();
             List<Empresa> deseables = met.ObtenerEmpresasDeseables(empresas,db.Operandos.ToList());
             ViewBag.Metodologia_Nombre = met.Nombre;

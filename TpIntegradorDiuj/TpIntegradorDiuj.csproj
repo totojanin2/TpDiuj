@@ -218,6 +218,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
     <Compile Include="Controllers\MetodologiasController.cs" />
+    <Compile Include="Controllers\PruebaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -449,6 +450,11 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Empresas\Edit.cshtml" />
     <Content Include="Views\Indicadores\Edit.cshtml" />
+    <Content Include="Views\Prueba\Create.cshtml" />
+    <Content Include="Views\Prueba\Delete.cshtml" />
+    <Content Include="Views\Prueba\Details.cshtml" />
+    <Content Include="Views\Prueba\Edit.cshtml" />
+    <Content Include="Views\Prueba\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
