@@ -12,9 +12,12 @@ namespace TpIntegradorDiuj.Services
     public class BalancesService
     {
         TpIntegradorDbContext db;
+        EmpresasService empService;
         public BalancesService(TpIntegradorDbContext db)
         {
             this.db = db;
+            empService = new EmpresasService(db);
+
         }
        static string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\Balances");
 
@@ -25,7 +28,7 @@ namespace TpIntegradorDiuj.Services
         public Balance GetById(int id)
         {
             Balance bal = db.Balances.FirstOrDefault(x => x.Id == id);
-            bal.Empresa = EmpresasService.GetByCUIT(bal.Empresa_CUIT);
+            bal.Empresa = empService.GetByCUIT(bal.Empresa_CUIT);
             return bal;
         }
         public void Editar(Balance balanceEditado)
@@ -108,8 +111,10 @@ namespace TpIntegradorDiuj.Services
                 }
             }
         }
-        public void BatchArchivosBalances()
+        public static void BatchArchivosBalances()
         {
+            TpIntegradorDbContext db = new TpIntegradorDbContext();
+            BalancesService balService = new BalancesService(db);
             using (var tx = db.Database.BeginTransaction())
             {
                 try
@@ -118,9 +123,9 @@ namespace TpIntegradorDiuj.Services
                     string[] namesFiles = Directory.GetFiles(directorio);
                     foreach (var nameFile in namesFiles)
                     {
-                     //Por cada archivo obtenido, procesarlo:
+                        //Por cada archivo obtenido, procesarlo:
                         //      Agregar los balances que no existen y modificar los balances existentes
-                        this.ProcesarArchivo(nameFile);
+                        balService.ProcesarArchivo(nameFile);
                         //      Eliminar el archivo procesado del directorio
                         File.Delete(nameFile);
                     }

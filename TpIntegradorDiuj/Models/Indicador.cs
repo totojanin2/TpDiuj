@@ -29,7 +29,7 @@ namespace TpIntegradorDiuj.Models
         }
         public void Editar(Indicador indEdited)
         {
-            this.Nombre = indEdited.Nombre;
+            //this.Nombre = indEdited.Nombre;
             this.Formula = indEdited.Formula;
             this.UsuarioCreador_Id = indEdited.UsuarioCreador_Id;
             this.Operandos = indEdited.Operandos;

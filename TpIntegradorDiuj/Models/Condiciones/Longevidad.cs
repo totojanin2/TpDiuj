@@ -8,7 +8,7 @@ namespace TpIntegradorDiuj.Models.Condiciones
         public override bool Analizar(Empresa empresa, List<ComponenteOperando> lista)
         {
             //sólo vale la pena invertir en empresas con más de 10 años.
-            return empresa.FechaFundacion >= DateTime.Now.AddYears(-10);
+            return empresa.FechaFundacion <= DateTime.Now.AddYears(-10);
         }
     }
 }

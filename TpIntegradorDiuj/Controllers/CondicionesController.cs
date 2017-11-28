@@ -14,11 +14,15 @@ namespace TpIntegradorDiuj.Controllers
 
         TpIntegradorDbContext db;
         CondicionesService condicionesService;
+        IndicadoresService indService;
+
         public CondicionesController()
         {
             db = TpIntegradorDbContext.GetInstance();
             condicionesService = new CondicionesService(db);
+            indService = new IndicadoresService(db);
         }
+
         // GET: Condiciones
         public ActionResult Index()
         {
@@ -27,7 +31,7 @@ namespace TpIntegradorDiuj.Controllers
         }
         private void setViewbag()
         {
-            ViewBag.ListIndicadores = IndicadoresService.GetAll().Select(x => new SelectListItem
+            ViewBag.ListIndicadores = indService.GetAll().Select(x => new SelectListItem
             {
                 Text = x.Nombre,
                 Value = x.Id.ToString()

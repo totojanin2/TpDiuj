@@ -17,12 +17,13 @@ namespace TpIntegradorDiuj.Controllers
         TpIntegradorDbContext db;
         MetodologiasService metService;
         CondicionesService condService;
+        EmpresasService empService;
          public MetodologiasController()
         {
             db = TpIntegradorDbContext.GetInstance();
             condService = new CondicionesService(db);
-            metService = new MetodologiasService(db);           
-
+            metService = new MetodologiasService(db);
+            empService = new EmpresasService(db);
         }
         public ActionResult Index()
         {
@@ -72,20 +73,14 @@ namespace TpIntegradorDiuj.Controllers
         public ActionResult ObtenerEmpresasDeseables(int idMetodologia)
         {
             Metodologia met = metService.GetById(idMetodologia);
-            List<Empresa> empresas = db.Empresas.ToList();
+            List<Empresa> empresas = empService.GetAll();
             List<Empresa> deseables = met.ObtenerEmpresasDeseables(empresas,db.Operandos.ToList());
             ViewBag.Metodologia_Nombre = met.Nombre;
             return View(deseables);
         }
         public ActionResult EvaluarConvenienciaInversion(string empresaCuit,int metodologiaId)
-        {
-            EmpresasController empController = new EmpresasController();
-            //Obtengo la empresa solicitada
-            Empresa empresa = db.Empresas.FirstOrDefault(x=>x.CUIT == empresaCuit);
-            //Obtengo la metodologia solicitada
-            Metodologia metodologia = db.Metodologias.FirstOrDefault(x => x.Id == metodologiaId);
-            //Ejecuto las condiciones de la metodología, para tal empresa, para ver si conviene invertir o no
-            bool result = metodologia.EsDeseableInvertir(empresa,db.Operandos.ToList());
+        {            
+            bool result = metService.EvaluarConvenienciaInversion(empresaCuit, metodologiaId);
             return Json(new { EsDeseable = result });
         }
     }

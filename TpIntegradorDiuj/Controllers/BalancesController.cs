@@ -17,10 +17,12 @@ namespace TpIntegradorDiuj.Controllers
         EmpresasController empController = new EmpresasController();
         TpIntegradorDbContext db;
         BalancesService balanceService;
+        EmpresasService empService;
         public BalancesController()
         {
             db = TpIntegradorDbContext.GetInstance();
             balanceService = new BalancesService(db);
+            empService = new EmpresasService(db);
         }
 
         public ActionResult Index()
@@ -28,7 +30,7 @@ namespace TpIntegradorDiuj.Controllers
             List<Balance> balances = balanceService.GetAll();
             foreach (var item in balances)
             {
-                item.Empresa = EmpresasService.GetByCUIT(item.Empresa_CUIT);
+                item.Empresa = empService.GetByCUIT(item.Empresa_CUIT);
             }
             return View(balances);
         }
@@ -155,11 +157,13 @@ namespace TpIntegradorDiuj.Controllers
         }
         private void setViewBagEmpresa()
         {
-            ViewBag.Empresas = EmpresasService.GetAll().Select(x => new SelectListItem
+            ViewBag.Empresas = empService.GetAll().Select(x => new SelectListItem
+            
             {
                 Text = x.Nombre,
                 Value = x.CUIT
             }).ToList();
+            
         }
         
         [HttpPost]
@@ -167,7 +171,8 @@ namespace TpIntegradorDiuj.Controllers
         {
             try
             {
-                Empresa empresa = EmpresasService.GetByCUIT(cuitEmpresa);
+                Empresa empresa=new Empresa();                
+                empresa = empService.GetByCUIT(cuitEmpresa);
                 //Obtengo el balance de la empresa para el año solicitado
                 Balance balance = balanceService.GetBalanceByPeriodoYEmpresa(anio, cuitEmpresa);
                 if (balance != null)

@@ -15,10 +15,11 @@ namespace TpIntegradorDiuj.Controllers
     public class EmpresasController : Controller
     {
         // GET: Empresas
-        TpIntegradorDbContext db = TpIntegradorDbContext.GetInstance();
+        EmpresasService sv = new EmpresasService(new TpIntegradorDbContext());
+
         public ActionResult Index()
         {
-            List<Empresa> empresas = EmpresasService.GetAll();
+            List<Empresa> empresas = sv.GetAll();
             return View(empresas);
         }
         public List<Empresa> DeserializarArchivoEmpresas()
@@ -42,24 +43,24 @@ namespace TpIntegradorDiuj.Controllers
         }
         public ActionResult TraerEmpresas()
         {
-            List<Empresa> empresas = EmpresasService.GetAll();
+            List<Empresa> empresas = sv.GetAll();
             return Json(new { Empresas = empresas},JsonRequestBehavior.AllowGet);
         }
         public ActionResult Edit(string cuit)
         {
-            Empresa empresaAModificar = EmpresasService.GetByCUIT(cuit);
+            Empresa empresaAModificar = sv.GetByCUIT(cuit);
             return View(empresaAModificar);
         }
         [HttpPost]
         public ActionResult Edit(Empresa model)
         {
-            EmpresasService.Editar(model);          
+            sv.Editar(model);          
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(string cuit)
         {
-            EmpresasService.Eliminar(cuit);         
+            sv.Eliminar(cuit);         
             return RedirectToAction("Index");
         } 
     
@@ -70,7 +71,7 @@ namespace TpIntegradorDiuj.Controllers
         [HttpPost]
         public ActionResult Create(Empresa emp)
         {
-            EmpresasService.Crear(emp);
+            sv.Crear(emp);
             return RedirectToAction("Index");
         }
         

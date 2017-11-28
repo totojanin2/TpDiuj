@@ -296,6 +296,7 @@
     <Compile Include="Services\CondicionesService.cs" />
     <Compile Include="Services\EmpresasService.cs" />
     <Compile Include="Services\IndicadoresService.cs" />
+    <Compile Include="Services\MetodologiasService.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="TpIntegradorDbContext.cs" />
     <Compile Include="Visitador.cs" />
