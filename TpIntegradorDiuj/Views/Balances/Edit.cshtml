@@ -108,7 +108,7 @@
 <div class="row " style="margin-top: 90px;">
     <div class="col-md-5 col-md-offset-1">
         <form method="post" action="@Url.Action("Edit","Balances")">
-          <label>Periodo</label>  <input type="number" class="form-control" value="@Model.Periodo" disabled/>
+          <label>Periodo</label>  <input type="number" class="form-control" value="@Model.Periodo" id="inputPer" min="1" oninput="validity.valid||(value='');" disabled/>
           <label>Empresa</label>  <input type="text" class="form-control" value="@Model.Empresa.Nombre" disabled/>
 
             @*<div class="form-group">

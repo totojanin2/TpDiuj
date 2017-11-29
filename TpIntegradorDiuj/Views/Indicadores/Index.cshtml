@@ -31,7 +31,7 @@
         });
     }
     function mostrarFiltrosEvaluacion(idIndicador) {
-        var texto = '<div><span> Ingrese para que año y que empresa evaluar con este indicador. </span><br/><label>Año</label> <input class="form-control" type="number" name="Anio" placeholder="Año" id="inputAnio" required/> <br/>';
+        var texto = '<div><span> Ingrese para que año y que empresa evaluar con este indicador. </span><br/><label>Año</label> <input class="form-control" type="number" min="1" oninput="validity.valid||(value='+"''"+');" name="Anio" placeholder="Año" id="inputAnio" required/> <br/>';
         texto += '<label>Empresa</label> <select class="form-control" id="selectEmpresa" required>';
         //texto += '<input type="hidden" name ="idIndicador" value=""'
         var url = '@Url.Action("TraerEmpresas","Empresas")';       
