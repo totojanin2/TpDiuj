@@ -101,13 +101,17 @@
         });
     });
 </script>
+
 @Html.ValidationSummary()
+<div class="alert alert-danger divErrores" style="display: none;">
+    <strong>Errores:<br></strong> <ul id="listaErrores"><li>Error en el formulario, revise que los valores sean numericos</li></ul>
+</div>
 
 
 <h2>Editar balance</h2>
 <div class="row " style="margin-top: 90px;">
     <div class="col-md-5 col-md-offset-1">
-        <form method="post" action="@Url.Action("Edit","Balances")">
+        <form method="post" id="form" action="@Url.Action("Edit","Balances")">
           <label>Periodo</label>  <input type="number" class="form-control" value="@Model.Periodo" id="inputPer" min="1" oninput="validity.valid||(value='');" disabled/>
           <label>Empresa</label>  <input type="text" class="form-control" value="@Model.Empresa.Nombre" disabled/>
 
@@ -146,7 +150,7 @@
                 </table>
             </div>
             <br />
-            <input class="btn btn-primary" type="submit" value="Guardar" />
+            <input class="btn btn-primary" type="button" value="Guardar" onclick="validar()"/>
         </form>
     </div>
     <div class="col-md-4 col-md-offset-1" style="display:none" id="divCuentas">
@@ -155,3 +159,18 @@
             tambien se debe ir actualizando a medida que se agregan nuevas cuentas-->
     </div>
 </div>
+
+<script>
+    function validar(){
+        var resultado=true;
+        $(".valor").each(function(){
+            var check = /^[0-9]+$/.test($(this).val());
+            if(!check)
+                resultado=false;
+        });
+        if(resultado)
+            $("#form").submit();
+        else
+            $(".divErrores").show();
+    }
+</script>

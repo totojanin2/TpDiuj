@@ -36,8 +36,13 @@
 
 
 </script>
+
 <div>
-@Html.ValidationSummary()
+    @if (Model != null)
+    {
+        @Html.ValidationSummary(false, "Errores:", new { @class = "alert alert-error" })
+    }
+
 </div>
 <h2>Cargar balance</h2>
     <div class="col-md-5 col-md-offset-1">
@@ -48,7 +53,16 @@
              </div>
             <label>Periodo</label>
             <div class="form-group" id="nuevoPer">
-                <input type="number" class="form-control" name="Periodo" id="inputPer" min="1" oninput="validity.valid||(value='');" required/>
+                @if (Model != null)
+                {
+                    <input type="number" value=@Model.Periodo class="form-control" name="Periodo" id="inputPer" min="1" oninput="validity.valid||(value='');" required />
+
+                }
+                else
+                {
+                    <input type="number" class="form-control" name="Periodo" id="inputPer" min="1" oninput="validity.valid||(value='');" required />
+
+                }
             </div>
            
             <div>
@@ -65,6 +79,20 @@
                     <tbody class="cuerpo">
                        
                     </tbody>
+                    @if (Model!=null)
+                    {
+                        for (var i=0; i<Model.Cuentas.Count(); i++)
+                        {
+                            var nameNombre = String.Concat("Cuentas[", i.ToString(), "].Nombre");
+                            var nameValor = String.Concat("Cuentas[", i.ToString(), "].Valor");
+                            <tr>
+                                <td><input type="text" class="form-control nombre " name=@nameNombre required value=@Model.Cuentas[i].Nombre></td>
+                                <td><input type="text" class="form-control valor " name=@nameValor required value=@Model.Cuentas[i].Valor></td>
+                                <td> <a class="eliminar" href="#">X</a> </td>
+                            </tr>
+                        }
+                    }
+                    
                     <tr>
                         <td></td>
                         <td></td>

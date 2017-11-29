@@ -92,9 +92,9 @@ namespace TpIntegradorDiuj.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Hay errores en el formulario");
+                ModelState.AddModelError("", "Hay errores en el formulario, los valores erroneos se predeterminaran como 0");
                 setViewBagEmpresa();
-                return View();
+                return View(balanceModel);
             }
            
             try
@@ -107,7 +107,7 @@ namespace TpIntegradorDiuj.Controllers
                 {
                     ModelState.AddModelError("", "Ya existe un balance para esa empresa en ese período.");
                     setViewBagEmpresa();
-                    return View();
+                    return View(balanceModel);
                 }
                 balanceService.Crear(balanceModel);              
                 return RedirectToAction("Index");
@@ -116,7 +116,7 @@ namespace TpIntegradorDiuj.Controllers
             {
                 ModelState.AddModelError("", e.Message);
                 setViewBagEmpresa();
-                return View();
+                return View(balanceModel);
             }
 
         }
@@ -128,6 +128,12 @@ namespace TpIntegradorDiuj.Controllers
         [HttpPost]
         public ActionResult Edit(Balance model)
         {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Hay errores en el formulario, los valores erroneos se predeterminaran como 0");
+                setViewBagEmpresa();
+                return View(model);
+            }
             try
             {
                 if (model.Cuentas.Count == 0)
@@ -139,8 +145,7 @@ namespace TpIntegradorDiuj.Controllers
             {
                 ModelState.AddModelError("", e.Message);
                 setViewBagEmpresa();
-                Balance balance = balanceService.GetById(model.Id);
-                return View(balance);
+                return View(model);
             }
            
         }
