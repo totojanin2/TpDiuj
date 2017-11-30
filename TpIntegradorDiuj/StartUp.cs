@@ -9,6 +9,9 @@ using TpIntegradorDiuj.Services;
 using System.Collections.Generic;
 using Hangfire.Dashboard;
 using System.Linq;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.Azure;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 [assembly: OwinStartupAttribute(typeof(TpIntegradorDiuj.Startup))]
 namespace TpIntegradorDiuj
@@ -28,6 +31,15 @@ namespace TpIntegradorDiuj
             //createRolesandUsers();
 
             RecurringJob.AddOrUpdate(()=>BalancesService.BatchArchivosBalances(),Cron.Daily);
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+            CloudConfigurationManager.GetSetting("diujstorage_AzureStorageConnectionString"));
+
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            CloudBlobContainer container = blobClient.GetContainerReference("contenedor");
+
+            container.CreateIfNotExists();
         }
 
 

@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Azure;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -158,8 +161,26 @@ namespace TpIntegradorDiuj.Controllers
         public ActionResult Details(int id)
         {
             Balance bal = balanceService.GetById(id);
+            
             return View(bal);
         }
+
+        public ActionResult UploadBlob()
+        {
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+            CloudConfigurationManager.GetSetting("diujstorage_AzureStorageConnectionString"));
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference("contenedor");
+            CloudBlockBlob blob = container.GetBlockBlobReference("archivo");
+            using (var fileStream = System.IO.File.OpenRead("C:/Git/TpDiuj/TpIntegradorDiuj/App_Data/Balances/2016.json"))
+            {
+                blob.UploadFromStream(fileStream);
+            }
+
+            return View();
+        }
+
         private void setViewBagEmpresa()
         {
             ViewBag.Empresas = empService.GetAll().Select(x => new SelectListItem

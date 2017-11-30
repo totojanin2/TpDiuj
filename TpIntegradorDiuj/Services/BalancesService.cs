@@ -19,7 +19,7 @@ namespace TpIntegradorDiuj.Services
             empService = new EmpresasService(db);
 
         }
-       static string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\Balances");
+       static string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data");
 
         public List<Balance> GetAll()
         {
