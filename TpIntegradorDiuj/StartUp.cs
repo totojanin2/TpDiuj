@@ -6,6 +6,9 @@ using Owin;
 using System.Security.Claims;
 using Hangfire;
 using TpIntegradorDiuj.Services;
+using System.Collections.Generic;
+using Hangfire.Dashboard;
+using System.Linq;
 
 [assembly: OwinStartupAttribute(typeof(TpIntegradorDiuj.Startup))]
 namespace TpIntegradorDiuj
@@ -16,6 +19,10 @@ namespace TpIntegradorDiuj
         {
             ConfigureAuth(app);
             GlobalConfiguration.Configuration.UseSqlServerStorage("DefaultConnection");
+            app.UseHangfireDashboard("/hg", new DashboardOptions
+            {
+                Authorization = Enumerable.Empty<IDashboardAuthorizationFilter>()
+            });
             app.UseHangfireDashboard();
             app.UseHangfireServer();
             //createRolesandUsers();
@@ -80,3 +87,4 @@ namespace TpIntegradorDiuj
         }
     }
 }
+
