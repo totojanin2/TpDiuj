@@ -8,11 +8,9 @@ namespace TpIntegradorDiuj.Models
 {
     public enum TipoCondicion
     {
-        RoeConsistente = 0,
-        Creciente = 1,
-        MayorAUno = 2,
-        MinimizarDeuda = 3,
-        Longevidad = 4,
+        Creciente = 0,
+        MayorAUno = 1,
+        Longevidad = 2,
 
     }
    public abstract class Condicion

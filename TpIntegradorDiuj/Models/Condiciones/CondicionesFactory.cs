@@ -18,12 +18,6 @@ namespace TpIntegradorDiuj.Models.Condiciones
                 case TipoCondicion.MayorAUno:
                     condi = new MayorAUno();
                 break;
-                case TipoCondicion.RoeConsistente:
-                    condi = new RoeConsistente();
-                break;
-                case TipoCondicion.MinimizarDeuda:
-                    condi = new MinimizarDeuda();
-                break;
                 case TipoCondicion.Longevidad:
                     condi = new Longevidad();
                 break;
