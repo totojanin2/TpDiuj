@@ -22,5 +22,12 @@ namespace TpIntegradorDiuj.Services
             db.Condiciones.Add(condicion);
             db.SaveChanges();
         }
+
+        public void Eliminar(int id)
+        {
+            var cond = db.Condiciones.FirstOrDefault(x => x.Id == id);
+            db.Condiciones.Remove(cond);
+            db.SaveChanges();
+        }
     }
 }

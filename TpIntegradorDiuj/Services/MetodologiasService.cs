@@ -42,5 +42,12 @@ namespace TpIntegradorDiuj.Services
             bool result = metodologia.EsDeseableInvertir(empresa, db.Operandos.ToList());
             return result;
         }
+
+        public void Eliminar(int id)
+        {
+            var met = db.Metodologias.FirstOrDefault(x => x.Id == id);
+            db.Metodologias.Remove(met);
+            db.SaveChanges();
+        }
     }
 }

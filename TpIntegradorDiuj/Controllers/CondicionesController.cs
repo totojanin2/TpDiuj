@@ -58,5 +58,12 @@ namespace TpIntegradorDiuj.Controllers
                 return View();
             }
         }
+
+        public ActionResult Delete(int id)
+        {
+            condicionesService.Eliminar(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }

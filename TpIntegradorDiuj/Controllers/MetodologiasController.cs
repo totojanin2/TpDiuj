@@ -83,5 +83,12 @@ namespace TpIntegradorDiuj.Controllers
             bool result = metService.EvaluarConvenienciaInversion(empresaCuit, metodologiaId);
             return Json(new { EsDeseable = result });
         }
+
+
+        public ActionResult Delete(int id)
+        {
+            metService.Eliminar(id);
+            return RedirectToAction("Index");
+        }
     }
 }
